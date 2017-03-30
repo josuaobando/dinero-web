@@ -1,2 +1,0 @@
-# dinero-web
-Dinero Web
