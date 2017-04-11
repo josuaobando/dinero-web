@@ -70,8 +70,8 @@ class Report
     $this->currentPage = $wsRequest->getParam("filterPage", "1");
     $pageStart = ($this->currentPage - 1) * CoreConfig::PAGINATION_TABLE_MAX_ROWS;
 
-    $this->tblSystem = TblSystem::getInstance();
-    $dataReport = $this->tblSystem->getTransactionsReport($statusId, $filterType, $filterAgencyType, $account->getAccountId(), $beginDate, $endDate, $controlNumber, $filterUsername, $pageStart, CoreConfig::PAGINATION_TABLE_MAX_ROWS);
+    $system = new System();
+    $dataReport = $system->transactionsReport($statusId, $filterType, $filterAgencyType, $account->getAccountId(), $beginDate, $endDate, $controlNumber, $filterUsername, $pageStart, CoreConfig::PAGINATION_TABLE_MAX_ROWS);
 
     $this->account = $account;
     $this->transactions = $dataReport['transactions'];

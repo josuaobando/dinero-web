@@ -8,6 +8,7 @@ try
 {
   $userMessage = "Processing Transactions";
   $account = $_SESSION['account'];
+  $account instanceof Account;
 }
 catch(Exception $ex)
 {
@@ -38,8 +39,8 @@ catch(Exception $ex)
 
 try
 {
-  $system = new System($account);
-  $transactions = $system->transactions(Transaction::STATUS_SUBMITTED);
+  $system = new System();
+  $transactions = $system->transactions(Transaction::STATUS_SUBMITTED, $account->getAccountId());
 }
 catch(Exception $ex)
 {
