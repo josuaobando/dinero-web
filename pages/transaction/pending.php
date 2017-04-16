@@ -9,8 +9,6 @@ try
   $userMessage = "Pending Transactions";
   $account = $_SESSION['account'];
   $account instanceof Account;
-
-  Log::custom('test', 'OK');
 }
 catch(Exception $ex)
 {
