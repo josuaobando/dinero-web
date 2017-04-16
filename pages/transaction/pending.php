@@ -8,7 +8,6 @@ try
 {
   $userMessage = "Pending Transactions";
   $account = $_SESSION['account'];
-  $account instanceof Account;
 }
 catch(Exception $ex)
 {
