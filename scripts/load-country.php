@@ -3,15 +3,7 @@
 require_once ('system/Startup.class.php');
 
 session_start();
-$countries = $_SESSION['countries'];
-
-if(!$countries)
-{
-  $tblCountry = TblCountry::getInstance();
-  $countries = $tblCountry->getCountries();
-  $_SESSION['countries'] = $countries;
-}
-
+$countries = Session::getCountries();
 foreach($countries as $country)
 {
 	$key = $country['Code'];

@@ -5,9 +5,8 @@ require_once('system/Startup.class.php');
 session_start();
 $page = $_SERVER["REQUEST_URI"];
 if(strpos($page, "login") === false){
-  $account = $_SESSION['account'];
-  $account instanceof Account;
-  if(!$account){
+  $account = Session::getAccount();
+  if($account->isAuthenticated()){
     header("Location:login");
   }
 }
