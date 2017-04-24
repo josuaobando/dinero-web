@@ -2,7 +2,7 @@
 require_once ('system/Startup.class.php');
 session_start();
 
-$account = $_SESSION['account'];
+$account = Session::getAccount();
 $wsRequest = new WSRequest($_REQUEST);
 $date = date('Y.m.d H.i.s');
 

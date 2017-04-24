@@ -4,7 +4,7 @@ include("../../settingHeader.php");
 $wsRequest = new WSRequest($_REQUEST);
 try
 {
-  $account = $_SESSION['account'];
+  $account = Session::getAccount();
   $system = new System($account);
   $userMessage = "Agency";
 }

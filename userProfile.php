@@ -7,8 +7,7 @@ $userMessage = 'User Profile';
 
 try
 {
-	$account = $_SESSION['account'];
-	$account instanceof Account;
+  $account = Session::getAccount();
 	if($account->isAuthenticated()){
 	  
 	  $currentPassword = trim($wsRequest->getParam('currentPassword', ''));

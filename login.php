@@ -21,12 +21,10 @@ try
     $username = trim($wsRequest->requireNotNullOrEmpty('email'));
     $password = trim($wsRequest->requireNotNullOrEmpty('password'));
 
-    $account = new Account($username);
+    $account = Session::getAccount($username);
     $account->authenticate($password);
-
     if($account->isAuthenticated())
     {
-      $_SESSION['account'] = $account;
       header("Location:home");
     }
   }

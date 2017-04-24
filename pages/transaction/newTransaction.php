@@ -9,7 +9,7 @@ try
   $btnNewTransaction = $wsRequest->getParam('btnNewTransaction');
   if($btnNewTransaction)
   {
-    $account = $_SESSION['account'];
+    $account = Session::getAccount();
     $manager = new Manager($account);
 
     //Transaction Type

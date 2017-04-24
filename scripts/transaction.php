@@ -4,8 +4,8 @@ session_start();
 
 try
 {
-  $account = $_SESSION['account'];
-  if (!$account)
+  $account = Session::getAccount();
+  if ($account->isAuthenticated())
   {
     throw new InvalidStateException("User account is not logged");
   }

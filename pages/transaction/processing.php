@@ -7,8 +7,7 @@ $wsRequest = new WSRequest($_REQUEST);
 try
 {
   $userMessage = "Processing Transactions";
-  $account = $_SESSION['account'];
-  $account instanceof Account;
+  $account = Session::getAccount();
 }
 catch(Exception $ex)
 {

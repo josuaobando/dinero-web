@@ -6,7 +6,7 @@ $wsRequest = new WSRequest($_REQUEST);
 try
 {
   $userMessage = "Search Transactions";
-  $account = $_SESSION['account'];
+  $account = Session::getAccount();
 
   $system = new System($account);
   $transactionStatus = $system->transactionStatus();

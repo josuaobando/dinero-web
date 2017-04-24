@@ -1,0 +1,27 @@
+php_value include_path ".;C:\Server\PHP\PEAR;D:\Development\DSGit\dinero-api;D:\Development\DSGit\dinero-web"
+
+php_flag short_open_tag on
+php_flag display_errors on
+php_value error_reporting 6135
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+
+  RewriteRule ^/?$ index.php [NC,L]
+  RewriteRule ^login/?$ login.php [NC,L]
+  RewriteRule ^home/?$ dashboard.php [NC,L]
+
+  RewriteRule ^transaction/?$ pages/transaction/newTransaction.php [NC,L]
+  RewriteRule ^pending/?$ pages/transaction/pending.php [NC,L]
+  RewriteRule ^processing/?$ pages/transaction/processing.php [NC,L]
+  RewriteRule ^search/?$ pages/transaction/search.php [NC,L]
+
+  RewriteRule ^settings/?$ setting.php [NC,L]
+  RewriteRule ^agency/?$ pages/setting/agency.php [NC,L]
+  RewriteRule ^schedule/?$ pages/setting/schedule.php [NC,L]
+
+  RewriteRule ^userProfile/?$ userProfile.php [NC,L]
+</IfModule>
