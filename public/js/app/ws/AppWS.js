@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('AppModule', [])
+angular.module('AppWSModule', [])
 
   .factory('AppWS', ['AppConnector', 'AppConfig', function(AppConnector, AppConfig){
 

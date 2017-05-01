@@ -36,7 +36,7 @@ catch(Exception $ex)
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="DineroApp">
 
   <head>
 
@@ -78,8 +78,21 @@ catch(Exception $ex)
     <!-- Custom Fonts -->
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
-    <!-- JQUERY JS -->
-    <script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+    <!-- JS's -->
+    <script type="text/javascript" src="public/js/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="public/js/lib/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="public/js/lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="public/js/lib/angular/angular-resource.min.js"></script>
+    <script type="text/javascript" src="public/js/lib/angular/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="public/js/lib/bootstrap/js/ui-bootstrap-0.10.0.min.js"></script>
+
+    <script src="public/js/app/config/AppConfig.js"></script>
+
+    <script src="public/js/app/ws/AppConnector.js"></script>
+    <script src="public/js/app/ws/AppWS.js"></script>
+
+    <script src="public/js/AppModule.js"></script>
+    <script src="public/js/app.js"></script>
 
   </head>
 
@@ -114,9 +127,6 @@ catch(Exception $ex)
     </div>
 
     <hr>
-
-    <!-- jQuery -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

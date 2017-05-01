@@ -3,3 +3,5 @@
 dev
 /.htaccess
 !/.htaccess
+.htaccess
+*AppConfig.js

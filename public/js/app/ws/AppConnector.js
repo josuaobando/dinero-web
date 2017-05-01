@@ -1,11 +1,6 @@
 'use strict';
 
-angular.module('AppModule', ['httpTimeoutModule'])
-
-  .config(['httpTimeoutProvider', '$httpProvider', 'AppConfigProvider', function(httpTimeoutProvider, $httpProvider, AppConfigProvider) {
-    httpTimeoutProvider.config.timeout = AppConfigProvider.config.ws_timeout;
-    $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
-  }])
+angular.module('AppConnectorModule', [])
 
   .factory('AppConnector', ['$http', 'AppConfig', function($http, AppConfig){
 
