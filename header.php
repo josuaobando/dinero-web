@@ -4,11 +4,9 @@ require_once('system/Startup.class.php');
 
 session_start();
 $page = $_SERVER["REQUEST_URI"];
-if(strpos($page, "login.php") === false)
-{
+if(strpos($page, "login") === false){
   $account = Session::getAccount();
-  if(!$account)
-  {
+  if(!$account->isAuthenticated()){
     header("Location:login");
   }
 }

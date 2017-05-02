@@ -6,7 +6,7 @@ session_start();
 $page = $_SERVER["REQUEST_URI"];
 if(strpos($page, "login") === false){
   $account = Session::getAccount();
-  if($account->isAuthenticated()){
+  if(!$account->isAuthenticated()){
     header("Location:login");
   }
 }
