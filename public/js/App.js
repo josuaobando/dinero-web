@@ -1,4 +1,4 @@
 'use strict';
 
 // Declare app level module which depends on filters, and services
-angular.module('DineroApp', ['AppModule']);
+angular.module('DineroApp', ['AppModule', 'AppSessionModule']);

@@ -56,7 +56,6 @@ class Report
    */
   public function __construct($wsRequest, $account)
   {
-    $wsRequest instanceof WSRequest;
     $statusId = $wsRequest->getParam("filterStatus", "3");
     $statusId = ($statusId == "-1") ? "0" : $statusId;
     $filterType = $wsRequest->getParam("filterType", "0");

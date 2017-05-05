@@ -16,8 +16,6 @@ try
   $login = $wsRequest->getParam('login');
   if($login)
   {
-
-    session_start();
     $username = trim($wsRequest->requireNotNullOrEmpty('email'));
     $password = trim($wsRequest->requireNotNullOrEmpty('password'));
 
@@ -92,7 +90,7 @@ catch(Exception $ex)
     <script src="public/js/app/ws/AppWS.js"></script>
 
     <script src="public/js/AppModule.js"></script>
-    <script src="public/js/app.js"></script>
+    <script src="public/js/App.js"></script>
 
   </head>
 

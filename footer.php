@@ -47,6 +47,7 @@
 <!-- Custom JavaScript -->
 <script src="js/custom.js"></script>
 
+<input type="hidden" id="sid" ng-model="sid" value="<?php echo session_id() ?>">
 </body>
 
 </html>

@@ -72,7 +72,7 @@ catch(Exception $ex)
       <div class="col-lg-12">
         <div class="panel panel-default">
           <div class="panel-body">
-            <form role="form" method="post" name="searchForm" id="searchForm">
+            <form role="form" data-toggle="validator" method="post" name="searchForm" action="search">
               <!-- Optional filters -->
               <div class="row">
                 <div class="col-sm-4">
@@ -130,7 +130,7 @@ catch(Exception $ex)
 
               <div class="row">
                 <div class="col-lg-12">
-                  <input type="submit" class="btn btn-success" value="Search transactions">
+                  <button name="btnSearch" type="submit" tabindex="11" value="true" class="btn btn-success">Search transactions</button>
                 </div>
               </div>
 

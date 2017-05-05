@@ -1,7 +1,6 @@
 <?php
 require_once ('system/Startup.class.php');
 session_start();
-
 try
 {
   $account = Session::getAccount();

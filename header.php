@@ -2,9 +2,9 @@
 
 require_once('system/Startup.class.php');
 
-session_start();
 $page = $_SERVER["REQUEST_URI"];
 if(strpos($page, "login") === false){
+  session_start();
   $account = Session::getAccount();
   if(!$account->isAuthenticated()){
     header("Location:login");
@@ -64,21 +64,28 @@ if(strpos($page, "login") === false){
     <script type="text/javascript" src="public/js/lib/angular/angular.min.js"></script>
     <script type="text/javascript" src="public/js/lib/angular/angular-resource.min.js"></script>
     <script type="text/javascript" src="public/js/lib/angular/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="public/js/lib/angular/angular-webstorage.js"></script>
     <script type="text/javascript" src="public/js/lib/bootstrap/js/ui-bootstrap-0.10.0.min.js"></script>
 
-    <script src="public/js/app/config/AppConfig.js"></script>
+    <script src="public/js/AppModule.js"></script>
 
+    <script src="public/js/app/session/AppSessionModule.js"></script>
+    <script src="public/js/app/session/AppSession.js"></script>
+
+    <script src="public/js/app/config/AppConfig.js"></script>
     <script src="public/js/app/ws/AppConnector.js"></script>
     <script src="public/js/app/ws/AppWS.js"></script>
 
-    <script src="public/js/AppModule.js"></script>
-    <script src="public/js/app.js"></script>
+    <script src="public/js/AppCtrl.js"></script>
+    <script src="public/js/App.js"></script>
   </head>
 
-  <body>
+  <body ng-controller="AppCtrl">
     <div class="spinner">
       <img alt="loading" src="images/spinner.gif">
     </div>
+
+    <div ui-view></div>
 
     <div id="wrapper">
 
