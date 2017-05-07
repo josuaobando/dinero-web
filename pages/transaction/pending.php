@@ -181,7 +181,7 @@ catch(Exception $ex)
                         <div class="tab-content">
                           <!-- Tab Process -->
                           <div class="tab-pane fade active in" id="tab-process<?= $id ?>">
-                            <form role="form" data-toggle="validator" method="post" id="myForm<?= $id ?>" name="myForm<?= $id ?>">
+                            <form role="form" data-toggle="validator" method="post" id="myForm<?= $id ?>" name="myForm<?= $id ?>" action="pending">
                               <table class="table">
                                 <thead>
                                   <tr>

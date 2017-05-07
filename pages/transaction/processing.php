@@ -190,7 +190,7 @@ catch(Exception $ex)
                           <!-- Tab Process -->
                           <div class="tab-pane fade active in" id="tab-process<?= $id ?>">
                             <br/>
-                            <form role="form" data-toggle="validator" method="post" id="myForm<?= $id ?>" name="myForm<?= $id ?>">
+                            <form role="form" data-toggle="validator" method="post" id="myForm<?= $id ?>" name="myForm<?= $id ?>" action="processing">
                               <input type="hidden" id="transactionId" name="transactionId" value="<?= $id ?>">
                               <input type="hidden" id="transactionTypeId" name="transactionTypeId" value="<?= $transactionTypeId ?>">
 
@@ -409,8 +409,6 @@ catch(Exception $ex)
     </div>
   </div>
 </div>
-
-<form role="form" method="post" name="searchForm" id="searchForm"></form>
 
 <!-- FOOTER -->
 <?php include("../../footer.php"); ?>

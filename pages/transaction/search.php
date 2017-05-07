@@ -294,7 +294,7 @@ catch(Exception $ex)
                               { ?>
                                 <div class="tab-pane fade active in" id="tab-process<?= $id ?>">
                                   <br/>
-                                  <form role="form" data-toggle="validator" method="post" id="myForm<?= $id ?>" name="myForm<?= $id ?>">
+                                  <form role="form" data-toggle="validator" method="post" id="myForm<?= $id ?>" name="myForm<?= $id ?>" action="search">
                                     <input type="hidden" id="filterStatus" name="filterStatus" value="<?= $filterStatus ?>">
                                     <input type="hidden" id="filterType" name="filterType" value="<?= $filterType ?>">
                                     <input type="hidden" id="filterAgencyType" name="filterAgencyType" value="<?= $filterAgencyType ?>">
