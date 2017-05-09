@@ -79,7 +79,7 @@ class ReportExport extends Report
       $row['Status'] = $transaction['Status'];
       $row['Amount'] = $transaction['Amount'];
       $row['Fee'] = $transaction['Fee'];
-      $row['Username'] = $transaction['Username'];
+      $row['Username'] = $transaction['Customer'];
       $row['Customer'] = ucwords(strtolower($transaction['CustomerName']));
       $row['Person'] = ucwords(strtolower($transaction['PersonName']));
       $row['MTCN'] = $transaction['ControlNumber'];
