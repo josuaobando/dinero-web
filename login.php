@@ -79,18 +79,26 @@ catch(Exception $ex)
     <!-- JS's -->
     <script type="text/javascript" src="public/js/lib/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="public/js/lib/jquery/jquery-ui.min.js"></script>
+
+    <!--
     <script type="text/javascript" src="public/js/lib/angular/angular.min.js"></script>
     <script type="text/javascript" src="public/js/lib/angular/angular-resource.min.js"></script>
     <script type="text/javascript" src="public/js/lib/angular/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="public/js/lib/angular/angular-webstorage.js"></script>
     <script type="text/javascript" src="public/js/lib/bootstrap/js/ui-bootstrap-0.10.0.min.js"></script>
 
-    <script src="public/js/app/config/AppConfig.js"></script>
+    <script src="public/js/AppModule.js"></script>
 
+    <script src="public/js/app/session/AppSessionModule.js"></script>
+    <script src="public/js/app/session/AppSession.js"></script>
+
+    <script src="public/js/app/config/AppConfig.js"></script>
     <script src="public/js/app/ws/AppConnector.js"></script>
     <script src="public/js/app/ws/AppWS.js"></script>
 
-    <script src="public/js/AppModule.js"></script>
+    <script src="public/js/AppCtrl.js"></script>
     <script src="public/js/App.js"></script>
+    -->
 
   </head>
 
