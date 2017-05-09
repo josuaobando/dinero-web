@@ -61,6 +61,8 @@ if(strpos($page, "login") === false){
     <!-- JS's -->
     <script type="text/javascript" src="public/js/lib/jquery/jquery.min.js"></script>
     <script type="text/javascript" src="public/js/lib/jquery/jquery-ui.min.js"></script>
+
+    <!--
     <script type="text/javascript" src="public/js/lib/angular/angular.min.js"></script>
     <script type="text/javascript" src="public/js/lib/angular/angular-resource.min.js"></script>
     <script type="text/javascript" src="public/js/lib/angular/angular-ui-router.min.js"></script>
@@ -78,6 +80,7 @@ if(strpos($page, "login") === false){
 
     <script src="public/js/AppCtrl.js"></script>
     <script src="public/js/App.js"></script>
+    -->
   </head>
 
   <body ng-controller="AppCtrl">
