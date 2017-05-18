@@ -73,62 +73,89 @@ catch(Exception $ex)
         <div class="panel panel-default">
           <div class="panel-body">
             <form role="form" data-toggle="validator" method="post" name="searchForm" action="search">
-              <!-- Optional filters -->
-              <div class="row">
-                <div class="col-sm-4">
-                  <select name="filterStatus" id="filteredStatus" class="input-sm form-control">
-                    <option value="-1" <?php echo $filterStatus == '-1' ? 'selected' : ''; ?>>Transaction Status</option>
-                    <?php
-                    foreach($transactionStatus as $tStatus)
-                    {
-                      $id = $tStatus['itemId'];
-                      $value = $tStatus['itemValue'];
-                      if($filterStatus == $id)
-                      {
-                        echo "<option value='$id' selected>$value</option>";
-                      }
-                      else
-                      {
-                        echo "<option value='$id'>$value</option>";
-                      }
-                    }
-                    ?>
-                  </select>
-                </div>
-                <div class="col-sm-4">
-                  <select name="filterType" id="filterType" class="input-sm form-control">
-                    <option value="0" <?php echo $filterType == '0' ? 'selected' : ''; ?>>Transaction Type</option>
-                    <option value="1" <?= ($filterType == Transaction::TYPE_RECEIVER) ? 'selected' : '' ?>>Receiver</option>
-                    <option value="2" <?= ($filterType == Transaction::TYPE_SENDER) ? 'selected' : '' ?>>Sender</option>
-                  </select>
-                </div>
-                <div class="col-sm-4">
-                  <select class="form-control input-sm" name="filterAgencyType" id="filterAgencyType" required>
-                    <option value="0" <?php echo $filterAgencyType == '0' ? 'selected' : ''; ?>>Agency Type</option>
-                    <option value="2" <?php echo $filterAgencyType == '2' ? 'selected' : ''; ?>>MoneyGram</option>
-                    <option value="3" <?php echo $filterAgencyType == '3' ? 'selected' : ''; ?>>Ria</option>
-                  </select>
-                </div>
-              </div>
 
-              <!-- Specific filters -->
               <div class="row">
-                <div class="col-sm-4" id="dateRange">
-                  <div class="input-daterange input-group" id="datepicker">
-                    <input class="input-sm form-control" type="text" name="filterBeginDate" id="filterBeginDate" placeholder="Begin Date" readonly value="<?= $filterBeginDate ?>"/>
-                    <span class="input-group-addon"></span>
-                    <input class="input-sm form-control" type="text" name="filterEndDate" id="filterEndDate" placeholder="End Date" readonly value="<?= $filterEndDate ?>"/>
+
+                <!-- Optional filters -->
+                <div class="col-sm-6">
+
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <select name="filterStatus" id="filteredStatus" class="input-sm form-control">
+                        <option value="-1" <?php echo $filterStatus == '-1' ? 'selected' : ''; ?>>Transaction Status</option>
+                        <?php
+                        foreach($transactionStatus as $tStatus)
+                        {
+                          $id = $tStatus['itemId'];
+                          $value = $tStatus['itemValue'];
+                          if($filterStatus == $id)
+                          {
+                            echo "<option value='$id' selected>$value</option>";
+                          }
+                          else
+                          {
+                            echo "<option value='$id'>$value</option>";
+                          }
+                        }
+                        ?>
+                      </select>
+                    </div>
                   </div>
+
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <select name="filterType" id="filterType" class="input-sm form-control">
+                        <option value="0" <?php echo $filterType == '0' ? 'selected' : ''; ?>>Transaction Type</option>
+                        <option value="1" <?= ($filterType == Transaction::TYPE_RECEIVER) ? 'selected' : '' ?>>Receiver</option>
+                        <option value="2" <?= ($filterType == Transaction::TYPE_SENDER) ? 'selected' : '' ?>>Sender</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <select class="form-control input-sm" name="filterAgencyType" id="filterAgencyType" required>
+                        <option value="0" <?php echo $filterAgencyType == '0' ? 'selected' : ''; ?>>Agency Type</option>
+                        <option value="2" <?php echo $filterAgencyType == '2' ? 'selected' : ''; ?>>MoneyGram</option>
+                        <option value="3" <?php echo $filterAgencyType == '3' ? 'selected' : ''; ?>>Ria</option>
+                      </select>
+                    </div>
+                  </div>
+
                 </div>
-                <div class="col-sm-4">
-                  <input class="input-sm form-control" type=text id="filterUsername" name="filterUsername" placeholder="Username" value="<?= $filterUsername ?>" pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
+                <!-- End Optional filters -->
+
+                <!-- Specific filters -->
+                <div class="col-sm-6">
+
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <input class="input-sm form-control" type=text id="filterUsername" name="filterUsername" placeholder="Username" value="<?= $filterUsername ?>" pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <input class="input-sm form-control" type="text" id="filterMTCN" name="filterMTCN" placeholder="Control Number" value="<?= $filterMTCN ?>" minlength="8" maxlength="10" pattern="<?= Util::REGEX_NUMERIC ?>">
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-sm-12" id="dateRange">
+                      <div class="input-daterange input-group" id="datepicker">
+                        <input class="input-sm form-control" type="text" name="filterBeginDate" id="filterBeginDate" placeholder="Begin Date" readonly value="<?= $filterBeginDate ?>"/>
+                        <span class="input-group-addon"></span>
+                        <input class="input-sm form-control" type="text" name="filterEndDate" id="filterEndDate" placeholder="End Date" readonly value="<?= $filterEndDate ?>"/>
+                      </div>
+                    </div>
+                  </div>
+
                 </div>
-                <div class="col-sm-4">
-                  <input class="input-sm form-control" type="text" id="filterMTCN" name="filterMTCN" placeholder="Control Number" value="<?= $filterMTCN ?>" minlength="8" maxlength="10" pattern="<?= Util::REGEX_NUMERIC ?>">
-                </div>
+                <!-- End Specific filters -->
+
               </div>
 
-              <div class="row">
+              <div class="row" style="margin-top: 10px;">
                 <div class="col-lg-12">
                   <button name="btnSearch" type="submit" tabindex="11" value="true" class="btn btn-success">Search transactions</button>
                 </div>
