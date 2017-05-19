@@ -22,13 +22,11 @@
 
 <!-- Bootstrap Core JavaScript -->
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
 <!-- Bootstrap Datepicker JavaScript -->
 <script src="bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 
 <!-- Metis Menu Plugin JavaScript -->
 <script src="bower_components/metisMenu/dist/metisMenu.min.js"></script>
-
 <!-- DataTables JavaScript -->
 <script src="bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
 <script src="bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
@@ -42,7 +40,7 @@
 <script src="dist/js/sb-admin-2.js"></script>
 
 <!-- Custom JavaScript -->
-<script src="js/custom.js"></script>
+<script src="js/custom.js<?= "?v=".CoreConfig::CACHE_VERSION ?>"></script>
 
 <input type="hidden" id="sid" ng-model="sid" value="<?php echo session_id() ?>">
 </body>

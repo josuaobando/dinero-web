@@ -29,7 +29,7 @@ if(strpos($page, "login") === false){
     <link rel="shortcut icon" href="favicon.ico">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css<?= "?v=".CoreConfig::CACHE_VERSION ?>">
 
     <!-- Bootstrap Core CSS -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
