@@ -13,7 +13,7 @@ if(strpos($page, "login") === false){
 
 ?>
 <!DOCTYPE html>
-<html lang="en" ng-app="DineroApp">
+<html lang="en">
 
   <head>
 
@@ -27,28 +27,20 @@ if(strpos($page, "login") === false){
 
     <!-- favicon -->
     <link rel="shortcut icon" href="favicon.ico">
-
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css<?= "?v=".CoreConfig::CACHE_VERSION ?>">
-
     <!-- Bootstrap Core CSS -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Bootstrap DatePicker CSS -->
     <link href="bower_components/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
-
     <!-- MetisMenu CSS -->
     <link href="bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
-
     <!-- DataTables CSS -->
     <link href="bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
-
     <!-- DataTables Responsive CSS -->
     <link href="bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
-
     <!-- Timeline CSS -->
     <link href="dist/css/timeline.css" rel="stylesheet">
-
     <!-- Morris Charts CSS -->
     <link href="bower_components/morrisjs/morris.css" rel="stylesheet">
 
@@ -59,31 +51,12 @@ if(strpos($page, "login") === false){
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- JS's -->
-    <script type="text/javascript" src="public/js/lib/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="public/js/lib/jquery/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="public/lib/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="public/lib/jquery/jquery-ui.min.js"></script>
 
-    <!--
-    <script type="text/javascript" src="public/js/lib/angular/angular.min.js"></script>
-    <script type="text/javascript" src="public/js/lib/angular/angular-resource.min.js"></script>
-    <script type="text/javascript" src="public/js/lib/angular/angular-ui-router.min.js"></script>
-    <script type="text/javascript" src="public/js/lib/angular/angular-webstorage.js"></script>
-    <script type="text/javascript" src="public/js/lib/bootstrap/js/ui-bootstrap-0.10.0.min.js"></script>
-
-    <script src="public/js/AppModule.js"></script>
-
-    <script src="public/js/app/session/AppSessionModule.js"></script>
-    <script src="public/js/app/session/AppSession.js"></script>
-
-    <script src="public/js/app/config/AppConfig.js"></script>
-    <script src="public/js/app/ws/AppConnector.js"></script>
-    <script src="public/js/app/ws/AppWS.js"></script>
-
-    <script src="public/js/AppCtrl.js"></script>
-    <script src="public/js/App.js"></script>
-    -->
   </head>
 
-  <body ng-controller="AppCtrl">
+  <body ng-controller="ClientCtrl">
     <div class="spinner">
       <img alt="loading" src="images/spinner.gif">
     </div>
