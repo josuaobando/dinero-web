@@ -42,6 +42,8 @@
 <!-- Custom JavaScript -->
 <script src="js/custom.js<?= "?v=".CoreConfig::CACHE_VERSION ?>"></script>
 
+<input type="hidden" id="sid" ng-model="sid" value="<?php echo session_id() ?>">
+
 <!-------------------------------- Library's -------------------------------->
 <script src="public/lib/angular/angular.js"></script>
 <script src="public/lib/angular/angular-resource.js"></script>
@@ -49,18 +51,21 @@
 <script src="public/lib/angular/angular-translate.js"></script>
 <script src="public/lib/angular/angular-translate-loader-static-files.js"></script>
 <script src="public/lib/angular/angular-animate.js"></script>
+<script src="public/lib/angular/angular-webstorage.js"></script>
 
 <script src="public/lib/bootstrap/js/ui-bootstrap-0.11.0.js"></script>
 <script src="public/lib/bindonce/bindonce.js"></script>
 
 <!-------------------------------- Application -------------------------------->
-<script src="public/app/system/SystemModule.js"></script>
-<script src="public/app/system/controller/SystemCtrl.js"></script>
+<script src="public/AppModule.js"></script>
 
 <script src="public/app/config/ClientConfig.js"></script>
 <script src="public/app/ws/httpTimeoutModule.js"></script>
 <script src="public/app/ws/Connector.js"></script>
 <script src="public/app/ws/WS.js"></script>
+
+<script src="public/app/session/AppSessionModule.js"></script>
+<script src="public/app/session/AppSession.js"></script>
 
 <script src="public/app/interface/InterfaceManager.js"></script>
 
@@ -75,7 +80,6 @@
 
 <script src="public/app.js"></script>
 
-<input type="hidden" id="sid" ng-model="sid" value="<?php echo session_id() ?>">
 </body>
 
 </html>
