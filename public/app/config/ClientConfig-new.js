@@ -5,7 +5,7 @@ angular.module('ConfigModule', [])
   .provider('Config', function () {
     var self = this;
     this.config = {
-      ws_timeout: 120000
+      ws_timeout: 60000
     };
     this.$get = function () {
       return { config: self.config };
@@ -15,7 +15,7 @@ angular.module('ConfigModule', [])
   .constant('ClientConfig', {
 
     dev: false,
-    wsController: 'http://cashier.bonus.localhost:8080/ws/wsBonus.php',
+    wsController: '',
     sys_access_pass: '1'
 
   });
