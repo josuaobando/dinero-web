@@ -2,11 +2,64 @@
 
 angular.module('InterfaceManagerModule', ['ngAnimate'])
 
-	.factory('InterfaceManager', ['$location', '$state', 'NotificationManager', function($location, $state, NotificationManager){
+	.factory('InterfaceManager', ['$location', '$state', 'NotificationManager', 'AppSession', function($location, $state, NotificationManager, AppSession){
 
 		var InterfaceManager = {};
 
-		InterfaceManager.filters = [];
+		/**
+		 * Get the Session Id
+		 *
+		 * @returns {*}
+		 */
+		InterfaceManager.getSid = function(){
+			var aSid = AppSession.get('sid');
+			if(!aSid){
+				var pSid = angular.element('[id="sid"]').val();
+				AppSession.set('sid', pSid);
+				return pSid;
+			}else{
+				return aSid;
+			}
+		};
+
+		/**
+		 * add filter to environment
+		 *
+		 * @param type
+		 * @param filterData
+		 */
+		InterfaceManager.addFilter = function(type, filterData){
+			var filters = AppSession.get('filters');
+
+			if(!filters){
+				filters = [];
+			}
+
+			filters[type] = filterData;
+
+			AppSession.set('filters', filters);
+		};
+
+		/**
+		 * get filter from environment
+		 *
+		 * @param type
+		 * @param callback
+		 */
+		InterfaceManager.getFilter = function(type, callback){
+			if (!(callback instanceof Function)){
+				callback = function(){}
+			}
+
+			var filterData = null;
+			var filters = AppSession.get('filters');
+
+			if(filters){
+				filterData = filters[type];
+			}
+
+			callback(filterData);
+		};
 
 		/**
 		 * Configuration by pop up notification

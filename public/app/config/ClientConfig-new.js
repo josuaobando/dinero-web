@@ -16,6 +16,6 @@ angular.module('ConfigModule', [])
 
 		dev: false,
 		wsController: '',
-		sys_access_pass: '1'
+		auth: ''
 
 	});

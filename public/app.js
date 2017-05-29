@@ -8,12 +8,7 @@ angular.module('DineroApp', ['pascalprecht.translate', 'ui.bootstrap', 'pasvaz.b
 
 			$rootScope.$on('$locationChangeStart', function(event, toState, toParams){});
 
-			$rootScope.$on('$locationChangeSuccess', function(event, toState, toParams){
-				var x = angular.element("sid");
-				if(x){
-
-				}
-			});
+			$rootScope.$on('$locationChangeSuccess', function(event, toState, toParams){});
 
 			$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){});
 

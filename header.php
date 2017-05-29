@@ -55,6 +55,13 @@ if(strpos($page, "login") === false){
   </head>
 
   <body ng-controller="ClientCtrl">
+
+    <div loading>
+      <div class="spinner">
+        <img alt="loading" src="images/spinner.gif">
+      </div>
+    </div>
+
     <div class="spinner">
       <img alt="loading" src="images/spinner.gif">
     </div>

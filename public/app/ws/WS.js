@@ -2,19 +2,13 @@
 
 angular.module('WSModule', [])
 
-	.factory('WS', ['Connector', 'ClientConfig', function(Connector, ClientConfig){
+	.factory('WS', ['Connector', 'ClientConfig', 'InterfaceManager', function(Connector, ClientConfig, InterfaceManager){
 
 		/**
 		 * Constructor function
 		 * @constructor
 		 */
 		function WS(){
-
-			/**
-			 * The last request made to the server
-			 * @type {}
-			 */
-			this.lastRequest = null;
 
 			/**
 			 * The last response received from the server
@@ -30,30 +24,6 @@ angular.module('WSModule', [])
 		}
 
 		/**
-		 * Returns the last state returned from the server
-		 * @returns string
-		 */
-		WS.prototype.getResponseState = function(){
-			var state = null;
-			if(typeof this.lastResponse !== 'undefined'){
-				state = this.lastResponse.state;
-			}
-			return state
-		}
-
-		/**
-		 * Returns the last user message returned from the server
-		 * @returns string
-		 */
-		WS.prototype.getResponseUserMessage = function(){
-			var userMessage = null;
-			if(typeof this.lastResponse !== 'undefined'){
-				userMessage = this.lastResponse.userMessage;
-			}
-			return userMessage
-		}
-
-		/**
 		 * Returns the last system message returned from the server
 		 * @returns string
 		 */
@@ -63,7 +33,7 @@ angular.module('WSModule', [])
 				systemMessage = this.lastResponse.systemMessage;
 			}
 			return systemMessage
-		}
+		};
 
 		/**
 		 * Makes a request to the Backend Server
@@ -74,9 +44,6 @@ angular.module('WSModule', [])
 
 			// Add the required parameters to the request
 			this.prepareRequest(req);
-
-			// Store the last request
-			this.lastRequest = req;
 
 			var self = this;
 			this.connector.post(req, function(res){
@@ -101,20 +68,20 @@ angular.module('WSModule', [])
 
 		/**
 		 * Adds the default parameters to the Backend request
+		 *
 		 * @param req
 		 * @returns {*}
 		 */
 		WS.prototype.prepareRequest = function(req){
 
-			req.sys_access_pass = ClientConfig.sys_access_pass;
+			req.format = 'json';
 			req.userAgent = navigator.userAgent;
-			req.isProxy = 1;
+			req.url = ClientConfig.wsController;
+			req.auth = ClientConfig.auth;
+			req.sid = InterfaceManager.getSid();
 
 			if(ClientConfig.dev === true){
 				req.XDEBUG_SESSION_START = 'ECLIPSE_DBGP';
-			}
-			if(!req.url){
-				req.url = ClientConfig.wsController;
 			}
 
 		};

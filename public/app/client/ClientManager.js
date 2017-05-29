@@ -2,28 +2,43 @@
 
 angular.module('ClientModule', [])
 
-	.factory('ClientManager', ['WS', function(WS){
+	.factory('ClientManager', ['WS', 'InterfaceManager', function(WS, InterfaceManager){
 
 		var ClientManager = {};
 
+		/**
+		 * get countries
+		 *
+		 * @param callback
+		 */
 		ClientManager.getCountries = function(callback){
+			InterfaceManager.getFilter('countries', function(filterData){
+				if(filterData){
 
-			var req = {f: "getCountries"};
+					callback(filterData);
 
-			var WSBEConnector = new WS();
-			WSBEConnector.execPost(req, function(res){
-
-				if(res === {} || res === null){
-					callback([], WSBEConnector.getResponseUserMessage());
-				}else if(res.hasOwnProperty('countries')){
-					var countries = res.countries;
-					callback(countries);
 				}else{
-					callback([]);
+
+					var req = {f: "getCountries"};
+					var WSBEConnector = new WS();
+					WSBEConnector.execPost(req, function(res){
+
+						if(res === {} || res === null){
+							callback([], WSBEConnector.getResponseSystemMessage());
+						}else if(res.hasOwnProperty('countries')){
+							var countries = res.countries;
+
+							InterfaceManager.addFilter('countries', countries);
+
+							callback(countries);
+						}else{
+							callback([]);
+						}
+
+					});
+
 				}
-
 			});
-
 		};
 
 		return ClientManager;
