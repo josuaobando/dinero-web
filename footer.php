@@ -77,6 +77,7 @@
 <script src="public/app/client/ClientModule.js<?= "?v=".CoreConfig::CACHE_VERSION ?>"></script>
 <script src="public/app/client/ClientManager.js<?= "?v=".CoreConfig::CACHE_VERSION ?>"></script>
 <script src="public/app/client/controller/ClientCtrl.js<?= "?v=".CoreConfig::CACHE_VERSION ?>"></script>
+<script src="public/app/client/controller/ClientSearchCtrl.js<?= "?v=".CoreConfig::CACHE_VERSION ?>"></script>
 
 <script src="public/app.js<?= "?v=".CoreConfig::CACHE_VERSION ?>"></script>
 

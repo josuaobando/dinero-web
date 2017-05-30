@@ -46,6 +46,7 @@ try
   $filterStatus = $wsRequest->getParam("filterStatus", "3");
   $filterType = $wsRequest->getParam("filterType", "0");
   $filterAgencyType = $wsRequest->getParam("filterAgencyType", "0");
+  $filterAgencyId = $wsRequest->getParam("filterAgencyId", "");
 
   $filterBeginDate = $wsRequest->getParam("filterBeginDate", "");
   $filterEndDate = $wsRequest->getParam("filterEndDate", "");
@@ -59,7 +60,7 @@ catch(Exception $ex)
   $userMessage = '<div class="alert alert-danger">'.$userMessage.'</div>';
 }
 ?>
-  <div id="page-wrapper">
+  <div id="page-wrapper" ng-controller="ClientSearchCtrl">
 
     <div class="row">
       <div class="col-lg-12">
@@ -114,10 +115,22 @@ catch(Exception $ex)
 
                   <div class="row">
                     <div class="col-sm-12">
-                      <select class="form-control input-sm" name="filterAgencyType" id="filterAgencyType" required>
+                      <select class="form-control input-sm" name="filterAgencyType" id="filterAgencyType"
+                              ng-model="reportFilter.filterAgencyTypeId"
+                              ng-change="getAgenciesByType()" required>
                         <option value="0" <?php echo $filterAgencyType == '0' ? 'selected' : ''; ?>>Agency Type</option>
                         <option value="2" <?php echo $filterAgencyType == '2' ? 'selected' : ''; ?>>MoneyGram</option>
                         <option value="3" <?php echo $filterAgencyType == '3' ? 'selected' : ''; ?>>Ria</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="row" ng-show="reportFilter.filterAgencyTypeId > 0">
+                    <div class="col-sm-12">
+                      <select class="form-control input-sm" name="filterAgencyId" id="reportFilter.filterAgencyId"
+                              ng-model="filterAgencyId"
+                              ng-options="item.Agency_Id as (item.Name + ' - ' + item.AgencyType) for item in agenciesFilterData | filter: {AgencyType_Id: reportFilter.filterAgencyTypeId} | orderBy:'Name'">
+                        <option value="">Agency</option>
                       </select>
                     </div>
                   </div>

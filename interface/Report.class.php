@@ -60,6 +60,7 @@ class Report
     $statusId = ($statusId == "-1") ? "0" : $statusId;
     $filterType = $wsRequest->getParam("filterType", "0");
     $filterAgencyType = $wsRequest->getParam("filterAgencyType", "0");
+    $filterAgencyId = $wsRequest->getParam("filterAgencyId", "0");
 
     $beginDate = $wsRequest->getParam("filterBeginDate", "");
     $endDate = $wsRequest->getParam("filterEndDate", "");

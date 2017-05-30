@@ -9,17 +9,27 @@ angular.module('InterfaceManagerModule', ['ngAnimate'])
 		/**
 		 * Get the Session Id
 		 *
-		 * @returns {*}
+		 * @returns string
 		 */
 		InterfaceManager.getSid = function(){
-			var aSid = AppSession.get('sid');
-			if(!aSid){
-				var pSid = angular.element('[id="sid"]').val();
-				AppSession.set('sid', pSid);
-				return pSid;
+			var sid = null;
+			var pageSid = angular.element('[id="sid"]').val();
+			var appSid = AppSession.get('sid');
+
+			if(!appSid){
+				sid = pageSid;
+				AppSession.set('sid', pageSid);
 			}else{
-				return aSid;
+				if(pageSid && pageSid != appSid){
+					AppSession.clear();
+					AppSession.set('sid', pageSid);
+					sid = pageSid;
+				}else{
+					sid = appSid;
+				}
 			}
+
+			return sid;
 		};
 
 		/**
@@ -29,15 +39,7 @@ angular.module('InterfaceManagerModule', ['ngAnimate'])
 		 * @param filterData
 		 */
 		InterfaceManager.addFilter = function(type, filterData){
-			var filters = AppSession.get('filters');
-
-			if(!filters){
-				filters = [];
-			}
-
-			filters[type] = filterData;
-
-			AppSession.set('filters', filters);
+			AppSession.set(type, filterData);
 		};
 
 		/**
@@ -51,12 +53,7 @@ angular.module('InterfaceManagerModule', ['ngAnimate'])
 				callback = function(){}
 			}
 
-			var filterData = null;
-			var filters = AppSession.get('filters');
-
-			if(filters){
-				filterData = filters[type];
-			}
+			var filterData = AppSession.get(type);
 
 			callback(filterData);
 		};
