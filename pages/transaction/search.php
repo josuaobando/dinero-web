@@ -348,9 +348,9 @@ catch(Exception $ex)
                                     <input type="hidden" id="transactionId" name="transactionId" value="<?= $id ?>">
                                     <input type="hidden" id="transactionTypeId" name="transactionTypeId" value="<?= $transactionTypeId ?>">
 
-                                    <table class="table">
+                                    <table class="table table-hover table-condensed table-responsive">
                                       <thead>
-                                        <tr>
+                                        <tr class="active">
                                           <th>ID</th>
                                           <th>Agency</th>
                                           <th>Type</th>
