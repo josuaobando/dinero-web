@@ -348,31 +348,34 @@ catch(Exception $ex)
                                     <input type="hidden" id="transactionId" name="transactionId" value="<?= $id ?>">
                                     <input type="hidden" id="transactionTypeId" name="transactionTypeId" value="<?= $transactionTypeId ?>">
 
-                                    <table class="table table-hover table-condensed table-responsive">
-                                      <thead>
-                                        <tr class="active">
-                                          <th>ID</th>
-                                          <th>Agency</th>
-                                          <th>Type</th>
-                                          <th>Date</th>
-                                          <th>API Verification</th>
-                                          <th>API Status</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <tr>
-                                          <td><?= $id ?></td>
-                                          <td><?= $agency ?></td>
-                                          <td><?= $agencyType ?></td>
-                                          <td><?= $modifiedDate ?></td>
-                                          <?php if($account->checkPermission('REPORT_TRANSACTION_VIEW_API_VERIFICATION'))
-                                          { ?>
-                                            <td><?= $apiVerificationId ?></td>
-                                            <td><?= $apiVerification ?></td>
-                                          <?php } ?>
-                                        </tr>
-                                      </tbody>
-                                    </table>
+                                    <div class="wrap-table">
+                                      <table class="table">
+                                        <thead>
+                                          <tr class="active">
+                                            <th>ID</th>
+                                            <th>Agency</th>
+                                            <th>Type</th>
+                                            <th>Date</th>
+                                            <th>API Verification</th>
+                                            <th>API Status</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          <tr>
+                                            <td><?= $id ?></td>
+                                            <td><?= $agency ?></td>
+                                            <td><?= $agencyType ?></td>
+                                            <td><?= $modifiedDate ?></td>
+                                            <?php if($account->checkPermission('REPORT_TRANSACTION_VIEW_API_VERIFICATION'))
+                                            { ?>
+                                              <td><?= $apiVerificationId ?></td>
+                                              <td><?= $apiVerification ?></td>
+                                            <?php } ?>
+                                          </tr>
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                    <br>
 
                                     <div class="form-group">
                                       <div class="row">
