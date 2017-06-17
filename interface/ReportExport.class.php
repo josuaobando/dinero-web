@@ -50,6 +50,7 @@ class ReportExport extends Report
   {
 
     $viewAgency = $this->account->checkPermission('REPORT_TRANSACTION_VIEW_AGENCY');
+    $viewAPITransaction = $this->account->checkPermission('REPORT_TRANSACTION_VIEW_API_VERIFICATION');
 
     $headers = array();
     $headers[] = 'Transaction Id';
@@ -66,6 +67,11 @@ class ReportExport extends Report
       $headers[] = 'Agency';
     }
     $headers[] = 'Agency Type';
+    if($viewAPITransaction)
+    {
+      $headers[] = 'API Verification';
+      $headers[] = 'API Status';
+    }
     $headers[] = 'Created';
     $headers[] = 'Modified';
     $headers[] = 'Notes';
@@ -88,6 +94,11 @@ class ReportExport extends Report
         $row['Agency'] = $transaction['Agency'];
       }
       $row['AgencyType'] = $transaction['AgencyType'];
+      if($viewAPITransaction)
+      {
+        $row['API Verification'] = $transaction['Verification_Id'];
+        $row['API Status'] = ucwords($transaction['Verification']);
+      }
       $createdDate = $transaction['CreatedDate'];
       $modifiedDate = $transaction['ModifiedDate'];
       $row['CreatedDate'] = date(Util::FORMAT_DATE_DISPLAY, strtotime($createdDate));

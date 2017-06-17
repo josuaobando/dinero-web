@@ -45,6 +45,7 @@
 <input type="hidden" id="sid" name="sid" value="<?php echo session_id() ?>">
 
 <!-------------------------------- Library's -------------------------------->
+<!--
 <script src="public/lib/angular/angular.js"></script>
 <script src="public/lib/angular/angular-resource.js"></script>
 <script src="public/lib/angular/angular-ui-router.js"></script>
@@ -55,8 +56,9 @@
 
 <script src="public/lib/bootstrap/js/ui-bootstrap-0.11.0.js"></script>
 <script src="public/lib/bindonce/bindonce.js"></script>
-
+-->
 <!-------------------------------- Application -------------------------------->
+<!--
 <script src="public/AppModule.js<?= "?v=".CoreConfig::CACHE_VERSION ?>"></script>
 
 <script src="public/app/config/ClientConfig.js<?= "?v=".CoreConfig::CACHE_VERSION ?>"></script>
@@ -80,7 +82,7 @@
 <script src="public/app/client/controller/ClientSearchCtrl.js<?= "?v=".CoreConfig::CACHE_VERSION ?>"></script>
 
 <script src="public/app.js<?= "?v=".CoreConfig::CACHE_VERSION ?>"></script>
-
+-->
 </body>
 
 </html>

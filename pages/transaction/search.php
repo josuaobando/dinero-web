@@ -281,6 +281,9 @@ catch(Exception $ex)
                   $personState = $transaction['PersonState'];
                   $personCountry = $transaction['PersonCountry'];
 
+                  $apiVerification = ucwords($transaction['Verification']);
+                  $apiVerificationId = $transaction['Verification_Id'];
+
                   $createdDate = $transaction['CreatedDate'];
                   $modifiedDate = $transaction['ModifiedDate'];
                   //format date
@@ -297,7 +300,7 @@ catch(Exception $ex)
                   }
                   ?>
                   <div class="modal fade" id="myModal<?= $id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-                    <div class="modal-dialog">
+                    <div class="modal-dialog modal-lg">
                       <div class="modal-content">
 
                         <div class="modal-header <?= $headerType ?>">
@@ -345,14 +348,59 @@ catch(Exception $ex)
                                     <input type="hidden" id="transactionId" name="transactionId" value="<?= $id ?>">
                                     <input type="hidden" id="transactionTypeId" name="transactionTypeId" value="<?= $transactionTypeId ?>">
 
+                                    <table class="table">
+                                      <thead>
+                                        <tr>
+                                          <th>ID</th>
+                                          <th>Agency</th>
+                                          <th>Type</th>
+                                          <th>Date</th>
+                                          <th>API Verification</th>
+                                          <th>API Status</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <tr>
+                                          <td><?= $id ?></td>
+                                          <td><?= $agency ?></td>
+                                          <td><?= $agencyType ?></td>
+                                          <td><?= $modifiedDate ?></td>
+                                          <?php if($account->checkPermission('REPORT_TRANSACTION_VIEW_API_VERIFICATION'))
+                                          { ?>
+                                            <td><?= $apiVerificationId ?></td>
+                                            <td><?= $apiVerification ?></td>
+                                          <?php } ?>
+                                        </tr>
+                                      </tbody>
+                                    </table>
+
                                     <div class="form-group">
-                                      <div class="form-group">
-                                        <label>Amount ($USD)</label>
-                                        <input class="form-control input-sm <?= $disabled ?>" type="number" step="any" min="1" id="amount" name="amount" value="<?= $amount ?>" required>
-                                      </div>
-                                      <div class="form-group">
-                                        <label>Fee ($USD)</label>
-                                        <input class="form-control input-sm <?= $disabled ?>" type="number" step="any" min="0" id="fee" name="fee" value="<?= $fee ?>" required>
+                                      <div class="row">
+                                        <div class="col-lg-4">
+                                          <label>Amount ($USD)</label>
+                                          <input class="form-control input-sm <?= $disabled ?>"
+                                                 type="number" step="any" min="1"
+                                                 id="amount" name="amount"
+                                                 value="<?= $amount ?>" required>
+                                        </div>
+                                        <div class="col-lg-4">
+                                          <label>Fee ($USD)</label>
+                                          <input class="form-control input-sm <?= $disabled ?>"
+                                                 type="number" step="any" min="0"
+                                                 id="fee" name="fee"
+                                                 value="<?= $fee ?>" required>
+                                        </div>
+                                        <div class="col-lg-4">
+                                          <label>Control Number</label>
+                                          <input class="form-control input-sm <?= $disabled ?>"
+                                                 type="text" id="controlNumber"
+                                                 name="controlNumber"
+                                                 value="<?= $controlNumber ?>"
+                                                 minlength="8" maxlength="11"
+                                                 pattern="<?= Util::REGEX_NUMERIC ?>" <?php if($transactionTypeId == Transaction::TYPE_RECEIVER){
+                                            echo 'required';
+                                          } ?>>
+                                        </div>
                                       </div>
                                       <div class="form-group">
                                         <!-- Status -->
@@ -375,13 +423,6 @@ catch(Exception $ex)
                                           ?>
                                         </select>
                                       </div>
-                                    </div>
-                                    <div class="form-group">
-                                      <label>Control Number</label>
-                                      <input class="form-control input-sm <?= $disabled ?>" type="text" id="controlNumber" name="controlNumber" value="<?= $controlNumber ?>" minlength="8" maxlength="11" pattern="<?= Util::REGEX_NUMERIC ?>" <?php if($transactionTypeId == Transaction::TYPE_RECEIVER)
-                                      {
-                                        echo 'required';
-                                      } ?>>
                                     </div>
                                     <div class="form-group">
                                       <label>Reason (Only Numbers and Letters)</label>
@@ -407,18 +448,6 @@ catch(Exception $ex)
                                 <table class="table">
                                   <tbody>
                                     <tr>
-                                      <td>Transaction ID</td>
-                                      <td><?= $id ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Amount</td>
-                                      <td>$<?= $amount ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Fee</td>
-                                      <td>$<?= $fee ?></td>
-                                    </tr>
-                                    <tr>
                                       <td>Username</td>
                                       <td><?= $customer ?></td>
                                     </tr>
@@ -433,10 +462,6 @@ catch(Exception $ex)
                                     <tr>
                                       <td>Country</td>
                                       <td><?= $country ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Control Number</td>
-                                      <td><?= $controlNumber ?></td>
                                     </tr>
                                     <?php if($account->checkPermission('REPORT_TRANSACTION_VIEW_AGENCY'))
                                     { ?>
