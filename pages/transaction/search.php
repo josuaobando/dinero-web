@@ -124,7 +124,7 @@ catch(Exception $ex)
                       </select>
                     </div>
                   </div>
-
+                  <!--
                   <div class="row" ng-show="reportFilter.filterAgencyTypeId > 0">
                     <div class="col-sm-12">
                       <select class="form-control input-sm" name="filterAgencyId" id="reportFilter.filterAgencyId"
@@ -134,7 +134,7 @@ catch(Exception $ex)
                       </select>
                     </div>
                   </div>
-
+                  -->
                 </div>
                 <!-- End Optional filters -->
 
