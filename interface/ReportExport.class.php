@@ -71,6 +71,7 @@ class ReportExport extends Report
     {
       $headers[] = 'API Verification';
       $headers[] = 'API Status';
+      $headers[] = 'API Code';
     }
     $headers[] = 'Created';
     $headers[] = 'Modified';
@@ -98,6 +99,7 @@ class ReportExport extends Report
       {
         $row['API Verification'] = $transaction['Verification_Id'];
         $row['API Status'] = ucwords($transaction['Verification']);
+        $row['API Code'] = $transaction['AuthCode'];
       }
       $createdDate = $transaction['CreatedDate'];
       $modifiedDate = $transaction['ModifiedDate'];

@@ -283,6 +283,7 @@ catch(Exception $ex)
 
                   $apiVerification = ucwords($transaction['Verification']);
                   $apiVerificationId = $transaction['Verification_Id'];
+                  $apiAuthCode = $transaction['AuthCode'];
 
                   $createdDate = $transaction['CreatedDate'];
                   $modifiedDate = $transaction['ModifiedDate'];
@@ -356,8 +357,12 @@ catch(Exception $ex)
                                             <th>Agency</th>
                                             <th>Type</th>
                                             <th>Date</th>
-                                            <th>API Verification</th>
-                                            <th>API Status</th>
+                                            <?php if($account->checkPermission('REPORT_TRANSACTION_VIEW_API_VERIFICATION'))
+                                            { ?>
+                                              <th>API Verification</th>
+                                              <th>API Status</th>
+                                              <th>API Code</th>
+                                            <?php } ?>
                                           </tr>
                                         </thead>
                                         <tbody>
@@ -370,6 +375,7 @@ catch(Exception $ex)
                                             { ?>
                                               <td><?= $apiVerificationId ?></td>
                                               <td><?= $apiVerification ?></td>
+                                              <td><?= $apiAuthCode ?></td>
                                             <?php } ?>
                                           </tr>
                                         </tbody>
