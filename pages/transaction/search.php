@@ -149,7 +149,7 @@ catch(Exception $ex)
 
                   <div class="row">
                     <div class="col-sm-12">
-                      <input class="input-sm form-control" type="text" id="filterMTCN" name="filterMTCN" placeholder="Control Number" value="<?= $filterMTCN ?>" minlength="8" maxlength="10" pattern="<?= Util::REGEX_NUMERIC ?>">
+                      <input class="input-sm form-control" type="text" id="filterMTCN" name="filterMTCN" placeholder="Control Number" value="<?= $filterMTCN ?>" minlength="8" maxlength="11" pattern="<?= Util::REGEX_NUMERIC ?>">
                     </div>
                   </div>
 
