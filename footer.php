@@ -9,7 +9,7 @@
       <p>
         <strong>
           <i class="fa fa-copyright"></i>
-          2017 - DineroSeguroHF.com - All Rights Reserved
+          2018 - DineroSeguroHF.com - All Rights Reserved
         </strong>
       </p>
     </div>
