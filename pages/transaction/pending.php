@@ -68,7 +68,7 @@ catch(Exception $ex)
                   <th>ID</th>
                   <th>Amount</th>
                   <th>Username</th>
-                  <th>Username</th>
+                  <th>Customer</th>
                   <th>Person</th>
                   <th>Agency</th>
                   <th>Type</th>
