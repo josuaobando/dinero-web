@@ -64,7 +64,9 @@ class Report
 
     $beginDate = $wsRequest->getParam("filterBeginDate", "");
     $endDate = $wsRequest->getParam("filterEndDate", "");
+    $filterID = $wsRequest->getParam("filterID", "");
     $controlNumber = $wsRequest->getParam("filterMTCN", "");
+    $filterReference = $wsRequest->getParam("filterReference", "");
     $filterUsername = $wsRequest->getParam("filterUsername", "");
 
     $this->currentPage = $wsRequest->getParam("filterPage", "1");
@@ -136,6 +138,7 @@ class Report
                   <th>Type</th>
                   <th>Date</th>
                   <th>Reason</th>
+                  <th>Reference</th>
                 </tr>
               </thead>";
 
@@ -160,6 +163,7 @@ class Report
         $agencyType = $transaction['AgencyType'];
         $modifiedDate = $transaction['ModifiedDate'];
         $modifiedDate = date(Util::FORMAT_DATE_DISPLAY, strtotime($modifiedDate));
+        $reference = $transaction['Reference'];
         $rowType = ($type == Transaction::TYPE_RECEIVER) ? '' : 'warning';
 
         $row = "<tr class='$rowType'>
@@ -178,6 +182,7 @@ class Report
           <td>$agencyType</td>  
           <td>$modifiedDate</td>
           <td>$reason</td>
+          <td>$reference</td>
         </tr>";
 
         $table .= $row;

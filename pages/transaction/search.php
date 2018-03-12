@@ -51,7 +51,9 @@ try
   $filterBeginDate = $wsRequest->getParam("filterBeginDate", "");
   $filterEndDate = $wsRequest->getParam("filterEndDate", "");
   $filterMTCN = $wsRequest->getParam("filterMTCN", "");
+  $filterID = $wsRequest->getParam("filterID", "");
   $filterUsername = $wsRequest->getParam("filterUsername", "");
+  $filterReference = $wsRequest->getParam("filterReference", "");
 }
 catch(Exception $ex)
 {
@@ -82,8 +84,11 @@ catch(Exception $ex)
 
                   <div class="row">
                     <div class="col-sm-12">
-                      <select name="filterStatus" id="filteredStatus" class="input-sm form-control">
-                        <option value="-1" <?php echo $filterStatus == '-1' ? 'selected' : ''; ?>>Transaction Status</option>
+                      <select name="filterStatus" id="filteredStatus"
+                              class="input-sm form-control">
+                        <option value="-1" <?php echo $filterStatus == '-1' ? 'selected' : ''; ?>>
+                          Transaction Status
+                        </option>
                         <?php
                         foreach($transactionStatus as $tStatus)
                         {
@@ -106,21 +111,34 @@ catch(Exception $ex)
                   <div class="row">
                     <div class="col-sm-12">
                       <select name="filterType" id="filterType" class="input-sm form-control">
-                        <option value="0" <?php echo $filterType == '0' ? 'selected' : ''; ?>>Transaction Type</option>
-                        <option value="1" <?= ($filterType == Transaction::TYPE_RECEIVER) ? 'selected' : '' ?>>Receiver</option>
-                        <option value="2" <?= ($filterType == Transaction::TYPE_SENDER) ? 'selected' : '' ?>>Sender</option>
+                        <option value="0" <?php echo $filterType == '0' ? 'selected' : ''; ?>>
+                          Transaction Type
+                        </option>
+                        <option value="1" <?= ($filterType == Transaction::TYPE_RECEIVER) ? 'selected' : '' ?>>
+                          Receiver
+                        </option>
+                        <option value="2" <?= ($filterType == Transaction::TYPE_SENDER) ? 'selected' : '' ?>>
+                          Sender
+                        </option>
                       </select>
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="col-sm-12">
-                      <select class="form-control input-sm" name="filterAgencyType" id="filterAgencyType"
+                      <select class="form-control input-sm" name="filterAgencyType"
+                              id="filterAgencyType"
                               ng-model="reportFilter.filterAgencyTypeId"
                               ng-change="getAgenciesByType()" required>
-                        <option value="0" <?php echo $filterAgencyType == '0' ? 'selected' : ''; ?>>Agency Type</option>
-                        <option value="2" <?php echo $filterAgencyType == '2' ? 'selected' : ''; ?>>MoneyGram</option>
-                        <option value="3" <?php echo $filterAgencyType == '3' ? 'selected' : ''; ?>>Ria</option>
+                        <option value="0" <?php echo $filterAgencyType == '0' ? 'selected' : ''; ?>>
+                          Agency Type
+                        </option>
+                        <option value="2" <?php echo $filterAgencyType == '2' ? 'selected' : ''; ?>>
+                          MoneyGram
+                        </option>
+                        <option value="3" <?php echo $filterAgencyType == '3' ? 'selected' : ''; ?>>
+                          Ria
+                        </option>
                       </select>
                     </div>
                   </div>
@@ -143,22 +161,40 @@ catch(Exception $ex)
 
                   <div class="row">
                     <div class="col-sm-12">
-                      <input class="input-sm form-control" type=text id="filterUsername" name="filterUsername" placeholder="Username" value="<?= $filterUsername ?>" pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <input class="input-sm form-control" type="text" id="filterID" name="filterID" placeholder="ID" value="<?= $filterID ?>" pattern="<?= Util::REGEX_NUMERIC ?>">
+                        </div>
+                        <div class="col-sm-6">
+                          <input class="input-sm form-control" type="text" id="filterMTCN" name="filterMTCN" placeholder="Control Number" value="<?= $filterMTCN ?>" minlength="8" maxlength="11" pattern="<?= Util::REGEX_NUMERIC ?>">
+                        </div>
+                      </div>
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="col-sm-12">
-                      <input class="input-sm form-control" type="text" id="filterMTCN" name="filterMTCN" placeholder="Control Number" value="<?= $filterMTCN ?>" minlength="8" maxlength="11" pattern="<?= Util::REGEX_NUMERIC ?>">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <input class="input-sm form-control" type=text id="filterUsername" name="filterReference" placeholder="Reference" value="<?= $filterReference ?>" pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
+                        </div>
+                        <div class="col-sm-6">
+                          <input class="input-sm form-control" type=text id="filterUsername" name="filterUsername" placeholder="Username" value="<?= $filterUsername ?>" pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
+                        </div>
+                      </div>
                     </div>
                   </div>
 
                   <div class="row">
                     <div class="col-sm-12" id="dateRange">
                       <div class="input-daterange input-group" id="datepicker">
-                        <input class="input-sm form-control" type="text" name="filterBeginDate" id="filterBeginDate" placeholder="Begin Date" readonly value="<?= $filterBeginDate ?>"/>
+                        <input class="input-sm form-control" type="text" name="filterBeginDate"
+                               id="filterBeginDate" placeholder="Begin Date" readonly
+                               value="<?= $filterBeginDate ?>"/>
                         <span class="input-group-addon"></span>
-                        <input class="input-sm form-control" type="text" name="filterEndDate" id="filterEndDate" placeholder="End Date" readonly value="<?= $filterEndDate ?>"/>
+                        <input class="input-sm form-control" type="text" name="filterEndDate"
+                               id="filterEndDate" placeholder="End Date" readonly
+                               value="<?= $filterEndDate ?>"/>
                       </div>
                     </div>
                   </div>
@@ -170,7 +206,9 @@ catch(Exception $ex)
 
               <div class="row" style="margin-top: 10px;">
                 <div class="col-lg-12">
-                  <button name="btnSearch" type="submit" tabindex="11" value="true" class="btn btn-success">Search transactions</button>
+                  <button name="btnSearch" type="submit" tabindex="11" value="true"
+                          class="btn btn-success">Search transactions
+                  </button>
                 </div>
               </div>
 
@@ -234,7 +272,8 @@ catch(Exception $ex)
               <div>
                 <div class="row">
                   <div class="col-lg-12">
-                    <input type="button" class="btn btn-default" value="Export" onclick="exportReport()">
+                    <input type="button" class="btn btn-default" value="Export"
+                           onclick="exportReport()">
                   </div>
                 </div>
               </div>
@@ -300,12 +339,14 @@ catch(Exception $ex)
                     $readonly = 'readonly';
                   }
                   ?>
-                  <div class="modal fade" id="myModal<?= $id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+                  <div class="modal fade" id="myModal<?= $id ?>" tabindex="-1" role="dialog"
+                       aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                     <div class="modal-dialog modal-lg">
                       <div class="modal-content">
 
                         <div class="modal-header <?= $headerType ?>">
-                          <h4 class="modal-title" id="myModalLabel"><?= $transactionType ?> Transaction Details</h4>
+                          <h4 class="modal-title" id="myModalLabel"><?= $transactionType ?>
+                            Transaction Details</h4>
                         </div>
 
                         <div class="modal-body">
@@ -315,20 +356,25 @@ catch(Exception $ex)
                               <?php if($account->checkPermission('TRANSACTION_UPDATE'))
                               { ?>
                                 <li class="active">
-                                  <a href="#tab-process<?= $id ?>" data-toggle="tab" aria-expanded="true">Re-Process</a>
+                                  <a href="#tab-process<?= $id ?>" data-toggle="tab"
+                                     aria-expanded="true">Re-Process
+                                  </a>
                                 </li>
                                 <li class="">
-                                  <a href="#tab-customer<?= $id ?>" data-toggle="tab" aria-expanded="false"><?= ($transactionTypeId == Transaction::TYPE_RECEIVER) ? 'Sender' : 'Receiver' ?></a>
+                                  <a href="#tab-customer<?= $id ?>" data-toggle="tab"
+                                     aria-expanded="false"><?= ($transactionTypeId == Transaction::TYPE_RECEIVER) ? 'Sender' : 'Receiver' ?></a>
                                 </li>
                               <?php }
                               else
                               { ?>
                                 <li class="active">
-                                  <a href="#tab-customer<?= $id ?>" data-toggle="tab" aria-expanded="true"><?= ($transactionTypeId == Transaction::TYPE_RECEIVER) ? 'Sender' : 'Receiver' ?></a>
+                                  <a href="#tab-customer<?= $id ?>" data-toggle="tab"
+                                     aria-expanded="true"><?= ($transactionTypeId == Transaction::TYPE_RECEIVER) ? 'Sender' : 'Receiver' ?></a>
                                 </li>
                               <?php } ?>
                               <li class="">
-                                <a href="#tab-person<?= $id ?>" data-toggle="tab" aria-expanded="false"><?= ($transactionTypeId == Transaction::TYPE_SENDER) ? 'Sender' : 'Receiver' ?></a>
+                                <a href="#tab-person<?= $id ?>" data-toggle="tab"
+                                   aria-expanded="false"><?= ($transactionTypeId == Transaction::TYPE_SENDER) ? 'Sender' : 'Receiver' ?></a>
                               </li>
                             </ul>
                             <!-- Tab panes -->
@@ -336,18 +382,36 @@ catch(Exception $ex)
                               <!-- Tab Re-Process -->
                               <?php if($account->checkPermission('TRANSACTION_UPDATE'))
                               { ?>
-                                <div class="tab-pane fade active in" id="tab-process<?= $id ?>">
+                                <div class="tab-pane fade active in"
+                                     id="tab-process<?= $id ?>">
                                   <br/>
-                                  <form role="form" data-toggle="validator" method="post" id="myForm<?= $id ?>" name="myForm<?= $id ?>" action="search">
-                                    <input type="hidden" id="filterStatus" name="filterStatus" value="<?= $filterStatus ?>">
-                                    <input type="hidden" id="filterType" name="filterType" value="<?= $filterType ?>">
-                                    <input type="hidden" id="filterAgencyType" name="filterAgencyType" value="<?= $filterAgencyType ?>">
-                                    <input type="hidden" id="filterBeginDate" name="filterBeginDate" value="<?= $filterBeginDate ?>">
-                                    <input type="hidden" id="filterEndDate" name="filterEndDate" value="<?= $filterEndDate ?>">
-                                    <input type="hidden" id="filterUsername" name="filterUsername" value="<?= $filterUsername ?>">
-                                    <input type="hidden" id="filterMTCN" name="filterMTCN" value="<?= $filterMTCN ?>">
-                                    <input type="hidden" id="transactionId" name="transactionId" value="<?= $id ?>">
-                                    <input type="hidden" id="transactionTypeId" name="transactionTypeId" value="<?= $transactionTypeId ?>">
+                                  <form role="form" data-toggle="validator" method="post"
+                                        id="myForm<?= $id ?>" name="myForm<?= $id ?>"
+                                        action="search">
+                                    <input type="hidden" id="filterStatus"
+                                           name="filterStatus"
+                                           value="<?= $filterStatus ?>">
+                                    <input type="hidden" id="filterType" name="filterType"
+                                           value="<?= $filterType ?>">
+                                    <input type="hidden" id="filterAgencyType"
+                                           name="filterAgencyType"
+                                           value="<?= $filterAgencyType ?>">
+                                    <input type="hidden" id="filterBeginDate"
+                                           name="filterBeginDate"
+                                           value="<?= $filterBeginDate ?>">
+                                    <input type="hidden" id="filterEndDate"
+                                           name="filterEndDate"
+                                           value="<?= $filterEndDate ?>">
+                                    <input type="hidden" id="filterUsername"
+                                           name="filterUsername"
+                                           value="<?= $filterUsername ?>">
+                                    <input type="hidden" id="filterMTCN" name="filterMTCN"
+                                           value="<?= $filterMTCN ?>">
+                                    <input type="hidden" id="transactionId"
+                                           name="transactionId" value="<?= $id ?>">
+                                    <input type="hidden" id="transactionTypeId"
+                                           name="transactionTypeId"
+                                           value="<?= $transactionTypeId ?>">
 
                                     <div class="wrap-table">
                                       <table class="table">
@@ -406,7 +470,8 @@ catch(Exception $ex)
                                                  name="controlNumber"
                                                  value="<?= $controlNumber ?>"
                                                  minlength="8" maxlength="11"
-                                                 pattern="<?= Util::REGEX_NUMERIC ?>" <?php if($transactionTypeId == Transaction::TYPE_RECEIVER){
+                                                 pattern="<?= Util::REGEX_NUMERIC ?>" <?php if($transactionTypeId == Transaction::TYPE_RECEIVER)
+                                          {
                                             echo 'required';
                                           } ?>>
                                         </div>
@@ -414,7 +479,8 @@ catch(Exception $ex)
                                       <div class="form-group">
                                         <!-- Status -->
                                         <label>Status</label>
-                                        <select class="form-control input-sm <?= $disabled ?>" id="status" name="status" required>
+                                        <select class="form-control input-sm <?= $disabled ?>"
+                                                id="status" name="status" required>
                                           <?php
                                           foreach($transactionStatus as $tStatus)
                                           {
@@ -435,24 +501,36 @@ catch(Exception $ex)
                                     </div>
                                     <div class="form-group">
                                       <label>Reason (Only Numbers and Letters)</label>
-                                      <input class="form-control input-sm" type="text" id="reason" name="reason" value="<?= $reason ?>" pattern="<?= Util::REGEX_ALPHANIMERIC ?>" required <?= $readonly ?>>
+                                      <input class="form-control input-sm" type="text"
+                                             id="reason" name="reason"
+                                             value="<?= $reason ?>"
+                                             pattern="<?= Util::REGEX_ALPHANIMERIC ?>"
+                                             required <?= $readonly ?>>
                                     </div>
                                     <div class="form-group">
                                       <label>Note</label>
-                                      <input class="form-control input-sm" type="text" id="note" name="note" value="<?= $note ?>" pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
+                                      <input class="form-control input-sm" type="text"
+                                             id="note" name="note" value="<?= $note ?>"
+                                             pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
                                     </div>
                                     <div class="modal-footer">
-                                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                      <button type="button" class="btn btn-default"
+                                              data-dismiss="modal">Close
+                                      </button>
                                       <?php if($account->checkPermission('REPORT_TRANSACTION_SAVE'))
                                       { ?>
-                                        <button type="submit" class="btn btn-danger <?= $disabled ?>">Save changes</button>
+                                        <button type="submit"
+                                                class="btn btn-danger <?= $disabled ?>">
+                                          Save changes
+                                        </button>
                                       <?php } ?>
                                     </div>
                                   </form>
                                 </div>
                               <?php } ?>
                               <!-- Tab Customer -->
-                              <div class="tab-pane fade <?= (!$account->checkPermission("TRANSACTION_UPDATE") ? 'active in' : '') ?>" id="tab-customer<?= $id ?>">
+                              <div class="tab-pane fade <?= (!$account->checkPermission("TRANSACTION_UPDATE") ? 'active in' : '') ?>"
+                                   id="tab-customer<?= $id ?>">
                                 <br/>
                                 <table class="table">
                                   <tbody>
@@ -495,7 +573,9 @@ catch(Exception $ex)
                                 </table>
 
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-default"
+                                          data-dismiss="modal">Close
+                                  </button>
                                 </div>
                               </div>
                               <!-- Tab Person -->
@@ -555,10 +635,14 @@ catch(Exception $ex)
                                 </table>
 
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-default"
+                                          data-dismiss="modal">Close
+                                  </button>
                                   <?php if($transactionTypeId == Transaction::TYPE_SENDER && $statusId == Transaction::STATUS_REJECTED && $account->checkPermission('REPORT_TRANSACTION_GET_NEW_PERSON'))
                                   { ?>
-                                    <button type="button" class="btn btn-danger" onclick="getNewPerson(<?= $id ?>)">Get New <?= $transactionType ?></button>
+                                    <button type="button" class="btn btn-danger"
+                                            onclick="getNewPerson(<?= $id ?>)">Get
+                                      New <?= $transactionType ?></button>
                                   <?php } ?>
                                 </div>
                               </div>
