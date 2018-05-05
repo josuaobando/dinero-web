@@ -4,48 +4,37 @@ include("../../header.php");
 
 $wsRequest = new WSRequest($_REQUEST);
 
-try
-{
+try{
   $userMessage = "Processing Transactions";
   $account = Session::getAccount();
-}
-catch(Exception $ex)
-{
+}catch(Exception $ex){
   ExceptionManager::handleException($ex);
   $userMessage = $ex->getMessage();
-  $userMessage = '<div class="alert alert-danger">'.$userMessage.'</div>';
+  $userMessage = '<div class="alert alert-danger">' . $userMessage . '</div>';
 }
 
-try
-{
+try{
   $transactionId = $wsRequest->getParam("transactionId");
-  if($transactionId)
-  {
+  if($transactionId){
     $manager = new Manager($account);
     $r = $manager->transactionUpdate($wsRequest);
-    if($r)
-    {
+    if($r){
       $userMessage = '<div class="alert alert-success">Transaction processed successfully</div>';
     }
   }
-}
-catch(Exception $ex)
-{
+}catch(Exception $ex){
   ExceptionManager::handleException($ex);
   $userMessage = $ex->getMessage();
-  $userMessage = '<div class="alert alert-danger">'.$userMessage.'</div>';
+  $userMessage = '<div class="alert alert-danger">' . $userMessage . '</div>';
 }
 
-try
-{
+try{
   $system = new System();
   $transactions = $system->transactions(Transaction::STATUS_SUBMITTED, $account->getAccountId());
-}
-catch(Exception $ex)
-{
+}catch(Exception $ex){
   ExceptionManager::handleException($ex);
   $userMessage = $ex->getMessage();
-  $userMessage = '<div class="alert alert-danger">'.$userMessage.'</div>';
+  $userMessage = '<div class="alert alert-danger">' . $userMessage . '</div>';
 }
 ?>
 <div id="page-wrapper">
@@ -64,39 +53,38 @@ catch(Exception $ex)
           <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover">
               <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Amount</th>
-                  <th>Fee</th>
-                  <th>Username</th>
-                  <th>Customer</th>
-                  <th>Person</th>
-                  <th>MTCN</th>
-                  <th>Agency</th>
-                  <th>Type</th>
-                  <th>Modified</th>
-                </tr>
+              <tr>
+                <th>ID</th>
+                <th>Amount</th>
+                <th>Fee</th>
+                <th>Username</th>
+                <th>Customer</th>
+                <th>Person</th>
+                <th>MTCN</th>
+                <th>Agency</th>
+                <th>Type</th>
+                <th>Modified</th>
+              </tr>
               </thead>
               <tbody>
-                <?php
-                foreach($transactions as $transaction)
-                {
-                  $id = $transaction['Transaction_Id'];
-                  $type = $transaction['TransactionType_Id'];
-                  $customer = $transaction['Username'];
-                  $customerName = ucwords(strtolower($transaction['CustomerName']));
-                  $amount = $transaction['Amount'];
-                  $fee = $transaction['Fee'];
-                  $personName = ucwords(strtolower($transaction['PersonName']));
-                  $controlNumber = $transaction['ControlNumber'];
-                  $agency = $transaction['Agency'];
-                  $agencyType = $transaction['AgencyType'];
-                  $modifiedDate = $transaction['ModifiedDate'];
-                  //format date
-                  $modifiedDate = date(Util::FORMAT_DATE_DISPLAY, strtotime($modifiedDate));
-                  $rowType = ($type == Transaction::TYPE_RECEIVER) ? '' : 'warning';
+              <?php
+              foreach($transactions as $transaction){
+                $id = $transaction['Transaction_Id'];
+                $type = $transaction['TransactionType_Id'];
+                $customer = $transaction['Username'];
+                $customerName = ucwords(strtolower($transaction['CustomerName']));
+                $amount = $transaction['Amount'];
+                $fee = $transaction['Fee'];
+                $personName = ucwords(strtolower($transaction['PersonName']));
+                $controlNumber = $transaction['ControlNumber'];
+                $agency = $transaction['Agency'];
+                $agencyType = $transaction['AgencyType'];
+                $modifiedDate = $transaction['ModifiedDate'];
+                //format date
+                $modifiedDate = date(Util::FORMAT_DATE_DISPLAY, strtotime($modifiedDate));
+                $rowType = ($type == Transaction::TYPE_RECEIVER) ? '' : 'warning';
 
-                  echo "<tr class='$rowType'>
+                echo "<tr class='$rowType'>
 														<td>
 														  <a title='Open' class=\"btn btn-primary btn-xs\" data-toggle=\"modal\" data-target=\"#myModal$id\">$id</a>
 														</td>
@@ -110,15 +98,14 @@ catch(Exception $ex)
 														<td>$agencyType</td>
 														<td>$modifiedDate</td>
 													</tr>";
-                }
-                ?>
+              }
+              ?>
               </tbody>
             </table>
 
             <!-- MODAL -->
             <?php
-            foreach($transactions as $transaction)
-            {
+            foreach($transactions as $transaction){
               $id = $transaction['Transaction_Id'];
               $statusId = $transaction['TransactionStatus_Id'];
               $transactionTypeId = $transaction['TransactionType_Id'];
@@ -162,12 +149,14 @@ catch(Exception $ex)
               $headerType = ($transactionTypeId == Transaction::TYPE_RECEIVER) ? 'modal-header-info' : 'modal-header-warning';
 
               ?>
-              <div class="modal fade" id="myModal<?= $id ?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+              <div class="modal fade" id="myModal<?= $id ?>" tabindex="-1" role="dialog"
+                   aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
                 <div class="modal-dialog">
                   <div class="modal-content">
 
                     <div class="modal-header <?= $headerType ?>">
-                      <h4 class="modal-title" id="myModalLabel">Please review the <?= $transactionType ?> information</h4>
+                      <h4 class="modal-title" id="myModalLabel">Please review
+                        the <?= $transactionType ?> information</h4>
                     </div>
                     <div class="modal-body">
 
@@ -175,13 +164,16 @@ catch(Exception $ex)
                         <!-- Nav tabs -->
                         <ul class="nav nav-pills">
                           <li class="active">
-                            <a href="#tab-process<?= $id ?>" data-toggle="tab" aria-expanded="true">Process</a>
+                            <a href="#tab-process<?= $id ?>" data-toggle="tab"
+                               aria-expanded="true">Process</a>
                           </li>
                           <li class="">
-                            <a href="#tab-customer<?= $id ?>" data-toggle="tab" aria-expanded="false"><?= ($transactionTypeId == Transaction::TYPE_RECEIVER) ? 'Sender' : 'Receiver' ?></a>
+                            <a href="#tab-customer<?= $id ?>" data-toggle="tab"
+                               aria-expanded="false"><?= ($transactionTypeId == Transaction::TYPE_RECEIVER) ? 'Sender' : 'Receiver' ?></a>
                           </li>
                           <li class="">
-                            <a href="#tab-person<?= $id ?>" data-toggle="tab" aria-expanded="false"><?= ($transactionTypeId == Transaction::TYPE_SENDER) ? 'Sender' : 'Receiver' ?></a>
+                            <a href="#tab-person<?= $id ?>" data-toggle="tab"
+                               aria-expanded="false"><?= ($transactionTypeId == Transaction::TYPE_SENDER) ? 'Sender' : 'Receiver' ?></a>
                           </li>
                         </ul>
 
@@ -190,45 +182,65 @@ catch(Exception $ex)
                           <!-- Tab Process -->
                           <div class="tab-pane fade active in" id="tab-process<?= $id ?>">
                             <br/>
-                            <form role="form" data-toggle="validator" method="post" id="myForm<?= $id ?>" name="myForm<?= $id ?>" action="processing">
-                              <input type="hidden" id="transactionId" name="transactionId" value="<?= $id ?>">
-                              <input type="hidden" id="transactionTypeId" name="transactionTypeId" value="<?= $transactionTypeId ?>">
+                            <form role="form" data-toggle="validator" method="post"
+                                  id="myForm<?= $id ?>" name="myForm<?= $id ?>"
+                                  action="processing">
+                              <input type="hidden" id="transactionId" name="transactionId"
+                                     value="<?= $id ?>">
+                              <input type="hidden" id="transactionTypeId"
+                                     name="transactionTypeId"
+                                     value="<?= $transactionTypeId ?>">
 
                               <div class="form-group">
                                 <div class="form-group">
-                                  <label>Confirmed Amount ($USD)</label>
-                                  <?php if($account->checkPermission('BOARD_PROCESSING_CHANGE_AMOUNT'))
-                                  { ?>
-                                    <input class="form-control input-sm" type="number" step="any" min="1" id="amount" name="amount" value="<?= $amount ?>" required>
-                                  <?php }
-                                  else
-                                  { ?>
-                                    <input class="form-control input-sm disabled" type="number" id="amount" name="amount" value="<?= $amount ?>">
-                                  <?php } ?>
-                                </div>
-                                <div class="form-group">
-                                  <label>Fee Amount ($USD)</label>
-                                  <?php if($account->checkPermission('BOARD_PROCESSING_CHANGE_FEE'))
-                                  { ?>
-                                    <input class="form-control input-sm" type="number" step="any" min="0" id="fee" name="fee" value="<?= $fee ?>" required>
-                                  <?php }
-                                  else
-                                  { ?>
-                                    <input class="form-control input-sm disabled" type="number" id="fee" name="fee" value="<?= $fee ?>">
-                                  <?php } ?>
+                                  <div class="row">
+                                    <div class="col-lg-4">
+                                      <label>Amount ($USD)</label>
+                                      <?php if($account->checkPermission('BOARD_PROCESSING_CHANGE_AMOUNT')){ ?>
+                                        <input class="form-control input-sm" type="number"
+                                               step="any" min="1" id="amount" name="amount"
+                                               value="<?= $amount ?>" required>
+                                      <?php }else{ ?>
+                                        <input class="form-control input-sm disabled"
+                                               type="number" id="amount" name="amount"
+                                               value="<?= $amount ?>">
+                                      <?php } ?>
+                                    </div>
+                                    <div class="col-lg-4">
+                                      <label>Fee ($USD)</label>
+                                      <?php if($account->checkPermission('BOARD_PROCESSING_CHANGE_FEE')){ ?>
+                                        <input class="form-control input-sm" type="number"
+                                               step="any" min="0" id="fee" name="fee"
+                                               value="<?= $fee ?>" required>
+                                      <?php }else{ ?>
+                                        <input class="form-control input-sm disabled"
+                                               type="number" id="fee" name="fee"
+                                               value="<?= $fee ?>">
+                                      <?php } ?>
+                                    </div>
+                                    <div class="col-lg-4">
+                                      <label>Control Number</label>
+                                      <input class="form-control input-sm" type="text"
+                                             id="controlNumber" name="controlNumber"
+                                             value="<?= $controlNumber ?>" minlength="8"
+                                             maxlength="11"
+                                             pattern="<?= Util::REGEX_NUMERIC ?>" <?php if($transactionTypeId == Transaction::TYPE_RECEIVER){
+                                        echo 'required';
+                                      } ?>>
+                                    </div>
+                                  </div>
                                 </div>
                                 <div class="form-group">
                                   <!-- Status -->
                                   <label>Status</label>
-                                  <select class="form-control input-sm" id="status" name="status" required>
+                                  <select class="form-control input-sm" id="status"
+                                          name="status" required>
                                     <option value="">Please Select Status</option>
-                                    <option value="3" <?php if($statusId == 3)
-                                    {
+                                    <option value="3" <?php if($statusId == 3){
                                       echo 'selected="selected"';
                                     } ?>>Approved
                                     </option>
-                                    <option value="4" <?php if($statusId == 4)
-                                    {
+                                    <option value="4" <?php if($statusId == 4){
                                       echo 'selected="selected"';
                                     } ?>>Rejected
                                     </option>
@@ -236,28 +248,27 @@ catch(Exception $ex)
                                 </div>
                               </div>
                               <div class="form-group">
-                                <label>Control Number</label>
-                                <input class="form-control input-sm" type="text" id="controlNumber" name="controlNumber" value="<?= $controlNumber ?>" minlength="8" maxlength="11" pattern="<?= Util::REGEX_NUMERIC ?>" <?php if($transactionTypeId == Transaction::TYPE_RECEIVER)
-                                {
-                                  echo 'required';
-                                } ?>>
-                              </div>
-                              <div class="form-group">
                                 <label>Reason (Only Numbers and Letters)</label>
-                                <input class="form-control input-sm" type="text" id="reason" name="reason" pattern="<?= Util::REGEX_ALPHANIMERIC ?>" required>
+                                <input class="form-control input-sm" type="text"
+                                       id="reason" name="reason"
+                                       pattern="<?= Util::REGEX_ALPHANIMERIC ?>" required>
                               </div>
-                              <?php if($account->checkPermission('BOARD_PROCESSING_NOTE'))
-                              { ?>
+                              <?php if($account->checkPermission('BOARD_PROCESSING_NOTE')){ ?>
                                 <div class="form-group">
                                   <label>Note</label>
-                                  <input class="form-control input-sm" type="text" id="note" name="note" pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
+                                  <input class="form-control input-sm" type="text"
+                                         id="note" name="note"
+                                         pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
                                 </div>
                               <?php } ?>
                               <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <?php if($account->checkPermission('BOARD_PROCESSING_SAVE'))
-                                { ?>
-                                  <button type="submit" class="btn btn-danger">Save changes</button>
+                                <button type="button" class="btn btn-default"
+                                        data-dismiss="modal">Close
+                                </button>
+                                <?php if($account->checkPermission('BOARD_PROCESSING_SAVE')){ ?>
+                                  <button type="submit" class="btn btn-danger">Save
+                                    changes
+                                  </button>
                                 <?php } ?>
                               </div>
                             </form>
@@ -267,59 +278,61 @@ catch(Exception $ex)
                             <br/>
                             <table class="table">
                               <tbody>
-                                <tr>
-                                  <td>Transaction ID</td>
-                                  <td><?= $id ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Amount</td>
-                                  <td>$<?= $amount ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Fee</td>
-                                  <td>$<?= $fee ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Username</td>
-                                  <td><?= $customer ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Customer</td>
-                                  <td><?= $customerName ?></td>
-                                </tr>
-                                <tr>
-                                  <td>State</td>
-                                  <td><?= $stateName ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Country</td>
-                                  <td><?= $countryName ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Control Number</td>
-                                  <td><?= $controlNumber ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Agency</td>
-                                  <td><?= $agency ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Type</td>
-                                  <td><?= $agencyType ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Created Date</td>
-                                  <td><?= $createdDate ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Modified Date</td>
-                                  <td><?= $modifiedDate ?></td>
-                                </tr>
+                              <tr>
+                                <td>Transaction ID</td>
+                                <td><?= $id ?></td>
+                              </tr>
+                              <tr>
+                                <td>Amount</td>
+                                <td>$<?= $amount ?></td>
+                              </tr>
+                              <tr>
+                                <td>Fee</td>
+                                <td>$<?= $fee ?></td>
+                              </tr>
+                              <tr>
+                                <td>Username</td>
+                                <td><?= $customer ?></td>
+                              </tr>
+                              <tr>
+                                <td>Customer</td>
+                                <td><?= $customerName ?></td>
+                              </tr>
+                              <tr>
+                                <td>State</td>
+                                <td><?= $stateName ?></td>
+                              </tr>
+                              <tr>
+                                <td>Country</td>
+                                <td><?= $countryName ?></td>
+                              </tr>
+                              <tr>
+                                <td>Control Number</td>
+                                <td><?= $controlNumber ?></td>
+                              </tr>
+                              <tr>
+                                <td>Agency</td>
+                                <td><?= $agency ?></td>
+                              </tr>
+                              <tr>
+                                <td>Type</td>
+                                <td><?= $agencyType ?></td>
+                              </tr>
+                              <tr>
+                                <td>Created Date</td>
+                                <td><?= $createdDate ?></td>
+                              </tr>
+                              <tr>
+                                <td>Modified Date</td>
+                                <td><?= $modifiedDate ?></td>
+                              </tr>
                               </tbody>
                             </table>
 
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              <button type="button" class="btn btn-default"
+                                      data-dismiss="modal">Close
+                              </button>
                             </div>
                           </div>
                           <!-- Tab Receiver -->
@@ -327,62 +340,66 @@ catch(Exception $ex)
                             <br/>
                             <table class="table">
                               <tbody>
-                                <tr>
-                                  <td><?= $transactionType ?></td>
-                                  <td id="personName<?= $id ?>"><?= $personName ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Type Id</td>
-                                  <td id="typeId<?= $id ?>"><?= $personTypeId ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Personal Id</td>
-                                  <td id="personalId<?= $id ?>"><?= $personPersonalId ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Expiration Date Id</td>
-                                  <td id="expirationDateId<?= $id ?>"><?= $personExpirationDateId ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Birth Date</td>
-                                  <td id="birthDate<?= $id ?>"><?= $personBirthDate ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Marital Status</td>
-                                  <td id="maritalStatus<?= $id ?>"><?= $personMaritalStatus ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Gender</td>
-                                  <td id="gender<?= $id ?>"><?= $personGender ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Profession</td>
-                                  <td id="profession<?= $id ?>"><?= $personProfession ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Phone</td>
-                                  <td id="phone<?= $id ?>"><?= $personPhone ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Address</td>
-                                  <td id="address<?= $id ?>"><?= $personAddress ?></td>
-                                </tr>
-                                <tr>
-                                  <td>City</td>
-                                  <td id="city<?= $id ?>"><?= $personCity ?></td>
-                                </tr>
-                                <tr>
-                                  <td>Country/State</td>
-                                  <td id="location<?= $id ?>"><?= $personCountry.', '.$personState ?></td>
-                                </tr>
+                              <tr>
+                                <td><?= $transactionType ?></td>
+                                <td id="personName<?= $id ?>"><?= $personName ?></td>
+                              </tr>
+                              <tr>
+                                <td>Type Id</td>
+                                <td id="typeId<?= $id ?>"><?= $personTypeId ?></td>
+                              </tr>
+                              <tr>
+                                <td>Personal Id</td>
+                                <td id="personalId<?= $id ?>"><?= $personPersonalId ?></td>
+                              </tr>
+                              <tr>
+                                <td>Expiration Date Id</td>
+                                <td id="expirationDateId<?= $id ?>"><?= $personExpirationDateId ?></td>
+                              </tr>
+                              <tr>
+                                <td>Birth Date</td>
+                                <td id="birthDate<?= $id ?>"><?= $personBirthDate ?></td>
+                              </tr>
+                              <tr>
+                                <td>Marital Status</td>
+                                <td id="maritalStatus<?= $id ?>"><?= $personMaritalStatus ?></td>
+                              </tr>
+                              <tr>
+                                <td>Gender</td>
+                                <td id="gender<?= $id ?>"><?= $personGender ?></td>
+                              </tr>
+                              <tr>
+                                <td>Profession</td>
+                                <td id="profession<?= $id ?>"><?= $personProfession ?></td>
+                              </tr>
+                              <tr>
+                                <td>Phone</td>
+                                <td id="phone<?= $id ?>"><?= $personPhone ?></td>
+                              </tr>
+                              <tr>
+                                <td>Address</td>
+                                <td id="address<?= $id ?>"><?= $personAddress ?></td>
+                              </tr>
+                              <tr>
+                                <td>City</td>
+                                <td id="city<?= $id ?>"><?= $personCity ?></td>
+                              </tr>
+                              <tr>
+                                <td>Country/State</td>
+                                <td id="location<?= $id ?>"><?= $personCountry . ', ' . $personState ?></td>
+                              </tr>
                               </tbody>
                             </table>
 
                             <div class="modal-footer">
-                              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                              <?php if($transactionTypeId == Transaction::TYPE_SENDER && $account->checkPermission('BOARD_PROCESSING_TRANSACTION_GET_NEW_PERSON'))
-                              { ?>
-                                <button type="button" id="btnNewPerson<?= $id ?>" class="btn btn-danger" onclick="getNewPerson(<?= $id ?>)">Get New <?= $transactionType ?></button>
+                              <button type="button" class="btn btn-default"
+                                      data-dismiss="modal">Close
+                              </button>
+                              <?php if($transactionTypeId == Transaction::TYPE_SENDER && $account->checkPermission('BOARD_PROCESSING_TRANSACTION_GET_NEW_PERSON')){ ?>
+                                <button type="button" id="btnNewPerson<?= $id ?>"
+                                        class="btn btn-danger"
+                                        onclick="getNewPerson(<?= $id ?>)">Get
+                                  New <?= $transactionType ?></button>
                               <?php } ?>
                             </div>
                           </div>

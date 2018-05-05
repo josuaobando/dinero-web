@@ -218,20 +218,28 @@ catch(Exception $ex)
                                 </div>
                               </div>
                               <div class="form-group">
-                                <label>Username (Customer)</label>
-                                <input class="form-control input-sm" type="text" id="uid" name="uid" value="<?= $customer ?>" required>
+                                  <div class="row">
+                                      <div class="col-lg-6">
+                                          <label>First Name</label>
+                                          <input class="form-control input-sm" type="text" id="first_name" name="first_name" value="<?= $firstName ?>" required>
+                                      </div>
+                                      <div class="col-lg-6">
+                                          <label>Last Name</label>
+                                          <input class="form-control input-sm" type="text" id="last_name" name="last_name" value="<?= $lastName ?>" required>
+                                      </div>
+                                  </div>
                               </div>
                               <div class="form-group">
-                                <label>First Name</label>
-                                <input class="form-control input-sm" type="text" id="first_name" name="first_name" value="<?= $firstName ?>" required>
-                              </div>
-                              <div class="form-group">
-                                <label>Last Name</label>
-                                <input class="form-control input-sm" type="text" id="last_name" name="last_name" value="<?= $lastName ?>" required>
-                              </div>
-                              <div class="form-group">
-                                <label>Phone</label>
-                                <input class="form-control input-sm" type="text" id="phone" name="phone" value="<?= $phone ?>" required>
+                                  <div class="row">
+                                      <div class="col-lg-6">
+                                          <label>Phone</label>
+                                          <input class="form-control input-sm" type="text" id="phone" name="phone" value="<?= $phone ?>" required>
+                                      </div>
+                                      <div class="col-lg-6">
+                                          <label>Username (Customer)</label>
+                                          <input class="form-control input-sm" type="text" id="uid" name="uid" value="<?= $customer ?>" required>
+                                      </div>
+                                  </div>
                               </div>
                               <div class="form-group">
                                 <div class="row">
