@@ -116,6 +116,7 @@ try{
               $controlNumber = $transaction['ControlNumber'];
               $agency = $transaction['Agency'];
               $agencyType = $transaction['AgencyType'];
+              $agencyId = $transaction['Agency_Id'];
 
               $customer = $transaction['Username'];
               $customerName = ucwords(strtolower($transaction['CustomerName']));
@@ -262,13 +263,12 @@ try{
                                 </div>
                               <?php } ?>
                               <div class="modal-footer">
-                                <button type="button" class="btn btn-default"
-                                        data-dismiss="modal">Close
-                                </button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <?php if($agencyId == CoreConfig::AGENCY_ID_SATURNO){ ?>
+                                  <button type="button" class="btn btn-info" id="btnCheckStatus<?= $id ?>" onclick="getStatus(<?= $id ?>)">Check Status</button>
+                                <?php } ?>
                                 <?php if($account->checkPermission('BOARD_PROCESSING_SAVE')){ ?>
-                                  <button type="submit" class="btn btn-danger">Save
-                                    changes
-                                  </button>
+                                  <button type="submit" class="btn btn-danger" id="btnSave<?= $id ?>">Save changes</button>
                                 <?php } ?>
                               </div>
                             </form>

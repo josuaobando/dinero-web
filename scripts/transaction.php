@@ -4,17 +4,25 @@ session_start();
 try
 {
   $account = Session::getAccount();
-  if ($account->isAuthenticated())
+  if (!$account->isAuthenticated())
   {
     throw new InvalidStateException("User account is not logged");
   }
   $wsRequest = new WSRequest($_REQUEST);
-  $transactionId = $wsRequest->requireNumericAndPositive('id');
-  
-  $manager = new Manager($account);
-  $newPerson = $manager->getNewPerson($transactionId);
 
-  $jsonContent = json_encode($newPerson->toArray2());
+  $function = $wsRequest->getParam('f');
+  $transactionId = $wsRequest->requireNumericAndPositive('id');
+
+  $manager = new Manager($account);
+  if($function == 'information'){
+    $wsRequest->putParam('transaction_id', $transactionId);
+    $transaction = $manager->information($wsRequest, true);
+
+    $jsonContent = json_encode($transaction->toArray());
+  }else{
+    $newPerson = $manager->getNewPerson($transactionId);
+    $jsonContent = json_encode($newPerson->toArray2());
+  }
 }
 catch (InvalidStateException $ex)
 {
