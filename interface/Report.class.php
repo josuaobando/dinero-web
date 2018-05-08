@@ -132,12 +132,12 @@ class Report
                   <th>Customer</th>
                   <th>Person</th>
                   <th>MTCN</th>
-                  ".($viewAgency ? '<th>Agency</th>' : '')."
-                  ".($viewAgencyNote ? '<th>Note</th>' : '')."
-                  <th>Type</th>
                   <th>Date</th>
-                  <th>Reason</th>
                   <th>Reference</th>
+                  ".($viewAgency ? '<th>Agency</th>' : '')."
+                  <th>Type</th>
+                  <th>Reason</th>
+                  ".($viewAgencyNote ? '<th>Note</th>' : '')."
                 </tr>
               </thead>";
 
@@ -167,7 +167,7 @@ class Report
 
         $row = "<tr class='$rowType'>
           <td>
-            <a title='Open' class=\"btn btn-primary btn-xs\" data-toggle=\"modal\" data-target=\"#myModal$id\">$id</a>
+            <a title='Open' class='btn btn-primary btn-xs' data-toggle='modal' data-target=\"#myModal$id\">$id</a>
           </td>
           <td>$status</td>
           <td>$$amount</td>
@@ -176,12 +176,12 @@ class Report
           <td>$senderName</td>
           <td>$receiverName</td>
           <td>$controlNumber</td>
-          ".($viewAgency ? "<td>$agency</td>" : "")."
-          ".($viewAgencyNote ? "<td>$note</td>" : "")."
-          <td>$agencyType</td>  
           <td>$modifiedDate</td>
-          <td>$reason</td>
           <td>$reference</td>
+          ".($viewAgency ? "<td>$agency</td>" : "")."
+          <td>$agencyType</td>
+          <td>$reason</td>
+          ".($viewAgencyNote ? "<td>$note</td>" : "")."
         </tr>";
 
         $table .= $row;
@@ -189,7 +189,7 @@ class Report
     }
     else
     {
-      $table .= "<td colspan='15'>No Records!</td>";
+      $table .= "<td colspan='14'>No Records!</td>";
     }
 
     $table .= "</tbody>";
@@ -278,7 +278,7 @@ class Report
       $totalPages = (int)($this->total / CoreConfig::PAGINATION_TABLE_MAX_ROWS) + ((($this->total % CoreConfig::PAGINATION_TABLE_MAX_ROWS) > 0) ? 1 : 0);
       if($totalPages > 1)
       {
-
+        $pagination = "<ul>";
         for($id = 1; $id <= $totalPages; $id++)
         {
           $class = ($this->currentPage == $id) ? 'btn-info disabled' : 'btn-default';
