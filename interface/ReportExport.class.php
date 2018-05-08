@@ -15,8 +15,6 @@ class ReportExport extends Report
   public function __construct($wsRequest, $account)
   {
 
-    $wsRequest instanceof WSRequest;
-
     $statusId = $wsRequest->getParam("filterStatus", "3");
     $statusId = ($statusId == "-1") ? "0" : $statusId;
 
@@ -32,7 +30,7 @@ class ReportExport extends Report
     $pageStart = 0;
 
     $this->tblSystem = TblSystem::getInstance();
-    $dataReport = $this->tblSystem->getTransactionsReport($statusId, $filterType, $filterAgencyType, $account->getAccountId(), $beginDate, $endDate, $controlNumber, $filterUsername, $pageStart, $pageSize);
+    $dataReport = $this->tblSystem->getExportReport($statusId, $filterType, $filterAgencyType, $account->getAccountId(), $beginDate, $endDate, $controlNumber, $filterUsername, $pageStart, $pageSize);
 
     $this->account = $account;
     $this->transactions = $dataReport['transactions'];
