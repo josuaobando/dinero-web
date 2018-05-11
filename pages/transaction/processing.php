@@ -107,6 +107,7 @@ try{
             <?php
             foreach($transactions as $transaction){
               $id = $transaction['Transaction_Id'];
+              $apiTransactionId = $transaction['ApiTransactionId'];
               $statusId = $transaction['TransactionStatus_Id'];
               $transactionTypeId = $transaction['TransactionType_Id'];
               $transactionType = $transaction['TransactionType'];
@@ -282,6 +283,12 @@ try{
                                 <td>Transaction ID</td>
                                 <td><?= $id ?></td>
                               </tr>
+                              <?php if($apiTransactionId){ ?>
+                                <tr>
+                                  <td>API ID</td>
+                                  <td><?= $apiTransactionId ?></td>
+                                </tr>
+                              <?php } ?>
                               <tr>
                                 <td>Amount</td>
                                 <td>$<?= $amount ?></td>
