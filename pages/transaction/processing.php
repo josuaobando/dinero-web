@@ -263,14 +263,14 @@ try{
                                          pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
                                 </div>
                               <?php } ?>
-                              <div>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                              <div class="btn-group pull-right">
                                 <?php if($agencyId == CoreConfig::AGENCY_ID_SATURNO){ ?>
                                   <button type="button" class="btn btn-info" id="btnCheckStatus<?= $id ?>" onclick="getStatus(<?= $id ?>)">Check Status</button>
                                 <?php } ?>
                                 <?php if($account->checkPermission('BOARD_PROCESSING_SAVE')){ ?>
                                   <button type="submit" class="btn btn-danger" id="btnSave<?= $id ?>">Save changes</button>
                                 <?php } ?>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                               </div>
                             </form>
                           </div>
