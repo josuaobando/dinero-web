@@ -263,7 +263,7 @@ try{
                                          pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
                                 </div>
                               <?php } ?>
-                              <div class="modal-footer">
+                              <div>
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                                 <?php if($agencyId == CoreConfig::AGENCY_ID_SATURNO){ ?>
                                   <button type="button" class="btn btn-info" id="btnCheckStatus<?= $id ?>" onclick="getStatus(<?= $id ?>)">Check Status</button>
