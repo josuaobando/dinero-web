@@ -278,7 +278,7 @@ class Report
       $totalPages = (int)($this->total / CoreConfig::PAGINATION_TABLE_MAX_ROWS) + ((($this->total % CoreConfig::PAGINATION_TABLE_MAX_ROWS) > 0) ? 1 : 0);
       if($totalPages > 1)
       {
-        $pagination = "<ul>";
+        $pagination = "";
         for($id = 1; $id <= $totalPages; $id++)
         {
           $class = ($this->currentPage == $id) ? 'btn-info disabled' : 'btn-default';
