@@ -290,6 +290,7 @@ catch(Exception $ex)
                 foreach($report->getTransactions() as $transaction)
                 {
                   $id = $transaction['Transaction_Id'];
+                  $apiTransactionId = $transaction['ApiTransactionId'];
                   $statusId = $transaction['TransactionStatus_Id'];
                   $transactionTypeId = $transaction['TransactionType_Id'];
                   $transactionType = $transaction['TransactionType'];
@@ -534,6 +535,12 @@ catch(Exception $ex)
                                 <br/>
                                 <table class="table">
                                   <tbody>
+                                  <?php if($apiTransactionId){ ?>
+                                    <tr>
+                                      <td>API ID</td>
+                                      <td><?= $apiTransactionId ?></td>
+                                    </tr>
+                                  <?php } ?>
                                     <tr>
                                       <td>Username</td>
                                       <td><?= $customer ?></td>
