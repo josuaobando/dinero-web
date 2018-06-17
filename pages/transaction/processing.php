@@ -7,28 +7,16 @@ $wsRequest = new WSRequest($_REQUEST);
 try{
   $userMessage = "Processing Transactions";
   $account = Session::getAccount();
-}catch(Exception $ex){
-  ExceptionManager::handleException($ex);
-  $userMessage = $ex->getMessage();
-  $userMessage = '<div class="alert alert-danger">' . $userMessage . '</div>';
-}
 
-try{
   $transactionId = $wsRequest->getParam("transactionId");
   if($transactionId){
     $manager = new Manager($account);
-    $r = $manager->transactionUpdate($wsRequest);
-    if($r){
+    $update = $manager->transactionUpdate($wsRequest);
+    if($update){
       $userMessage = '<div class="alert alert-success">Transaction processed successfully</div>';
     }
   }
-}catch(Exception $ex){
-  ExceptionManager::handleException($ex);
-  $userMessage = $ex->getMessage();
-  $userMessage = '<div class="alert alert-danger">' . $userMessage . '</div>';
-}
 
-try{
   $system = new System();
   $transactions = $system->transactions(Transaction::STATUS_SUBMITTED, $account->getAccountId());
 }catch(Exception $ex){
@@ -36,6 +24,7 @@ try{
   $userMessage = $ex->getMessage();
   $userMessage = '<div class="alert alert-danger">' . $userMessage . '</div>';
 }
+
 ?>
 <div id="page-wrapper">
 
