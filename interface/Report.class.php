@@ -72,7 +72,7 @@ class Report
     $this->currentPage = $wsRequest->getParam("filterPage", "1");
 
     $system = new System();
-    $dataReport = $system->transactionsReport($statusId, $filterType, $filterAgencyType, $account->getAccountId(), $beginDate, $endDate, $controlNumber, $filterUsername, $filterID, $filterReference, $this->currentPage);
+    $dataReport = $system->transactionsReport($statusId, $filterType, $filterAgencyType, $filterAgencyId, $account->getAccountId(), $beginDate, $endDate, $controlNumber, $filterUsername, $filterID, $filterReference, $this->currentPage);
 
     $this->account = $account;
     $this->transactions = $dataReport['transactions'];

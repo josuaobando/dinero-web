@@ -59,10 +59,10 @@ function exportReport(){
   filterEndDate.appendTo(form);
   filterMTCN.appendTo(form);
   filterUsername.appendTo(form);
-
+  
   form.appendTo($("body"));
   $("#exportForm").submit();
-
+  
   stopSpinner();
 }
 
@@ -73,13 +73,13 @@ function exportReport(){
  */
 function getNewPerson(id){
   startSpinner();
-
+  
   $("#btnNewPerson" + id).attr("disabled", "disabled");
-
+  
   $.get("scripts/transaction.php", {f: 'newName', id: id},
     function(result){
       if(result.personId){
-
+        
         $("#personName" + id).text(result.name);
         $("#typeId" + id).text(result.typeId);
         $("#personalId" + id).text(result.personalId);
@@ -92,11 +92,11 @@ function getNewPerson(id){
         $("#address" + id).text(result.address);
         $("#city" + id).text(result.city);
         $("#location" + id).text(result.countryName + ', ' + result.stateName);
-
+        
         setTimeout(function(){
           $("#searchForm").submit();
         }, 5000);
-
+        
       }else{
         if(result.error){
           alert('The operation could not be completed: ' + result.error);
@@ -104,7 +104,7 @@ function getNewPerson(id){
           alert('The operation could not be completed!');
         }
       }
-
+      
       stopSpinner();
     }
   );
@@ -117,13 +117,13 @@ function getNewPerson(id){
  */
 function getStatus(id){
   startSpinner();
-
+  
   $("#btnCheckStatus" + id).attr("disabled", "disabled");
-
+  
   $.get("scripts/transaction.php", {f: 'information', id: id, XDEBUG_SESSION_START: 'ECLIPSE_DBGP'},
     function(transaction){
       if(transaction){
-
+        
         if(transaction.status_id == 3){
           alert('The transaction has been Approved. Please refresh!');
         }else if(transaction.status_id == 4){
@@ -140,11 +140,32 @@ function getStatus(id){
           alert('The operation could not be completed!');
         }
       }
-
+      
       stopSpinner();
     }
   );
 }
+
+/**
+ *
+ */
+function changeFilter(){
+  var agencyTypeId = $("#filterAgencyType").val();
+  if(agencyTypeId > 0){
+    $("#filterAgencyId").attr("disabled", "disabled");
+  }else{
+    $("#filterAgencyId").removeAttr("disabled");
+  }
+  var agencyId = $("#filterAgencyId").val();
+  if(agencyId > 0){
+    $("#filterAgencyType").attr("disabled", "disabled");
+  }else{
+    $("#filterAgencyType").removeAttr("disabled");
+  }
+}
+/**
+ *
+ */
 
 /**
  * Date Range Element

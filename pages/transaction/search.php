@@ -84,8 +84,7 @@ catch(Exception $ex)
 
                   <div class="row">
                     <div class="col-sm-12">
-                      <select name="filterStatus" id="filteredStatus"
-                              class="input-sm form-control">
+                      <select name="filterStatus" id="filteredStatus" class="input-sm form-control">
                         <option value="-1" <?php echo $filterStatus == '-1' ? 'selected' : ''; ?>>
                           Transaction Status
                         </option>
@@ -126,10 +125,7 @@ catch(Exception $ex)
 
                   <div class="row">
                     <div class="col-sm-12">
-                      <select class="form-control input-sm" name="filterAgencyType"
-                              id="filterAgencyType"
-                              ng-model="reportFilter.filterAgencyTypeId"
-                              ng-change="getAgenciesByType()" required>
+                      <select class="form-control input-sm" name="filterAgencyType" id="filterAgencyType" onchange="changeFilter()">
                         <option value="0" <?php echo $filterAgencyType == '0' ? 'selected' : ''; ?>>
                           Agency Type
                         </option>
@@ -142,17 +138,32 @@ catch(Exception $ex)
                       </select>
                     </div>
                   </div>
-                  <!--
-                  <div class="row" ng-show="reportFilter.filterAgencyTypeId > 0">
-                    <div class="col-sm-12">
-                      <select class="form-control input-sm" name="filterAgencyId" id="reportFilter.filterAgencyId"
-                              ng-model="filterAgencyId"
-                              ng-options="item.Agency_Id as (item.Name + ' - ' + item.AgencyType) for item in agenciesFilterData | filter: {AgencyType_Id: reportFilter.filterAgencyTypeId} | orderBy:'Name'">
-                        <option value="">Agency</option>
-                      </select>
+
+                  <?php if($account->checkPermission('REPORT_FILTER_AGENCY')){?>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <select class="form-control input-sm" name="filterAgencyId" id="filterAgencyId" onchange="changeFilter()">
+                          <option value="">Agency</option>
+                          <option value="1" <?php echo $filterAgencyId == '1' ? 'selected' : ''; ?>>
+                            MG - Pavon
+                          </option>
+                          <option value="2" <?php echo $filterAgencyId == '2' ? 'selected' : ''; ?>>
+                            MG - Cañas
+                          </option>
+                          <option value="100" <?php echo $filterAgencyId == '100' ? 'selected' : ''; ?>>
+                            MG - Saturno
+                          </option>
+                          <option value="4" <?php echo $filterAgencyId == '4' ? 'selected' : ''; ?>>
+                            RIA - Pavon
+                          </option>
+                          <option value="5" <?php echo $filterAgencyId == '5' ? 'selected' : ''; ?>>
+                            RIA - Cañas
+                          </option>
+                        </select>
+                      </div>
                     </div>
-                  </div>
-                  -->
+                  <?php } ?>
+
                 </div>
                 <!-- End Optional filters -->
 
@@ -648,8 +659,7 @@ catch(Exception $ex)
                                   <?php if($transactionTypeId == Transaction::TYPE_SENDER && $statusId == Transaction::STATUS_REJECTED && $account->checkPermission('REPORT_TRANSACTION_GET_NEW_PERSON'))
                                   { ?>
                                     <button type="button" class="btn btn-danger"
-                                            onclick="getNewPerson(<?= $id ?>)">Get
-                                      New <?= $transactionType ?></button>
+                                            onclick="getNewPerson(<?= $id ?>)">Get New <?= $transactionType ?></button>
                                   <?php } ?>
                                 </div>
                               </div>
@@ -676,6 +686,12 @@ catch(Exception $ex)
       </div>
     </div>
   </div>
+
+  <script type="application/javascript">
+    $(window).load(function(){
+      changeFilter()
+    })
+  </script>
 
   <!-- FOOTER -->
 <?php include("../../footer.php"); ?>
