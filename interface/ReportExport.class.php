@@ -14,23 +14,24 @@ class ReportExport extends Report
    */
   public function __construct($wsRequest, $account)
   {
-
     $statusId = $wsRequest->getParam("filterStatus", "3");
     $statusId = ($statusId == "-1") ? "0" : $statusId;
-
     $filterType = $wsRequest->getParam("filterType", "0");
     $filterAgencyType = $wsRequest->getParam("filterAgencyType", "0");
+    $filterAgencyId = $wsRequest->getParam("filterAgencyId", "0");
 
     $beginDate = $wsRequest->getParam("filterBeginDate", "");
     $endDate = $wsRequest->getParam("filterEndDate", "");
+    $filterID = $wsRequest->getParam("filterID", "");
     $controlNumber = $wsRequest->getParam("filterMTCN", "");
+    $filterReference = $wsRequest->getParam("filterReference", "");
     $filterUsername = $wsRequest->getParam("filterUsername", "");
 
     $pageSize = 0;
     $pageStart = 0;
 
     $this->tblSystem = TblSystem::getInstance();
-    $dataReport = $this->tblSystem->getExportReport($statusId, $filterType, $filterAgencyType, $account->getAccountId(), $beginDate, $endDate, $controlNumber, $filterUsername, $pageStart, $pageSize);
+    $dataReport = $this->tblSystem->getTransactionsReport($statusId, $filterType, $filterAgencyType, $filterAgencyId, $account->getAccountId(), $beginDate, $endDate, $controlNumber, $filterUsername, $filterID, $filterReference, $pageSize, $pageStart);
 
     $this->account = $account;
     $this->transactions = $dataReport['transactions'];

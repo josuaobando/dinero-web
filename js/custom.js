@@ -51,6 +51,9 @@ function exportReport(){
   var filterEndDate = $('<input>', {'type': 'hidden', 'id': 'filterEndDate', 'name': 'filterEndDate', 'value': $("#filterEndDate").val()});
   var filterMTCN = $('<input>', {'type': 'hidden', 'id': 'filterMTCN', 'name': 'filterMTCN', 'value': $("#filterMTCN").val()});
   var filterUsername = $('<input>', {'type': 'hidden', 'id': 'filterUsername', 'name': 'filterUsername', 'value': $("#filterUsername").val()});
+  var filterAgencyId = $('<input>', {'type': 'hidden', 'id': 'filterAgencyId', 'name': 'filterAgencyId', 'value': $("#filterAgencyId").val()});
+  var filterID = $('<input>', {'type': 'hidden', 'id': 'filterID', 'name': 'filterID', 'value': $("#filterID").val()});
+  var filterReference = $('<input>', {'type': 'hidden', 'id': 'filterReference', 'name': 'filterReference', 'value': $("#filterReference").val()});
 
   filterStatus.appendTo(form);
   filterType.appendTo(form);
@@ -59,6 +62,9 @@ function exportReport(){
   filterEndDate.appendTo(form);
   filterMTCN.appendTo(form);
   filterUsername.appendTo(form);
+  filterAgencyId.appendTo(form);
+  filterID.appendTo(form);
+  filterReference.appendTo(form);
   
   form.appendTo($("body"));
   $("#exportForm").submit();
