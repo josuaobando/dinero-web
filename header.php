@@ -12,12 +12,14 @@ if(strpos($page, "login") === false){
     if(!$account->isAuthenticated()){
       header("Location:login");
     }
-  }catch(SessionException $ex){
+  }catch(SessionException $exS){
+    $userMessage = $exS->getMessage();
+    $userMessage = '<div class="alert alert-danger">' . $userMessage . '</div>';
     header("Location:login");
   }catch(Exception $ex){
-    ExceptionManager::handleException($ex);
     $userMessage = $ex->getMessage();
     $userMessage = '<div class="alert alert-danger">' . $userMessage . '</div>';
+    header("Location:login");
   }
 
 }
