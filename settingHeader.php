@@ -4,10 +4,19 @@ require_once('system/Startup.class.php');
 
 $page = $_SERVER["REQUEST_URI"];
 if(strpos($page, "login") === false){
+  //start session
   session_start();
-  $account = Session::getAccount();
-  if(!$account->isAuthenticated()){
+  try{
+    $account = Session::getAccount();
+    if(!$account->isAuthenticated()){
+      header("Location:login");
+    }
+  }catch(SessionException $ex){
     header("Location:login");
+  }catch(Exception $ex){
+    ExceptionManager::handleException($ex);
+    $userMessage = $ex->getMessage();
+    $userMessage = '<div class="alert alert-danger">' . $userMessage . '</div>';
   }
 }
 
