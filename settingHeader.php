@@ -10,15 +10,14 @@ if(strpos($page, "login") === false){
     $account = Session::getAccount();
     if(!$account->isAuthenticated()){
       header("Location:login");
+      exit;
     }
   }catch(SessionException $exS){
-    $userMessage = $exS->getMessage();
-    $userMessage = '<div class="alert alert-danger">' . $userMessage . '</div>';
     header("Location:login");
+    exit;
   }catch(Exception $ex){
-    $userMessage = $ex->getMessage();
-    $userMessage = '<div class="alert alert-danger">' . $userMessage . '</div>';
     header("Location:login");
+    exit;
   }
 }
 
