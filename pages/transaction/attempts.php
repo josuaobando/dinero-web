@@ -63,9 +63,9 @@ try{
 
                 $rowType = '';
                 if($type == 'P2P Controller'){
-                  $rowType = 'danger';
-                }elseif($type == 'Saturno Dep'){
                   $rowType = 'active';
+                }elseif($type == 'Saturno Dep'){
+                  $rowType = 'danger';
                 }elseif($type == 'Saturno Pay'){
                   $rowType = 'info';
                 }
