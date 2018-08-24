@@ -57,7 +57,7 @@ try{
                 $firstDate = $attempt['First'];
                 $lastDate = $attempt['Last'];
 
-                $createdDate = date(Util::FORMAT_DATE_DISPLAY, strtotime($createdDate));
+                $createdDate = date('d F', strtotime($createdDate));
                 $firstDate = date(Util::FORMAT_DATE_DISPLAY, strtotime($firstDate));
                 $lastDate = date(Util::FORMAT_DATE_DISPLAY, strtotime($lastDate));
 
