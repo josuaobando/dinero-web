@@ -62,11 +62,11 @@ try{
                 $lastDate = date(Util::FORMAT_DATE_DISPLAY, strtotime($lastDate));
 
                 $rowType = '';
-                if(strtoupper($type) == 'P2P Controller'){
+                if($type == 'P2P Controller'){
                   $rowType = 'danger';
-                }elseif(strtoupper($type) == 'Saturno Dep'){
+                }elseif($type == 'Saturno Dep'){
                   $rowType = 'warning';
-                }elseif(strtoupper($type) == 'Saturno Pay'){
+                }elseif($type == 'Saturno Pay'){
                   $rowType = 'info';
                 }
 
