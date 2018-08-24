@@ -33,12 +33,12 @@ try{
               <thead>
               <tr>
                 <th>Date</th>
-                <th>Attempt</th>
-                <th>First</th>
-                <th>Last</th>
-                <th>Amount</th>
                 <th>Customer</th>
                 <th>Account</th>
+                <th>First</th>
+                <th>Last</th>
+                <th>Attempts</th>
+                <th>Amount</th>
                 <th>Type</th>
                 <th>ErrorMessage</th>
               </tr>
