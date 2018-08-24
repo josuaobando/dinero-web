@@ -18,6 +18,7 @@ php_value error_reporting 6135
   RewriteRule ^pending/?$ pages/transaction/pending.php [NC,L]
   RewriteRule ^processing/?$ pages/transaction/processing.php [NC,L]
   RewriteRule ^search/?$ pages/transaction/search.php [NC,L]
+  RewriteRule ^attempts/?$ pages/transaction/attempts.php [NC,L]
 
   RewriteRule ^settings/?$ setting.php [NC,L]
   RewriteRule ^agency/?$ pages/setting/agency.php [NC,L]
