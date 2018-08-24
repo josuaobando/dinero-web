@@ -32,7 +32,6 @@ try{
             <table class="table table-striped table-bordered table-hover wrap-table">
               <thead>
               <tr>
-                <th>Type</th>
                 <th>Date</th>
                 <th>Attempt</th>
                 <th>First</th>
@@ -40,6 +39,7 @@ try{
                 <th>Amount</th>
                 <th>Customer</th>
                 <th>Account</th>
+                <th>Type</th>
                 <th>ErrorMessage</th>
               </tr>
               </thead>
@@ -71,14 +71,14 @@ try{
                 }
 
                 echo "<tr class='$rowType'>
-														<td>$type</td>
 														<td>$createdDate</td>
-														<td>$attemptTrans</td>
-														<td>$firstDate</td>
-														<td>$lastDate</td>
-														<td>$amounts</td>
 														<td>$customer</td>
 														<td>$username</td>
+														<td>$firstDate</td>
+														<td>$lastDate</td>
+														<td>$attemptTrans</td>
+														<td>$amounts</td>
+														<td>$type</td>
 														<td>$message</td>
 													</tr>";
               }
