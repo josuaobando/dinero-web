@@ -50,7 +50,7 @@ try{
                 $attemptTrans = $attempt['Attempt'];
                 $amounts = $attempt['Amount'];
                 $customer = ucwords(strtolower($attempt['Customer']));
-                $username = ucwords(strtolower($attempt['Account']));
+                $username = $attempt['Account'];
                 $message = ucwords(strtolower($attempt['ErrorMessage']));
                 //format date
                 $createdDate = $attempt['Date'];
