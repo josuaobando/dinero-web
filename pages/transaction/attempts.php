@@ -47,6 +47,7 @@ try{
               <?php
               foreach($attempts as $attempt){
                 $type = $attempt['Type'];
+                $typeId = $attempt['TypeId'];
                 $attemptTrans = $attempt['Attempt'];
                 $amounts = $attempt['Amount'];
                 $customer = ucwords(strtolower($attempt['Customer']));
@@ -62,11 +63,11 @@ try{
                 $lastDate = date(Util::FORMAT_DATE_DISPLAY, strtotime($lastDate));
 
                 $rowType = '';
-                if($type == 'P2P Controller'){
+                if($typeId == 1){
                   $rowType = 'active';
-                }elseif($type == 'Saturno Dep'){
+                }elseif($typeId == 2){
                   $rowType = 'danger';
-                }elseif($type == 'Saturno Pay'){
+                }elseif($typeId == 3){
                   $rowType = 'info';
                 }
 
