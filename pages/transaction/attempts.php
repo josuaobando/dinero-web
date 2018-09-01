@@ -4,6 +4,7 @@ include("../../header.php");
 
 $wsRequest = new WSRequest($_REQUEST);
 
+$totalAttempt = 0;
 $userMessage = "Attempts Transactions";
 
 try{
@@ -51,6 +52,7 @@ try{
                 $type = $attempt['Type'];
                 $typeId = $attempt['TypeId'];
                 $attemptTrans = $attempt['Attempt'];
+                $totalAttempt = $totalAttempt + $attemptTrans;
                 $amounts = $attempt['Amount'];
                 $customer = ucwords(strtolower($attempt['Customer']));
                 $username = $attempt['Account'];
@@ -96,19 +98,35 @@ try{
       <!-- SUMMARY -->
       <?php
       if($attempts && count($attempts) > 0){
-        ?>
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <strong>Total: <?php echo count($attempts); ?></strong>
+      ?>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover wrap-table">
+              <thead>
+              <tr>
+                <th>Unique</th>
+                <th>Total</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td><?php echo count($attempts); ?></td>
+                <td><?php echo $totalAttempt; ?></td>
+              </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-        <?php
-      }
-      ?>
-      <!-- END SUMMARY -->
-
+      </div>
     </div>
+    <?php
+    }
+    ?>
+    <!-- END SUMMARY -->
+
   </div>
+</div>
 </div>
 
 <!-- FOOTER -->
