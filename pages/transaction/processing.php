@@ -97,7 +97,9 @@ try{
             if($transactions && count($transactions) > 0){
               ?>
               <div class="panel panel-default">
-                <div class="panel-heading"><strong>Total: <?php echo count($transactions); ?></strong></div>
+                <div class="panel-body">
+                  <strong>Total: <?php echo count($transactions); ?></strong>
+                </div>
               </div>
               <?php
             }

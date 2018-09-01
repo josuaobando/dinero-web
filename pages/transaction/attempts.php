@@ -26,6 +26,8 @@ try{
   <!-- /.row -->
   <div class="row">
     <div class="col-lg-12">
+
+      <!-- TABLE -->
       <div class="panel panel-default">
         <div class="panel-body">
           <div class="table-responsive">
@@ -86,10 +88,25 @@ try{
               ?>
               </tbody>
             </table>
-
           </div>
         </div>
       </div>
+      <!-- END TABLE -->
+
+      <!-- SUMMARY -->
+      <?php
+      if($attempts && count($attempts) > 0){
+        ?>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <strong>Total: <?php echo count($attempts); ?></strong>
+          </div>
+        </div>
+        <?php
+      }
+      ?>
+      <!-- END SUMMARY -->
+
     </div>
   </div>
 </div>

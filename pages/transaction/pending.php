@@ -48,6 +48,7 @@ try{
   <!-- /.row -->
   <div class="row">
     <div class="col-lg-12">
+
       <div class="panel panel-default">
         <div class="panel-body">
           <div class="table-responsive">
@@ -100,18 +101,6 @@ try{
               ?>
               </tbody>
             </table>
-
-            <!-- SUMMARY -->
-            <?php
-            if($transactions && count($transactions) > 0){
-              ?>
-              <div class="panel panel-default">
-                <div class="panel-heading"><strong>Total: <?php echo count($transactions); ?></strong></div>
-              </div>
-              <?php
-            }
-            ?>
-            <!-- END SUMMARY -->
 
             <!-- MODAL -->
             <?php
@@ -352,6 +341,21 @@ try{
           </div>
         </div>
       </div>
+
+      <!-- SUMMARY -->
+      <?php
+      if($transactions && count($transactions) > 0){
+        ?>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <strong>Total: <?php echo count($transactions); ?></strong>
+          </div>
+        </div>
+        <?php
+      }
+      ?>
+      <!-- END SUMMARY -->
+
     </div>
   </div>
 </div>
