@@ -92,20 +92,6 @@ try{
               </tbody>
             </table>
 
-            <!-- SUMMARY -->
-            <?php
-            if($transactions && count($transactions) > 0){
-              ?>
-              <div class="panel panel-default">
-                <div class="panel-body">
-                  <strong>Total: <?php echo count($transactions); ?></strong>
-                </div>
-              </div>
-              <?php
-            }
-            ?>
-            <!-- END SUMMARY -->
-
             <!-- MODAL -->
             <?php
             foreach($transactions as $transaction){
@@ -435,6 +421,21 @@ try{
           </div>
         </div>
       </div>
+
+      <!-- SUMMARY -->
+      <?php
+      if($transactions && count($transactions) > 0){
+        ?>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <strong>Total: <?php echo count($transactions); ?></strong>
+          </div>
+        </div>
+        <?php
+      }
+      ?>
+      <!-- END SUMMARY -->
+
     </div>
   </div>
 </div>
