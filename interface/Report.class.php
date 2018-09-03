@@ -121,6 +121,7 @@ class Report
   {
     $viewAgency = $this->account->checkPermission('REPORT_TRANSACTION_VIEW_AGENCY');
     $viewAgencyNote = $this->account->checkPermission('REPORT_TRANSACTION_VIEW_AGENCY_NOTE');
+    $viewCompany = $this->account->checkPermission('REPORT_TRANSACTION_VIEW_COMPANY');
 
     $table = "<thead>
                  <tr>
@@ -133,6 +134,7 @@ class Report
                   <th>Person</th>
                   <th>MTCN</th>
                   <th>Date</th>
+                  ".($viewCompany ? '<th>Company</th>' : '')."
                   <th>Reference</th>
                   ".($viewAgency ? '<th>Agency</th>' : '')."
                   <th>Type</th>
@@ -150,6 +152,8 @@ class Report
         $id = $transaction['Transaction_Id'];
         $type = $transaction['TransactionType_Id'];
         $status = $transaction['Status'];
+        $company = $transaction['Company'];
+
         $customer = $transaction['Customer'];
         $senderName = ucwords(strtolower($transaction['CustomerName']));
         $amount = $transaction['Amount'];
@@ -177,6 +181,7 @@ class Report
           <td>$receiverName</td>
           <td>$controlNumber</td>
           <td>$modifiedDate</td>
+           ".($viewCompany ? "<td>$company</td>" : "")."
           <td>$reference</td>
           ".($viewAgency ? "<td>$agency</td>" : "")."
           <td>$agencyType</td>
