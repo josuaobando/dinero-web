@@ -50,6 +50,7 @@ class ReportExport extends Report
 
     $viewAgency = $this->account->checkPermission('REPORT_TRANSACTION_VIEW_AGENCY');
     $viewAPITransaction = $this->account->checkPermission('REPORT_TRANSACTION_VIEW_API_VERIFICATION');
+    $viewCompany = $this->account->checkPermission('REPORT_TRANSACTION_VIEW_COMPANY');
 
     $headers = array();
     $headers[] = 'Transaction Id';
@@ -61,6 +62,11 @@ class ReportExport extends Report
     $headers[] = 'Customer';
     $headers[] = 'Person';
     $headers[] = 'MTCN';
+    if($viewCompany)
+    {
+      $headers[] = 'Company';
+    }
+    $headers[] = 'MerchantId';
     if($viewAgency)
     {
       $headers[] = 'Agency';
@@ -89,6 +95,11 @@ class ReportExport extends Report
       $row['Customer'] = ucwords(strtolower($transaction['CustomerName']));
       $row['Person'] = ucwords(strtolower($transaction['PersonName']));
       $row['MTCN'] = $transaction['ControlNumber'];
+      if($viewCompany)
+      {
+        $row['Company'] = $transaction['Company'];
+      }
+      $row['MerchantId'] = $transaction['MerchantId'];
       if($viewAgency)
       {
         $row['Agency'] = $transaction['Agency'];

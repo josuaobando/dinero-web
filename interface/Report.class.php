@@ -135,7 +135,7 @@ class Report
                   <th>MTCN</th>
                   <th>Date</th>
                   ".($viewCompany ? '<th>Company</th>' : '')."
-                  <th>Reference</th>
+                  <th>MerchantId</th>
                   ".($viewAgency ? '<th>Agency</th>' : '')."
                   <th>Type</th>
                   <th>Reason</th>
@@ -166,7 +166,7 @@ class Report
         $agencyType = $transaction['AgencyType'];
         $modifiedDate = $transaction['ModifiedDate'];
         $modifiedDate = date(Util::FORMAT_DATE_DISPLAY, strtotime($modifiedDate));
-        $reference = $transaction['Reference'];
+        $merchantId = $transaction['MerchantId'];
         $rowType = ($type == Transaction::TYPE_RECEIVER) ? '' : 'warning';
 
         $row = "<tr class='$rowType'>
@@ -182,7 +182,7 @@ class Report
           <td>$controlNumber</td>
           <td>$modifiedDate</td>
            ".($viewCompany ? "<td>$company</td>" : "")."
-          <td>$reference</td>
+          <td>$merchantId</td>
           ".($viewAgency ? "<td>$agency</td>" : "")."
           <td>$agencyType</td>
           <td>$reason</td>
