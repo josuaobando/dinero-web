@@ -3,44 +3,35 @@ include("../../header.php");
 
 $wsRequest = new WSRequest($_REQUEST);
 
-try
-{
+try{
   $userMessage = "Search Transactions";
   $account = Session::getAccount();
 
   $system = new System($account);
   $transactionStatus = $system->transactionStatus();
-}
-catch(Exception $ex)
-{
+}catch(Exception $ex){
   ExceptionManager::handleException($ex);
   $userMessage = $ex->getMessage();
-  $userMessage = '<div class="alert alert-danger">'.$userMessage.'</div>';
+  $userMessage = '<div class="alert alert-danger">' . $userMessage . '</div>';
 }
 
-try
-{
+try{
   // Change Status to Transaction
   $transactionId = $wsRequest->getParam("transactionId");
-  if($transactionId)
-  {
+  if($transactionId){
     $manager = new Manager($account);
     $r = $manager->transactionUpdate($wsRequest);
-    if($r)
-    {
+    if($r){
       $userMessage = '<div class="alert alert-success">Transaction has been Updated</div>';
     }
   }
-}
-catch(Exception $ex)
-{
+}catch(Exception $ex){
   ExceptionManager::handleException($ex);
   $userMessage = $ex->getMessage();
-  $userMessage = '<div class="alert alert-danger">'.$userMessage.'</div>';
+  $userMessage = '<div class="alert alert-danger">' . $userMessage . '</div>';
 }
 
-try
-{
+try{
   $report = new Report($wsRequest, $account);
 
   $filterStatus = $wsRequest->getParam("filterStatus", "3");
@@ -54,12 +45,10 @@ try
   $filterID = $wsRequest->getParam("filterID", "");
   $filterUsername = $wsRequest->getParam("filterUsername", "");
   $filterReference = $wsRequest->getParam("filterReference", "");
-}
-catch(Exception $ex)
-{
+}catch(Exception $ex){
   ExceptionManager::handleException($ex);
   $userMessage = $ex->getMessage();
-  $userMessage = '<div class="alert alert-danger">'.$userMessage.'</div>';
+  $userMessage = '<div class="alert alert-danger">' . $userMessage . '</div>';
 }
 ?>
   <div id="page-wrapper" ng-controller="ClientSearchCtrl">
@@ -89,16 +78,12 @@ catch(Exception $ex)
                           Transaction Status
                         </option>
                         <?php
-                        foreach($transactionStatus as $tStatus)
-                        {
+                        foreach($transactionStatus as $tStatus){
                           $id = $tStatus['itemId'];
                           $value = $tStatus['itemValue'];
-                          if($filterStatus == $id)
-                          {
+                          if($filterStatus == $id){
                             echo "<option value='$id' selected>$value</option>";
-                          }
-                          else
-                          {
+                          }else{
                             echo "<option value='$id'>$value</option>";
                           }
                         }
@@ -125,7 +110,8 @@ catch(Exception $ex)
 
                   <div class="row">
                     <div class="col-sm-12">
-                      <select class="form-control input-sm" name="filterAgencyType" id="filterAgencyType" onchange="changeFilter()">
+                      <select class="form-control input-sm" name="filterAgencyType" id="filterAgencyType"
+                              onchange="changeFilter()">
                         <option value="0" <?php echo $filterAgencyType == '0' ? 'selected' : ''; ?>>
                           Agency Type
                         </option>
@@ -139,10 +125,11 @@ catch(Exception $ex)
                     </div>
                   </div>
 
-                  <?php if($account->checkPermission('REPORT_FILTER_AGENCY')){?>
+                  <?php if($account->checkPermission('REPORT_FILTER_AGENCY')){ ?>
                     <div class="row">
                       <div class="col-sm-12">
-                        <select class="form-control input-sm" name="filterAgencyId" id="filterAgencyId" onchange="changeFilter()">
+                        <select class="form-control input-sm" name="filterAgencyId" id="filterAgencyId"
+                                onchange="changeFilter()">
                           <option value="">Agency</option>
                           <option value="1" <?php echo $filterAgencyId == '1' ? 'selected' : ''; ?>>
                             MG - Pavon
@@ -153,11 +140,17 @@ catch(Exception $ex)
                           <option value="100" <?php echo $filterAgencyId == '100' ? 'selected' : ''; ?>>
                             MG - Saturno
                           </option>
+                          <option value="101" <?php echo $filterAgencyId == '101' ? 'selected' : ''; ?>>
+                            MG - Nicaragua
+                          </option>
                           <option value="4" <?php echo $filterAgencyId == '4' ? 'selected' : ''; ?>>
                             RIA - Pavon
                           </option>
                           <option value="5" <?php echo $filterAgencyId == '5' ? 'selected' : ''; ?>>
                             RIA - Cañas
+                          </option>
+                          <option value="102" <?php echo $filterAgencyId == '102' ? 'selected' : ''; ?>>
+                            RIA - Saturno
                           </option>
                         </select>
                       </div>
@@ -174,10 +167,13 @@ catch(Exception $ex)
                     <div class="col-sm-12">
                       <div class="row">
                         <div class="col-sm-6">
-                          <input class="input-sm form-control" type="text" id="filterID" name="filterID" placeholder="ID" value="<?= $filterID ?>" pattern="<?= Util::REGEX_NUMERIC ?>">
+                          <input class="input-sm form-control" type="text" id="filterID" name="filterID"
+                                 placeholder="ID" value="<?= $filterID ?>" pattern="<?= Util::REGEX_NUMERIC ?>">
                         </div>
                         <div class="col-sm-6">
-                          <input class="input-sm form-control" type="text" id="filterMTCN" name="filterMTCN" placeholder="Control Number" value="<?= $filterMTCN ?>" minlength="8" maxlength="11" pattern="<?= Util::REGEX_NUMERIC ?>">
+                          <input class="input-sm form-control" type="text" id="filterMTCN" name="filterMTCN"
+                                 placeholder="Control Number" value="<?= $filterMTCN ?>" minlength="8" maxlength="11"
+                                 pattern="<?= Util::REGEX_NUMERIC ?>">
                         </div>
                       </div>
                     </div>
@@ -187,10 +183,14 @@ catch(Exception $ex)
                     <div class="col-sm-12">
                       <div class="row">
                         <div class="col-sm-6">
-                          <input class="input-sm form-control" type=text id="filterUsername" name="filterReference" placeholder="Reference" value="<?= $filterReference ?>" pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
+                          <input class="input-sm form-control" type=text id="filterUsername" name="filterReference"
+                                 placeholder="Reference" value="<?= $filterReference ?>"
+                                 pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
                         </div>
                         <div class="col-sm-6">
-                          <input class="input-sm form-control" type=text id="filterUsername" name="filterUsername" placeholder="Username" value="<?= $filterUsername ?>" pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
+                          <input class="input-sm form-control" type=text id="filterUsername" name="filterUsername"
+                                 placeholder="Username" value="<?= $filterUsername ?>"
+                                 pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
                         </div>
                       </div>
                     </div>
@@ -238,8 +238,7 @@ catch(Exception $ex)
                 </div>
                 <!-- PAGINATION TABLE TRANSACTIONS -->
                 <?php
-                if($report->getTotal() > CoreConfig::PAGINATION_TABLE_MAX_ROWS)
-                {
+                if($report->getTotal() > CoreConfig::PAGINATION_TABLE_MAX_ROWS){
                   ?>
                   <div class="panel-footer">
                     <div class="btn-group" role="group">
@@ -256,8 +255,7 @@ catch(Exception $ex)
 
             <!-- SUMMARY -->
             <?php
-            if($report->getTotal())
-            {
+            if($report->getTotal()){
               ?>
               <div class="panel panel-default">
                 <div class="panel-heading">Summary</div>
@@ -277,8 +275,7 @@ catch(Exception $ex)
 
             <!-- EXPORT -->
             <?php
-            if($report->getTotal() && $account->checkPermission('REPORT_EXPORT'))
-            {
+            if($report->getTotal() && $account->checkPermission('REPORT_EXPORT')){
               ?>
               <div>
                 <div class="row">
@@ -296,10 +293,8 @@ catch(Exception $ex)
             <!-- MODAL -->
             <div>
               <?php
-              if($report->getTransactions())
-              {
-                foreach($report->getTransactions() as $transaction)
-                {
+              if($report->getTransactions()){
+                foreach($report->getTransactions() as $transaction){
                   $id = $transaction['Transaction_Id'];
                   $apiTransactionId = $transaction['ApiTransactionId'];
                   $statusId = $transaction['TransactionStatus_Id'];
@@ -345,8 +340,7 @@ catch(Exception $ex)
 
                   $disabled = "";
                   $readonly = "";
-                  if($statusId != Transaction::STATUS_APPROVED && $statusId != Transaction::STATUS_REJECTED)
-                  {
+                  if($statusId != Transaction::STATUS_APPROVED && $statusId != Transaction::STATUS_REJECTED){
                     $disabled = 'disabled';
                     $readonly = 'readonly';
                   }
@@ -365,8 +359,7 @@ catch(Exception $ex)
                           <div class="panel-body">
                             <!-- Nav tabs -->
                             <ul class="nav nav-pills">
-                              <?php if($account->checkPermission('TRANSACTION_UPDATE'))
-                              { ?>
+                              <?php if($account->checkPermission('TRANSACTION_UPDATE')){ ?>
                                 <li class="active">
                                   <a href="#tab-process<?= $id ?>" data-toggle="tab"
                                      aria-expanded="true">Re-Process
@@ -376,9 +369,7 @@ catch(Exception $ex)
                                   <a href="#tab-customer<?= $id ?>" data-toggle="tab"
                                      aria-expanded="false"><?= ($transactionTypeId == Transaction::TYPE_RECEIVER) ? 'Sender' : 'Receiver' ?></a>
                                 </li>
-                              <?php }
-                              else
-                              { ?>
+                              <?php }else{ ?>
                                 <li class="active">
                                   <a href="#tab-customer<?= $id ?>" data-toggle="tab"
                                      aria-expanded="true"><?= ($transactionTypeId == Transaction::TYPE_RECEIVER) ? 'Sender' : 'Receiver' ?></a>
@@ -392,8 +383,7 @@ catch(Exception $ex)
                             <!-- Tab panes -->
                             <div class="tab-content">
                               <!-- Tab Re-Process -->
-                              <?php if($account->checkPermission('TRANSACTION_UPDATE'))
-                              { ?>
+                              <?php if($account->checkPermission('TRANSACTION_UPDATE')){ ?>
                                 <div class="tab-pane fade active in"
                                      id="tab-process<?= $id ?>">
                                   <br/>
@@ -428,32 +418,30 @@ catch(Exception $ex)
                                     <div class="wrap-table">
                                       <table class="table">
                                         <thead>
-                                          <tr class="active">
-                                            <th>ID</th>
-                                            <th>Agency</th>
-                                            <th>Type</th>
-                                            <th>Date</th>
-                                            <?php if($account->checkPermission('REPORT_TRANSACTION_VIEW_API_VERIFICATION'))
-                                            { ?>
-                                              <th>API Verification</th>
-                                              <th>API Status</th>
-                                              <th>API Code</th>
-                                            <?php } ?>
-                                          </tr>
+                                        <tr class="active">
+                                          <th>ID</th>
+                                          <th>Agency</th>
+                                          <th>Type</th>
+                                          <th>Date</th>
+                                          <?php if($account->checkPermission('REPORT_TRANSACTION_VIEW_API_VERIFICATION')){ ?>
+                                            <th>API Verification</th>
+                                            <th>API Status</th>
+                                            <th>API Code</th>
+                                          <?php } ?>
+                                        </tr>
                                         </thead>
                                         <tbody>
-                                          <tr>
-                                            <td><?= $id ?></td>
-                                            <td><?= $agency ?></td>
-                                            <td><?= $agencyType ?></td>
-                                            <td><?= $modifiedDate ?></td>
-                                            <?php if($account->checkPermission('REPORT_TRANSACTION_VIEW_API_VERIFICATION'))
-                                            { ?>
-                                              <td><?= $apiVerificationId ?></td>
-                                              <td><?= $apiVerification ?></td>
-                                              <td><?= $apiAuthCode ?></td>
-                                            <?php } ?>
-                                          </tr>
+                                        <tr>
+                                          <td><?= $id ?></td>
+                                          <td><?= $agency ?></td>
+                                          <td><?= $agencyType ?></td>
+                                          <td><?= $modifiedDate ?></td>
+                                          <?php if($account->checkPermission('REPORT_TRANSACTION_VIEW_API_VERIFICATION')){ ?>
+                                            <td><?= $apiVerificationId ?></td>
+                                            <td><?= $apiVerification ?></td>
+                                            <td><?= $apiAuthCode ?></td>
+                                          <?php } ?>
+                                        </tr>
                                         </tbody>
                                       </table>
                                     </div>
@@ -482,8 +470,7 @@ catch(Exception $ex)
                                                  name="controlNumber"
                                                  value="<?= $controlNumber ?>"
                                                  minlength="8" maxlength="11"
-                                                 pattern="<?= Util::REGEX_NUMERIC ?>" <?php if($transactionTypeId == Transaction::TYPE_RECEIVER)
-                                          {
+                                                 pattern="<?= Util::REGEX_NUMERIC ?>" <?php if($transactionTypeId == Transaction::TYPE_RECEIVER){
                                             echo 'required';
                                           } ?>>
                                         </div>
@@ -494,16 +481,12 @@ catch(Exception $ex)
                                         <select class="form-control input-sm <?= $disabled ?>"
                                                 id="status" name="status" required>
                                           <?php
-                                          foreach($transactionStatus as $tStatus)
-                                          {
+                                          foreach($transactionStatus as $tStatus){
                                             $itemId = $tStatus['itemId'];
                                             $value = $tStatus['itemValue'];
-                                            if($statusId == $itemId)
-                                            {
+                                            if($statusId == $itemId){
                                               echo "<option value='$itemId' selected>$value</option>";
-                                            }
-                                            else
-                                            {
+                                            }else{
                                               echo "<option value='$itemId'>$value</option>";
                                             }
                                           }
@@ -529,8 +512,7 @@ catch(Exception $ex)
                                       <button type="button" class="btn btn-default"
                                               data-dismiss="modal">Close
                                       </button>
-                                      <?php if($account->checkPermission('REPORT_TRANSACTION_SAVE'))
-                                      { ?>
+                                      <?php if($account->checkPermission('REPORT_TRANSACTION_SAVE')){ ?>
                                         <button type="submit"
                                                 class="btn btn-danger <?= $disabled ?>">
                                           Save changes
@@ -541,8 +523,9 @@ catch(Exception $ex)
                                 </div>
                               <?php } ?>
                               <!-- Tab Customer -->
-                              <div class="tab-pane fade <?= (!$account->checkPermission("TRANSACTION_UPDATE") ? 'active in' : '') ?>"
-                                   id="tab-customer<?= $id ?>">
+                              <div
+                                  class="tab-pane fade <?= (!$account->checkPermission("TRANSACTION_UPDATE") ? 'active in' : '') ?>"
+                                  id="tab-customer<?= $id ?>">
                                 <br/>
                                 <table class="table">
                                   <tbody>
@@ -552,41 +535,40 @@ catch(Exception $ex)
                                       <td><?= $apiTransactionId ?></td>
                                     </tr>
                                   <?php } ?>
+                                  <tr>
+                                    <td>Username</td>
+                                    <td><?= $customer ?></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Customer</td>
+                                    <td><?= $customerName ?></td>
+                                  </tr>
+                                  <tr>
+                                    <td>State</td>
+                                    <td><?= $state ?></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Country</td>
+                                    <td><?= $country ?></td>
+                                  </tr>
+                                  <?php if($account->checkPermission('REPORT_TRANSACTION_VIEW_AGENCY')){ ?>
                                     <tr>
-                                      <td>Username</td>
-                                      <td><?= $customer ?></td>
+                                      <td>Agency</td>
+                                      <td><?= $agency ?></td>
                                     </tr>
-                                    <tr>
-                                      <td>Customer</td>
-                                      <td><?= $customerName ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td>State</td>
-                                      <td><?= $state ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Country</td>
-                                      <td><?= $country ?></td>
-                                    </tr>
-                                    <?php if($account->checkPermission('REPORT_TRANSACTION_VIEW_AGENCY'))
-                                    { ?>
-                                      <tr>
-                                        <td>Agency</td>
-                                        <td><?= $agency ?></td>
-                                      </tr>
-                                    <?php } ?>
-                                    <tr>
-                                      <td>Type</td>
-                                      <td><?= $agencyType ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Created Date</td>
-                                      <td><?= $createdDate ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Modified Date</td>
-                                      <td><?= $modifiedDate ?></td>
-                                    </tr>
+                                  <?php } ?>
+                                  <tr>
+                                    <td>Type</td>
+                                    <td><?= $agencyType ?></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Created Date</td>
+                                    <td><?= $createdDate ?></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Modified Date</td>
+                                    <td><?= $modifiedDate ?></td>
+                                  </tr>
                                   </tbody>
                                 </table>
 
@@ -601,54 +583,54 @@ catch(Exception $ex)
                                 <br/>
                                 <table class="table">
                                   <tbody>
-                                    <tr>
-                                      <td><?= $transactionType ?></td>
-                                      <td id="personName<?= $id ?>"><?= $personName ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Type Id</td>
-                                      <td id="typeId<?= $id ?>"><?= $personTypeId ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Personal Id</td>
-                                      <td id="personalId<?= $id ?>"><?= $personPersonalId ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Expiration Date Id</td>
-                                      <td id="expirationDateId<?= $id ?>"><?= $personExpirationDateId ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Birth Date</td>
-                                      <td id="birthDate<?= $id ?>"><?= $personBirthDate ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Marital Status</td>
-                                      <td id="maritalStatus<?= $id ?>"><?= $personMaritalStatus ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Gender</td>
-                                      <td id="gender<?= $id ?>"><?= $personGender ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Profession</td>
-                                      <td id="profession<?= $id ?>"><?= $personProfession ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Phone</td>
-                                      <td id="phone<?= $id ?>"><?= $personPhone ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Address</td>
-                                      <td id="address<?= $id ?>"><?= $personAddress ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td>City</td>
-                                      <td id="city<?= $id ?>"><?= $personCity ?></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Country/State</td>
-                                      <td id="location<?= $id ?>"><?= $personCountry.', '.$personState ?></td>
-                                    </tr>
+                                  <tr>
+                                    <td><?= $transactionType ?></td>
+                                    <td id="personName<?= $id ?>"><?= $personName ?></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Type Id</td>
+                                    <td id="typeId<?= $id ?>"><?= $personTypeId ?></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Personal Id</td>
+                                    <td id="personalId<?= $id ?>"><?= $personPersonalId ?></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Expiration Date Id</td>
+                                    <td id="expirationDateId<?= $id ?>"><?= $personExpirationDateId ?></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Birth Date</td>
+                                    <td id="birthDate<?= $id ?>"><?= $personBirthDate ?></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Marital Status</td>
+                                    <td id="maritalStatus<?= $id ?>"><?= $personMaritalStatus ?></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Gender</td>
+                                    <td id="gender<?= $id ?>"><?= $personGender ?></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Profession</td>
+                                    <td id="profession<?= $id ?>"><?= $personProfession ?></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Phone</td>
+                                    <td id="phone<?= $id ?>"><?= $personPhone ?></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Address</td>
+                                    <td id="address<?= $id ?>"><?= $personAddress ?></td>
+                                  </tr>
+                                  <tr>
+                                    <td>City</td>
+                                    <td id="city<?= $id ?>"><?= $personCity ?></td>
+                                  </tr>
+                                  <tr>
+                                    <td>Country/State</td>
+                                    <td id="location<?= $id ?>"><?= $personCountry . ', ' . $personState ?></td>
+                                  </tr>
                                   </tbody>
                                 </table>
 
@@ -656,8 +638,7 @@ catch(Exception $ex)
                                   <button type="button" class="btn btn-default"
                                           data-dismiss="modal">Close
                                   </button>
-                                  <?php if($transactionTypeId == Transaction::TYPE_SENDER && $statusId == Transaction::STATUS_REJECTED && $account->checkPermission('REPORT_TRANSACTION_GET_NEW_PERSON'))
-                                  { ?>
+                                  <?php if($transactionTypeId == Transaction::TYPE_SENDER && $statusId == Transaction::STATUS_REJECTED && $account->checkPermission('REPORT_TRANSACTION_GET_NEW_PERSON')){ ?>
                                     <button type="button" class="btn btn-danger"
                                             onclick="getNewPerson(<?= $id ?>)">Get New <?= $transactionType ?></button>
                                   <?php } ?>
