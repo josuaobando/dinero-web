@@ -172,17 +172,7 @@ if(strpos($page, "login") === false){
               </a>
             </li>
           <?php } ?>
-          <?php if($account->checkPermission('TRANSACTION_NEW_TRANSACTION'))
-          { ?>
-            <li>
-              <a href="transaction">
-                <i class="fa fa-edit fa-fw"></i>
-                New Transaction
-              </a>
-            </li>
-          <?php } ?>
-          <?php if($account->checkPermission('TRANSACTION_ATTEMPTS'))
-          { ?>
+          <?php if($account->checkPermission('TRANSACTION_ATTEMPTS')){ ?>
             <li>
               <a href="attempts">
                 <i class="fa fa-random fa-fw"></i>

@@ -16,9 +16,9 @@ try{
 try{
   $transactionId = $wsRequest->getParam("transaction_id");
   if($transactionId){
-    $manager = new Manager($account);
-    $r = $manager->confirm($wsRequest);
-    if($r){
+    $providerTransaction = new ProviderTransaction($wsRequest);
+    $confirm = $providerTransaction->confirm();
+    if($confirm){
       $userMessage = '<div class="alert alert-success">Transaction has been confirmed</div>';
     }
   }

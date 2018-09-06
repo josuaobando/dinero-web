@@ -15,8 +15,10 @@ try
 
   $manager = new Manager($account);
   if($function == 'information'){
+
     $wsRequest->putParam('transaction_id', $transactionId);
-    $transaction = $manager->information($wsRequest, true);
+    $providerTransaction = new ProviderTransaction($wsRequest);
+    $transaction =  $providerTransaction->status(true);
 
     $jsonContent = json_encode($transaction->toArray());
   }else{
