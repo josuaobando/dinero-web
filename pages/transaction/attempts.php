@@ -68,9 +68,9 @@ try{
 
                 $rowType = '';
                 if($typeId == 1){
-                  $rowType = 'active';
-                }elseif($typeId == 2){
                   $rowType = 'danger';
+                }elseif($typeId == 2){
+                  $rowType = 'active';
                 }elseif($typeId == 3){
                   $rowType = 'info';
                 }
