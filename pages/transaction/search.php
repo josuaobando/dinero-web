@@ -19,10 +19,16 @@ try{
   // Change Status to Transaction
   $transactionId = $wsRequest->getParam("transactionId");
   if($transactionId){
-    $manager = new Manager($account);
-    $r = $manager->transactionUpdate($wsRequest);
-    if($r){
-      $userMessage = '<div class="alert alert-success">Transaction has been Updated</div>';
+    try{
+      $providerTransaction = new ProviderTransaction($wsRequest);
+      $update = $providerTransaction->transactionUpdate();
+      if($update){
+        $userMessage = '<div class="alert alert-success">Transaction has been Updated</div>';
+      }
+    }catch(Exception $exception){
+      ExceptionManager::handleException($exception);
+      $userMessage = $exception->getMessage();
+      $userMessage = '<div class="alert alert-danger">' . $userMessage . '</div>';
     }
   }
 }catch(Exception $ex){

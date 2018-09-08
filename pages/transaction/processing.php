@@ -10,13 +10,18 @@ try{
 
   $transactionId = $wsRequest->getParam("transactionId");
   if($transactionId){
-    $manager = new Manager($account);
-    $update = $manager->transactionUpdate($wsRequest);
-    if($update){
-      $userMessage = '<div class="alert alert-success">Transaction processed successfully</div>';
+    try{
+      $providerTransaction = new ProviderTransaction($wsRequest);
+      $update = $providerTransaction->transactionUpdate();
+      if($update){
+        $userMessage = '<div class="alert alert-success">Transaction processed successfully</div>';
+      }
+    }catch(Exception $exception){
+      ExceptionManager::handleException($exception);
+      $userMessage = $exception->getMessage();
+      $userMessage = '<div class="alert alert-danger">' . $userMessage . '</div>';
     }
   }
-
   $system = new System();
   $transactions = $system->transactions(Transaction::STATUS_SUBMITTED, $account->getAccountId());
 }catch(Exception $ex){
