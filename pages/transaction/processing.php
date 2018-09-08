@@ -97,6 +97,7 @@ try{
             foreach($transactions as $transaction){
               $id = $transaction['Transaction_Id'];
               $apiTransactionId = $transaction['ApiTransactionId'];
+              $providerId = $transaction['Provider_Id'];
               $statusId = $transaction['TransactionStatus_Id'];
               $transactionTypeId = $transaction['TransactionType_Id'];
               $transactionType = $transaction['TransactionType'];
@@ -253,7 +254,7 @@ try{
                                 </div>
                               <?php } ?>
                               <div class="btn-group pull-right">
-                                <?php if($agencyId == CoreConfig::AGENCY_ID_SATURNO){ ?>
+                                <?php if($providerId != Dinero::PROVIDER_ID){ ?>
                                   <button type="button" class="btn btn-info" id="btnCheckStatus<?= $id ?>"
                                           onclick="getStatus(<?= $id ?>)">Check Status
                                   </button>
