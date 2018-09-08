@@ -56,6 +56,8 @@ class Report
    */
   public function __construct($wsRequest, $account)
   {
+    $this->currentPage = $wsRequest->getParam("filterPage", "1");
+
     $statusId = $wsRequest->getParam("filterStatus", "3");
     $statusId = ($statusId == "-1") ? "0" : $statusId;
     $filterType = $wsRequest->getParam("filterType", "0");
@@ -64,12 +66,15 @@ class Report
 
     $beginDate = $wsRequest->getParam("filterBeginDate", "");
     $endDate = $wsRequest->getParam("filterEndDate", "");
-    $filterID = $wsRequest->getParam("filterID", "");
-    $controlNumber = $wsRequest->getParam("filterMTCN", "");
-    $filterReference = $wsRequest->getParam("filterReference", "");
-    $filterUsername = $wsRequest->getParam("filterUsername", "");
 
-    $this->currentPage = $wsRequest->getParam("filterPage", "1");
+    //specific
+    $btnSearch = $wsRequest->getParam("btnSearch", '1');
+    if($btnSearch == '2'){
+      $filterID = $wsRequest->getParam("filterID", "");
+      $controlNumber = $wsRequest->getParam("filterMTCN", "");
+      $filterReference = $wsRequest->getParam("filterReference", "");
+      $filterUsername = $wsRequest->getParam("filterUsername", "");
+    }
 
     $system = new System();
     $dataReport = $system->transactionsReport($statusId, $filterType, $filterAgencyType, $filterAgencyId, $account->getAccountId(), $beginDate, $endDate, $controlNumber, $filterUsername, $filterID, $filterReference, $this->currentPage);
