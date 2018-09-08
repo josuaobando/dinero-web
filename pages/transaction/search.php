@@ -77,10 +77,10 @@ try{
           <!-- Nav tabs -->
           <ul class="nav nav-tabs">
             <li role="presentation" class="<?= ($btnSearch != '2') ? 'active' : '' ?>">
-              <a href="#tab-filter-general" data-toggle="tab" aria-expanded="<?= ($btnSearch != '2') ? 'true' : 'false' ?>">General Filters</a>
+              <a href="#tab-filter-general" data-toggle="tab" aria-expanded="<?= ($btnSearch != '2') ? 'true' : 'false' ?>">General</a>
             </li>
             <li role="presentation" class="<?= ($btnSearch == '2') ? 'active' : '' ?>">
-              <a href="#tab-filter-specific" data-toggle="tab" aria-expanded="<?= ($btnSearch == '2') ? 'true' : 'false' ?>">Specific Filters</a>
+              <a href="#tab-filter-specific" data-toggle="tab" aria-expanded="<?= ($btnSearch == '2') ? 'true' : 'false' ?>">Specific</a>
             </li>
           </ul>
           <!-- End Nav tabs -->
