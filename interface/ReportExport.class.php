@@ -19,9 +19,10 @@ class ReportExport extends Report
     $filterType = $wsRequest->getParam("filterType", "0");
     $filterAgencyType = $wsRequest->getParam("filterAgencyType", "0");
     $filterAgencyId = $wsRequest->getParam("filterAgencyId", "0");
-
     $beginDate = $wsRequest->getParam("filterBeginDate", "");
     $endDate = $wsRequest->getParam("filterEndDate", "");
+
+    //specific
     $filterID = $wsRequest->getParam("filterID", "");
     $controlNumber = $wsRequest->getParam("filterMTCN", "");
     $filterReference = $wsRequest->getParam("filterReference", "");
@@ -37,7 +38,6 @@ class ReportExport extends Report
     $this->transactions = $dataReport['transactions'];
     $this->summary = $dataReport['summary'];
     $this->total = $dataReport['total'][0]['total'];
-
   }
 
   /**
@@ -62,18 +62,15 @@ class ReportExport extends Report
     $headers[] = 'Customer';
     $headers[] = 'Person';
     $headers[] = 'MTCN';
-    if($viewCompany)
-    {
+    if($viewCompany){
       $headers[] = 'Company';
     }
     $headers[] = 'MerchantId';
-    if($viewAgency)
-    {
+    if($viewAgency){
       $headers[] = 'Agency';
     }
     $headers[] = 'Agency Type';
-    if($viewAPITransaction)
-    {
+    if($viewAPITransaction){
       $headers[] = 'API Verification';
       $headers[] = 'API Status';
       $headers[] = 'API Code';
@@ -83,8 +80,7 @@ class ReportExport extends Report
     $headers[] = 'Notes';
 
     $data = array();
-    foreach($this->transactions as $transaction)
-    {
+    foreach($this->transactions as $transaction){
       $row = array();
       $row['ID'] = $transaction['Transaction_Id'];
       $row['TransactionType'] = $transaction['TransactionType'];
@@ -95,18 +91,15 @@ class ReportExport extends Report
       $row['Customer'] = ucwords(strtolower($transaction['CustomerName']));
       $row['Person'] = ucwords(strtolower($transaction['PersonName']));
       $row['MTCN'] = $transaction['ControlNumber'];
-      if($viewCompany)
-      {
+      if($viewCompany){
         $row['Company'] = $transaction['Company'];
       }
       $row['MerchantId'] = $transaction['MerchantId'];
-      if($viewAgency)
-      {
+      if($viewAgency){
         $row['Agency'] = $transaction['Agency'];
       }
       $row['AgencyType'] = $transaction['AgencyType'];
-      if($viewAPITransaction)
-      {
+      if($viewAPITransaction){
         $row['API Verification'] = $transaction['Verification_Id'];
         $row['API Status'] = ucwords($transaction['Verification']);
         $row['API Code'] = $transaction['AuthCode'];

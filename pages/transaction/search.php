@@ -39,7 +39,7 @@ try{
 
 try{
   $report = new Report($wsRequest, $account);
-  $btnSearch = $wsRequest->getParam("btnSearch", 1);
+  $typeFilter = $wsRequest->getParam("btnSearch", 1);
 
   $filterStatus = $wsRequest->getParam("filterStatus", "3");
   $filterType = $wsRequest->getParam("filterType", "0");
@@ -51,7 +51,7 @@ try{
   $filterMTCN = $wsRequest->getParam("filterMTCN", "");
   $filterID = $wsRequest->getParam("filterID", "");
   $filterUsername = $wsRequest->getParam("filterUsername", "");
-  $filterReference = $wsRequest->getParam("filterReference", "");
+  $filterMerchantId = $wsRequest->getParam("filterReference", "");
 }catch(Exception $ex){
   ExceptionManager::handleException($ex);
   $userMessage = $ex->getMessage();
@@ -76,17 +76,17 @@ try{
 
           <!-- Nav tabs -->
           <ul class="nav nav-tabs">
-            <li role="presentation" class="<?= ($btnSearch != '2') ? 'active' : '' ?>">
-              <a href="#tab-filter-general" data-toggle="tab" aria-expanded="<?= ($btnSearch != '2') ? 'true' : 'false' ?>">General</a>
+            <li role="presentation" class="<?= ($typeFilter != '2') ? 'active' : '' ?>">
+              <a href="#tab-filter-general" data-toggle="tab" aria-expanded="<?= ($typeFilter != '2') ? 'true' : 'false' ?>">General</a>
             </li>
-            <li role="presentation" class="<?= ($btnSearch == '2') ? 'active' : '' ?>">
-              <a href="#tab-filter-specific" data-toggle="tab" aria-expanded="<?= ($btnSearch == '2') ? 'true' : 'false' ?>">Specific</a>
+            <li role="presentation" class="<?= ($typeFilter == '2') ? 'active' : '' ?>">
+              <a href="#tab-filter-specific" data-toggle="tab" aria-expanded="<?= ($typeFilter == '2') ? 'true' : 'false' ?>">Specific</a>
             </li>
           </ul>
           <!-- End Nav tabs -->
           <!-- Tab panes -->
           <div class="tab-content">
-            <div class="tab-pane fade <?= ($btnSearch != '2') ? 'active in' : '' ?>" id="tab-filter-general">
+            <div class="tab-pane fade <?= ($typeFilter != '2') ? 'active in' : '' ?>" id="tab-filter-general">
               <form role="form" data-toggle="validator" method="post" name="searchFormGeneral" action="search">
                 <br>
                 <!-- Optional filters -->
@@ -181,13 +181,9 @@ try{
                     <div class="row">
                       <div class="col-sm-12" id="dateRange">
                         <div class="input-daterange input-group" id="datepicker">
-                          <input class="input-sm form-control" type="text" name="filterBeginDate"
-                                 id="filterBeginDate" placeholder="Begin Date" readonly
-                                 value="<?= $filterBeginDate ?>"/>
+                          <input class="input-sm form-control" type="text" name="filterBeginDate" id="filterBeginDate" placeholder="Begin Date" readonly value="<?= $filterBeginDate ?>"/>
                           <span class="input-group-addon"></span>
-                          <input class="input-sm form-control" type="text" name="filterEndDate"
-                                 id="filterEndDate" placeholder="End Date" readonly
-                                 value="<?= $filterEndDate ?>"/>
+                          <input class="input-sm form-control" type="text" name="filterEndDate" id="filterEndDate" placeholder="End Date" readonly value="<?= $filterEndDate ?>"/>
                         </div>
                       </div>
                     </div>
@@ -201,30 +197,23 @@ try{
                   </div>
                 </div>
             </div>
-            <div class="tab-pane fade <?= ($btnSearch == '2') ? 'active in' : '' ?>" id="tab-filter-specific">
+            <div class="tab-pane fade <?= ($typeFilter == '2') ? 'active in' : '' ?>" id="tab-filter-specific">
               <form role="form" data-toggle="validator" method="post" name="searchFormSpecific" action="search">
                 <br>
 
                 <!-- Specific filters -->
                 <div class="row">
                   <div class="col-sm-6">
-                    <input class="input-sm form-control" type="text" id="filterID" name="filterID"
-                           placeholder="ID" value="<?= $filterID ?>" pattern="<?= Util::REGEX_NUMERIC ?>">
+                    <input class="input-sm form-control" type="text" id="filterID" name="filterID" placeholder="ID" value="<?= $filterID ?>" pattern="<?= Util::REGEX_NUMERIC ?>">
                   </div>
                   <div class="col-sm-6">
-                    <input class="input-sm form-control" type="text" id="filterMTCN" name="filterMTCN"
-                           placeholder="Control Number" value="<?= $filterMTCN ?>" minlength="8" maxlength="11"
-                           pattern="<?= Util::REGEX_NUMERIC ?>">
+                    <input class="input-sm form-control" type="text" id="filterMTCN" name="filterMTCN" placeholder="Control Number" value="<?= $filterMTCN ?>" minlength="8" maxlength="11" pattern="<?= Util::REGEX_NUMERIC ?>">
                   </div>
                   <div class="col-sm-6">
-                    <input class="input-sm form-control" type=text id="filterUsername" name="filterReference"
-                           placeholder="Reference" value="<?= $filterReference ?>"
-                           pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
+                    <input class="input-sm form-control" type=text id="filterUsername" name="filterReference" placeholder="Reference" value="<?= $filterMerchantId ?>" pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
                   </div>
                   <div class="col-sm-6">
-                    <input class="input-sm form-control" type=text id="filterUsername" name="filterUsername"
-                           placeholder="Username" value="<?= $filterUsername ?>"
-                           pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
+                    <input class="input-sm form-control" type=text id="filterUsername" name="filterUsername" placeholder="Username" value="<?= $filterUsername ?>" pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
                   </div>
                 </div>
                 <!-- End Specific filters -->
@@ -241,6 +230,7 @@ try{
 
         </div>
       </div>
+
       <!-- END SEARCH -->
 
       <div class="panel panel-default">
@@ -263,6 +253,7 @@ try{
               ?>
               <div class="panel-footer">
                 <div class="btn-group" role="group">
+                  <input type="hidden" id="typeFilter" name="typeFilter" value="<?= $typeFilter ?>">
                   <?php echo $report->getPaginationTable(); ?>
                 </div>
               </div>
@@ -300,7 +291,7 @@ try{
             <div>
               <div class="row">
                 <div class="col-lg-12">
-                  <input type="button" class="btn btn-default" value="Export" onclick="exportReport()">
+                  <input type="button" class="btn btn-default" value="Export" onclick="reportSearch(false, 0)">
                 </div>
               </div>
             </div>
@@ -405,33 +396,17 @@ try{
                             <?php if($account->checkPermission('TRANSACTION_UPDATE')){ ?>
                               <div class="tab-pane fade active in" id="tab-process<?= $id ?>">
                                 <br/>
-                                <form role="form" data-toggle="validator" method="post"
-                                      id="myForm<?= $id ?>" name="myForm<?= $id ?>"
-                                      action="search">
-                                  <input type="hidden" id="filterStatus"
-                                         name="filterStatus"
-                                         value="<?= $filterStatus ?>">
-                                  <input type="hidden" id="filterType" name="filterType"
-                                         value="<?= $filterType ?>">
-                                  <input type="hidden" id="filterAgencyType"
-                                         name="filterAgencyType"
-                                         value="<?= $filterAgencyType ?>">
-                                  <input type="hidden" id="filterBeginDate"
-                                         name="filterBeginDate"
-                                         value="<?= $filterBeginDate ?>">
-                                  <input type="hidden" id="filterEndDate"
-                                         name="filterEndDate"
-                                         value="<?= $filterEndDate ?>">
-                                  <input type="hidden" id="filterUsername"
-                                         name="filterUsername"
-                                         value="<?= $filterUsername ?>">
-                                  <input type="hidden" id="filterMTCN" name="filterMTCN"
-                                         value="<?= $filterMTCN ?>">
-                                  <input type="hidden" id="transactionId"
-                                         name="transactionId" value="<?= $id ?>">
-                                  <input type="hidden" id="transactionTypeId"
-                                         name="transactionTypeId"
-                                         value="<?= $transactionTypeId ?>">
+                                <form role="form" data-toggle="validator" method="post" id="myForm<?= $id ?>" name="myForm<?= $id ?>" action="search">
+
+                                  <input type="hidden" id="filterStatus" name="filterStatus" value="<?= $filterStatus ?>">
+                                  <input type="hidden" id="filterType" name="filterType" value="<?= $filterType ?>">
+                                  <input type="hidden" id="filterAgencyType" name="filterAgencyType" value="<?= $filterAgencyType ?>">
+                                  <input type="hidden" id="filterBeginDate" name="filterBeginDate" value="<?= $filterBeginDate ?>">
+                                  <input type="hidden" id="filterEndDate" name="filterEndDate" value="<?= $filterEndDate ?>">
+                                  <input type="hidden" id="filterUsername" name="filterUsername" value="<?= $filterUsername ?>">
+                                  <input type="hidden" id="filterMTCN" name="filterMTCN" value="<?= $filterMTCN ?>">
+                                  <input type="hidden" id="transactionId" name="transactionId" value="<?= $id ?>">
+                                  <input type="hidden" id="transactionTypeId" name="transactionTypeId" value="<?= $transactionTypeId ?>">
 
                                   <div class="wrap-table">
                                     <table class="table">
@@ -541,9 +516,7 @@ try{
                               </div>
                             <?php } ?>
                             <!-- Tab Customer -->
-                            <div
-                                class="tab-pane fade <?= (!$account->checkPermission("TRANSACTION_UPDATE") ? 'active in' : '') ?>"
-                                id="tab-customer<?= $id ?>">
+                            <div class="tab-pane fade <?= (!$account->checkPermission("TRANSACTION_UPDATE") ? 'active in' : '') ?>" id="tab-customer<?= $id ?>">
                               <br/>
                               <table class="table">
                                 <tbody>
@@ -591,9 +564,7 @@ try{
                               </table>
 
                               <div class="modal-footer">
-                                <button type="button" class="btn btn-default"
-                                        data-dismiss="modal">Close
-                                </button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                               </div>
                             </div>
                             <!-- Tab Person -->

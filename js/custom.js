@@ -40,10 +40,9 @@ $(window).load(function(){
 /**
  * Export report transactions
  */
-function exportReport(){
+function reportSearch(search, pageId){
   startSpinner();
-
-  var form = $('<form/>', {'action': 'scripts/export.php', 'method': 'post', 'id': 'exportForm', 'name': 'exportForm', target: '_blank'});
+  
   var filterStatus = $('<input>', {'type': 'hidden', 'id': 'filterStatus', 'name': 'filterStatus', 'value': $("#filterStatus").val()});
   var filterType = $('<input>', {'type': 'hidden', 'id': 'filterType', 'name': 'filterType', 'value': $("#filterType").val()});
   var filterAgencyType = $('<input>', {'type': 'hidden', 'id': 'filterAgencyType', 'name': 'filterAgencyType', 'value': $("#filterAgencyType").val()});
@@ -54,7 +53,13 @@ function exportReport(){
   var filterAgencyId = $('<input>', {'type': 'hidden', 'id': 'filterAgencyId', 'name': 'filterAgencyId', 'value': $("#filterAgencyId").val()});
   var filterID = $('<input>', {'type': 'hidden', 'id': 'filterID', 'name': 'filterID', 'value': $("#filterID").val()});
   var filterReference = $('<input>', {'type': 'hidden', 'id': 'filterReference', 'name': 'filterReference', 'value': $("#filterReference").val()});
-
+  var filterPage = $('<input>', {'type': 'hidden', 'id': 'filterPage', 'name': 'filterPage', 'value': pageId});
+  
+  var form = $('<form/>', {'action': 'search', 'method': 'post', 'id': 'searchForm', 'name': 'searchForm'});
+  if(!search){
+    form = $('<form/>', {'action': 'scripts/export.php', 'method': 'post', 'id': 'searchForm', 'name': 'searchForm', target: '_blank'});
+  }
+  
   filterStatus.appendTo(form);
   filterType.appendTo(form);
   filterAgencyType.appendTo(form);
@@ -65,9 +70,10 @@ function exportReport(){
   filterAgencyId.appendTo(form);
   filterID.appendTo(form);
   filterReference.appendTo(form);
+  filterPage.appendTo(form);
   
   form.appendTo($("body"));
-  $("#exportForm").submit();
+  $("#searchForm").submit();
   
   stopSpinner();
 }

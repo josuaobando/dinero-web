@@ -56,30 +56,36 @@ class Report
    */
   public function __construct($wsRequest, $account)
   {
+    $this->account = $account;
     $this->currentPage = $wsRequest->getParam("filterPage", "1");
-
+    $beginDate = $wsRequest->getParam("filterBeginDate", "");
+    $endDate = $wsRequest->getParam("filterEndDate", "");
     $statusId = $wsRequest->getParam("filterStatus", "3");
     $statusId = ($statusId == "-1") ? "0" : $statusId;
     $filterType = $wsRequest->getParam("filterType", "0");
     $filterAgencyType = $wsRequest->getParam("filterAgencyType", "0");
     $filterAgencyId = $wsRequest->getParam("filterAgencyId", "0");
 
-    $beginDate = $wsRequest->getParam("filterBeginDate", "");
-    $endDate = $wsRequest->getParam("filterEndDate", "");
-
     //specific
-    $btnSearch = $wsRequest->getParam("btnSearch", '1');
-    if($btnSearch == '2'){
+    $typeFilter = $wsRequest->getParam("btnSearch", '1');
+    if($typeFilter == '2'){
+
       $filterID = $wsRequest->getParam("filterID", "");
       $controlNumber = $wsRequest->getParam("filterMTCN", "");
-      $filterReference = $wsRequest->getParam("filterReference", "");
+      $filterMerchantId = $wsRequest->getParam("filterReference", "");
       $filterUsername = $wsRequest->getParam("filterUsername", "");
+
+      if(!$filterID && !$controlNumber && !$filterMerchantId && !$filterUsername){
+        $this->transactions = array();
+        $this->summary = array();
+        $this->total = 0;
+        return;
+      }
+
     }
 
     $system = new System();
-    $dataReport = $system->transactionsReport($statusId, $filterType, $filterAgencyType, $filterAgencyId, $account->getAccountId(), $beginDate, $endDate, $controlNumber, $filterUsername, $filterID, $filterReference, $this->currentPage);
-
-    $this->account = $account;
+    $dataReport = $system->transactionsReport($statusId, $filterType, $filterAgencyType, $filterAgencyId, $account->getAccountId(), $beginDate, $endDate, $controlNumber, $filterUsername, $filterID, $filterMerchantId, $this->currentPage);
     $this->transactions = $dataReport['transactions'];
     $this->summary = $dataReport['summary'];
     $this->total = $dataReport['total'][0]['total'];
@@ -292,7 +298,7 @@ class Report
         for($id = 1; $id <= $totalPages; $id++)
         {
           $class = ($this->currentPage == $id) ? 'btn-info disabled' : 'btn-default';
-          $pagination .= '<input type="submit" class="btn '.$class.'" data-toggle="tooltip" data-placement="bottom" title="Page '.$id.'" name="filterPage" id="filterPage" value="'.$id.'">';
+          $pagination .= '<input type="submit" class="btn '.$class.'" data-toggle="tooltip" data-placement="bottom" title="Page '.$id.'" name="filterPage" id="filterPage" value="'.$id.'" onclick="reportSearch(true, '.$id.')">';
         }
         $pagination .= "</ul>";
 
