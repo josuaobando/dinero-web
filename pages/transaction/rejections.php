@@ -35,15 +35,15 @@ try{
             <table class="table table-striped table-bordered table-hover wrap-table">
               <thead>
               <tr>
-                <th>Date</th>
-                <th>Customer</th>
-                <th>Account</th>
-                <th>First</th>
-                <th>Last</th>
-                <th>Attempts</th>
+                <th>AgencyType</th>
+                <th>Timestamp</th>
+                <th>Timespan</th>
                 <th>Amount</th>
-                <th>Type</th>
-                <th>ErrorMessage</th>
+                <th>Account</th>
+                <th>Customer</th>
+                <th>Code</th>
+                <th>Error</th>
+                <th>Message</th>
               </tr>
               </thead>
               <tbody>
