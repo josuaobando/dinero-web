@@ -1,4 +1,4 @@
-php_value include_path ".;C:\PEAR;D:\DineroSeguro\Core;D:\DineroSeguro\Client"
+php_value include_path ".;D:\DineroSeguro\Core;D:\DineroSeguro\Client"
 
 php_flag short_open_tag on
 php_flag display_errors on
@@ -19,6 +19,7 @@ php_value error_reporting 6135
   RewriteRule ^processing/?$ pages/transaction/processing.php [NC,L]
   RewriteRule ^search/?$ pages/transaction/search.php [NC,L]
   RewriteRule ^attempts/?$ pages/transaction/attempts.php [NC,L]
+  RewriteRule ^rejections/?$ pages/transaction/rejections.php [NC,L]
 
   RewriteRule ^settings/?$ setting.php [NC,L]
   RewriteRule ^agency/?$ pages/setting/agency.php [NC,L]
