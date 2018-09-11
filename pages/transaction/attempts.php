@@ -98,33 +98,32 @@ try{
       <!-- SUMMARY -->
       <?php
       if($attempts && count($attempts) > 0){
-      ?>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <div class="table-responsive">
-            <table class="table table-striped table-bordered table-hover wrap-table">
-              <thead>
-              <tr>
-                <th>Unique</th>
-                <th>Total</th>
-              </tr>
-              </thead>
-              <tbody>
-              <tr>
-                <td><?php echo count($attempts); ?></td>
-                <td><?php echo $totalAttempt; ?></td>
-              </tr>
-              </tbody>
-            </table>
+        ?>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="table-responsive">
+              <table class="table table-striped table-bordered table-hover wrap-table">
+                <thead>
+                <tr>
+                  <th>Unique</th>
+                  <th>Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><?php echo count($attempts); ?></td>
+                  <td><?php echo $totalAttempt; ?></td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </div>
+        <?php
+      }
+      ?>
+      <!-- END SUMMARY -->
     </div>
-    <?php
-    }
-    ?>
-    <!-- END SUMMARY -->
-
   </div>
 </div>
 
