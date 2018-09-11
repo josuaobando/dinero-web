@@ -175,7 +175,7 @@ if(strpos($page, "login") === false){
           <?php if($account->checkPermission('TRANSACTION_ATTEMPTS')){ ?>
             <li>
               <a href="attempts">
-                <i class="fa fa-ban fa-fw"></i>
+                <i class="fa fa-random fa-fw"></i>
                 Attempts
               </a>
             </li>
@@ -183,8 +183,8 @@ if(strpos($page, "login") === false){
           <?php if($account->checkPermission('TRANSACTION_ATTEMPTS')){ ?>
             <li>
               <a href="rejections">
-                <i class="fa fa-random fa-fw"></i>
-                Attempts
+                <i class="fa fa-ban fa-fw"></i>
+                Rejections
               </a>
             </li>
           <?php } ?>
