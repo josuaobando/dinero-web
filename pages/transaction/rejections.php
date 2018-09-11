@@ -58,13 +58,13 @@ try{
                 $error = $transaction['Error'];
                 $message = $transaction['Message'];
 
-                $timeStamp = date('d F', strtotime($timeStamp));
+                $timeStamp = date(Util::FORMAT_DATE_DISPLAY, strtotime($timeStamp));
 
                 echo "<tr>
 														<td>$agencyType</td>
 														<td>$timeStamp</td>
 														<td>$timeSpan</td>
-														<td>$amount</td>
+														<td>$$amount</td>
 														<td>$username</td>
 														<td>$customer</td>
 														<td>$error</td>
