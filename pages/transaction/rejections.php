@@ -98,50 +98,12 @@ try{
             <table class="table table-striped table-bordered table-hover wrap-table">
               <thead>
               <tr>
-                <th>Error Code</th>
-                <th>Description</th>
+                <th>Total</th>
               </tr>
               </thead>
               <tbody>
               <tr>
-                <td><?php echo RequestException::ERROR_TRANSACTION; ?></td>
-                <td>Transaction information</td>
-              </tr>
-              <tr>
-                <td><?php echo RequestException::ERROR_CUSTOMER; ?></td>
-                <td>Invalid customer information</td>
-              </tr>
-              <tr>
-                <td><?php echo RequestException::ERROR_CUSTOMER_BLACKLIST; ?></td>
-                <td>Customer is blacklisted</td>
-              </tr>
-              <tr>
-                <td><?php echo RequestException::ERROR_PERSON; ?></td>
-                <td>Invalid name information</td>
-              </tr>
-              <tr>
-                <td><?php echo RequestException::ERROR_LIMIT; ?></td>
-                <td>Limits (min, max, reached)</td>
-              </tr>
-              <tr>
-                <td><?php echo RequestException::ERROR_P2P; ?></td>
-                <td>External filter validations</td>
-              </tr>
-              <tr>
-                <td><?php echo RequestException::ERROR_API; ?></td>
-                <td>Problem with provider</td>
-              </tr>
-              <tr>
-                <td><?php echo RequestException::ERROR_API_BLACKLIST; ?></td>
-                <td>Customer on the provider blacklist</td>
-              </tr>
-              <tr>
-                <td><?php echo RequestException::ERROR_API_PERSON; ?></td>
-                <td>Invalid name information on the provider</td>
-              </tr>
-              <tr>
-                <td><?php echo RequestException::ERROR_API_LIMIT; ?></td>
-                <td>Limits reached on the provider</td>
+                <td><?php echo count($transactions); ?></td>
               </tr>
               </tbody>
             </table>
@@ -154,22 +116,57 @@ try{
     ?>
     <!-- END SUMMARY -->
 
-    <!-- SUMMARY -->
-    <?php
-    if($transactions && count($transactions) > 0){
-    ?>
+    <!-- Error List -->
     <div class="panel panel-default">
       <div class="panel-body">
         <div class="table-responsive">
           <table class="table table-striped table-bordered table-hover wrap-table">
             <thead>
             <tr>
-              <th>Total</th>
+              <th>Error Code</th>
+              <th>Description</th>
             </tr>
             </thead>
             <tbody>
             <tr>
-              <td><?php echo count($transactions); ?></td>
+              <td><?php echo RequestException::ERROR_TRANSACTION; ?></td>
+              <td>Transaction information</td>
+            </tr>
+            <tr>
+              <td><?php echo RequestException::ERROR_CUSTOMER; ?></td>
+              <td>Invalid customer information</td>
+            </tr>
+            <tr>
+              <td><?php echo RequestException::ERROR_CUSTOMER_BLACKLIST; ?></td>
+              <td>Customer is blacklisted</td>
+            </tr>
+            <tr>
+              <td><?php echo RequestException::ERROR_PERSON; ?></td>
+              <td>Invalid name information</td>
+            </tr>
+            <tr>
+              <td><?php echo RequestException::ERROR_LIMIT; ?></td>
+              <td>Limits (min, max, reached)</td>
+            </tr>
+            <tr>
+              <td><?php echo RequestException::ERROR_P2P; ?></td>
+              <td>External filter validations</td>
+            </tr>
+            <tr>
+              <td><?php echo RequestException::ERROR_API; ?></td>
+              <td>Problem with provider</td>
+            </tr>
+            <tr>
+              <td><?php echo RequestException::ERROR_API_BLACKLIST; ?></td>
+              <td>Customer on the provider blacklist</td>
+            </tr>
+            <tr>
+              <td><?php echo RequestException::ERROR_API_PERSON; ?></td>
+              <td>Invalid name information on the provider</td>
+            </tr>
+            <tr>
+              <td><?php echo RequestException::ERROR_API_LIMIT; ?></td>
+              <td>Limits reached on the provider</td>
             </tr>
             </tbody>
           </table>
@@ -177,14 +174,8 @@ try{
       </div>
     </div>
   </div>
-  <?php
-  }
-  ?>
-  <!-- END SUMMARY -->
-
+  <!-- Error List -->
   </div>
-</div>
-</div>
 
 <!-- FOOTER -->
 <?php include("../../footer.php"); ?>

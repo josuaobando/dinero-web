@@ -127,7 +127,6 @@ try{
 
   </div>
 </div>
-</div>
 
 <!-- FOOTER -->
 <?php include("../../footer.php"); ?>
