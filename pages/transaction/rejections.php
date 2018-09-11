@@ -35,7 +35,8 @@ try{
             <table class="table table-striped table-bordered table-hover wrap-table">
               <thead>
               <tr>
-                <th>AgencyType</th>
+                <th>Agency</th>
+                <th>Type</th>
                 <th>Timestamp</th>
                 <th>Timespan</th>
                 <th>Amount</th>
@@ -48,7 +49,9 @@ try{
               <tbody>
               <?php
               foreach($transactions as $transaction){
+                $type = $transaction['Type'];
                 $agencyType = $transaction['AgencyType'];
+                $requestType = $transaction['RequestType'];
                 $timeStamp = $transaction['Timestamp'];
                 $timeSpan = $transaction['Timespan'];
                 $amount = $transaction['Amount'];
@@ -60,8 +63,14 @@ try{
 
                 $timeStamp = date(Util::FORMAT_DATE_DISPLAY, strtotime($timeStamp));
 
-                echo "<tr>
+                $rowType = '';
+                if($type == 'confirm'){
+                  $rowType = 'danger';
+                }
+
+                echo "<tr class='$rowType'>
 														<td>$agencyType</td>
+														<td>$requestType</td>
 														<td>$timeStamp</td>
 														<td>$timeSpan</td>
 														<td>$$amount</td>
