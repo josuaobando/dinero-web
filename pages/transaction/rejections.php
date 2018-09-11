@@ -41,7 +41,6 @@ try{
                 <th>Amount</th>
                 <th>Account</th>
                 <th>Customer</th>
-                <th>Code</th>
                 <th>Error</th>
                 <th>Message</th>
               </tr>
@@ -56,7 +55,6 @@ try{
                 $username = $transaction['Account'];
                 $customer = ucwords(strtolower($transaction['Customer']));
                 //format date
-                $code = $transaction['Code'];
                 $error = $transaction['Error'];
                 $message = $transaction['Message'];
 
@@ -69,7 +67,6 @@ try{
 														<td>$amount</td>
 														<td>$username</td>
 														<td>$customer</td>
-														<td>$code</td>
 														<td>$error</td>
 														<td>$message</td>
 													</tr>";
