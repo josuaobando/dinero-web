@@ -29,6 +29,9 @@ try{
     <div class="col-lg-12">
 
       <!-- TABLE -->
+      <?php
+      if($transactions && count($transactions) > 0){
+      ?>
       <div class="panel panel-default">
         <div class="panel-body">
           <div class="table-responsive">
@@ -86,6 +89,9 @@ try{
           </div>
         </div>
       </div>
+        <?php
+      }
+      ?>
       <!-- END TABLE -->
 
       <!-- SUMMARY -->
