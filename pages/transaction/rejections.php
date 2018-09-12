@@ -47,6 +47,8 @@ try{
                 <th>Customer</th>
                 <th>Error</th>
                 <th>Message</th>
+                <th>Id</th>
+                <th>Control Number</th>
               </tr>
               </thead>
               <tbody>
@@ -59,6 +61,8 @@ try{
                 $timeSpan = $transaction['Timespan'];
                 $amount = $transaction['Amount'];
                 $username = $transaction['Account'];
+                $controlNumber = $transaction['ControlNumber'];
+                $transactionId = $transaction['TransactionId'];
                 $customer = ucwords(strtolower($transaction['Customer']));
                 //format date
                 $error = $transaction['Error'];
@@ -81,6 +85,8 @@ try{
 														<td>$customer</td>
 														<td>$error</td>
 														<td>$message</td>
+														<td>$transactionId</td>
+														<td>$controlNumber</td>
 													</tr>";
               }
               ?>
