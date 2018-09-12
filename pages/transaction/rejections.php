@@ -129,7 +129,7 @@ try{
               <tbody>
               <tr>
                 <td><?php echo RequestException::ERROR_TRANSACTION; ?></td>
-                <td>Transaction information</td>
+                <td>General. E.g.: No names available, invalid transaction Information</td>
               </tr>
               <tr>
                 <td><?php echo RequestException::ERROR_CUSTOMER; ?></td>
