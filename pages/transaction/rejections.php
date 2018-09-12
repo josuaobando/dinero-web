@@ -5,7 +5,7 @@ include("../../header.php");
 $wsRequest = new WSRequest($_REQUEST);
 
 $totalAttempt = 0;
-$userMessage = "Declined Transactions";
+$userMessage = "Declined Attempts";
 
 try{
   $system = new System();
