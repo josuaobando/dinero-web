@@ -128,7 +128,7 @@ try{
               <tbody>
               <tr>
                 <td><?php echo RequestException::ERROR_TRANSACTION; ?></td>
-                <td>General. E.g.: No names available, invalid transaction Information, unmapped error</td>
+                <td>General. E.g.: Invalid transaction Information, unmapped error</td>
               </tr>
               <tr>
                 <td><?php echo RequestException::ERROR_CUSTOMER; ?></td>
@@ -140,7 +140,7 @@ try{
               </tr>
               <tr>
                 <td><?php echo RequestException::ERROR_PERSON; ?></td>
-                <td>Invalid name information</td>
+                <td>No names available</td>
               </tr>
               <tr>
                 <td><?php echo RequestException::ERROR_LIMIT; ?></td>
@@ -160,7 +160,7 @@ try{
               </tr>
               <tr>
                 <td><?php echo RequestException::ERROR_API_PERSON; ?></td>
-                <td>Invalid name information on the provider</td>
+                <td>No names available on the provider</td>
               </tr>
               <tr>
                 <td><?php echo RequestException::ERROR_API_LIMIT; ?></td>
