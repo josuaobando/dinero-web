@@ -128,7 +128,7 @@ try{
               <tbody>
               <tr>
                 <td><?php echo RequestException::ERROR_TRANSACTION; ?></td>
-                <td>General. E.g.: No names available, invalid transaction Information</td>
+                <td>General. E.g.: No names available, invalid transaction Information, unmapped error</td>
               </tr>
               <tr>
                 <td><?php echo RequestException::ERROR_CUSTOMER; ?></td>
