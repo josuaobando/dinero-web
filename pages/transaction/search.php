@@ -120,10 +120,10 @@ try{
                             Transaction Type
                           </option>
                           <option value="1" <?= ($filterType == Transaction::TYPE_RECEIVER) ? 'selected' : '' ?>>
-                            Receiver
+                            Deposit (Receiver)
                           </option>
                           <option value="2" <?= ($filterType == Transaction::TYPE_SENDER) ? 'selected' : '' ?>>
-                            Sender
+                            Payout (Sender)
                           </option>
                         </select>
                       </div>
