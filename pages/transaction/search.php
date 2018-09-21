@@ -128,6 +128,11 @@ try{
                         </select>
                       </div>
                     </div>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <input class="input-sm form-control" type=text id="filterUsername" name="filterUsername" placeholder="Username" value="<?= $filterUsername ?>" pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
+                      </div>
+                    </div>
                   </div>
                   <!-- right -->
                   <div class="col-sm-6">
@@ -203,17 +208,14 @@ try{
 
                 <!-- Specific filters -->
                 <div class="row">
-                  <div class="col-sm-6">
+                  <div class="col-sm-4">
                     <input class="input-sm form-control" type="text" id="filterID" name="filterID" placeholder="ID" value="<?= $filterID ?>" pattern="<?= Util::REGEX_NUMERIC ?>">
                   </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-4">
                     <input class="input-sm form-control" type="text" id="filterMTCN" name="filterMTCN" placeholder="Control Number" value="<?= $filterMTCN ?>" minlength="8" maxlength="11" pattern="<?= Util::REGEX_NUMERIC ?>">
                   </div>
-                  <div class="col-sm-6">
+                  <div class="col-sm-4">
                     <input class="input-sm form-control" type=text id="filterUsername" name="filterReference" placeholder="Reference" value="<?= $filterMerchantId ?>" pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
-                  </div>
-                  <div class="col-sm-6">
-                    <input class="input-sm form-control" type=text id="filterUsername" name="filterUsername" placeholder="Username" value="<?= $filterUsername ?>" pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
                   </div>
                 </div>
                 <!-- End Specific filters -->

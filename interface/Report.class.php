@@ -65,6 +65,7 @@ class Report
     $filterType = $wsRequest->getParam("filterType", "0");
     $filterAgencyType = $wsRequest->getParam("filterAgencyType", "0");
     $filterAgencyId = $wsRequest->getParam("filterAgencyId", "0");
+    $filterUsername = $wsRequest->getParam("filterUsername", "");
 
     //specific
     $typeFilter = $wsRequest->getParam("btnSearch", '1');
@@ -73,9 +74,8 @@ class Report
       $filterID = $wsRequest->getParam("filterID", "");
       $controlNumber = $wsRequest->getParam("filterMTCN", "");
       $filterMerchantId = $wsRequest->getParam("filterReference", "");
-      $filterUsername = $wsRequest->getParam("filterUsername", "");
 
-      if(!$filterID && !$controlNumber && !$filterMerchantId && !$filterUsername){
+      if(!$filterID && !$controlNumber && !$filterMerchantId){
         $this->transactions = array();
         $this->summary = array();
         $this->total = 0;
