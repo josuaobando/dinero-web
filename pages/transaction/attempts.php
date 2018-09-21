@@ -54,9 +54,9 @@ try{
                 $attemptTrans = $attempt['Attempt'];
                 $totalAttempt = $totalAttempt + $attemptTrans;
                 $amounts = $attempt['Amount'];
-                $customer = ucwords(strtolower($attempt['Customer']));
+                $customer = $attempt['Customer'];
                 $username = $attempt['Account'];
-                $message = ucwords(strtolower($attempt['ErrorMessage']));
+                $message = $attempt['ErrorMessage'];
                 //format date
                 $createdDate = $attempt['Date'];
                 $firstDate = $attempt['First'];

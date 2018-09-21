@@ -63,7 +63,7 @@ try{
                 $username = $transaction['Account'];
                 $controlNumber = $transaction['ControlNumber'];
                 $transactionId = $transaction['TransactionId'];
-                $customer = ucwords(strtolower($transaction['Customer']));
+                $customer = $transaction['Customer'];
                 //format date
                 $error = $transaction['Error'];
                 $message = $transaction['Message'];
