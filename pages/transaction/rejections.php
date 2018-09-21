@@ -152,7 +152,7 @@ try{
               </tr>
               <tr>
                 <td><?php echo RequestException::ERROR_API; ?></td>
-                <td>Problem with provider</td>
+                <td>Unassigned provider message</td>
               </tr>
               <tr>
                 <td><?php echo RequestException::ERROR_API_BLACKLIST; ?></td>
