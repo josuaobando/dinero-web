@@ -25,12 +25,13 @@ if(strpos($page, "login") === false){
 
 ?>
 <!DOCTYPE html>
-<html lang="en" ng-app="DineroApp">
+<html lang="en">
 
 <head>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Cache-control" content="no-cache">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
@@ -66,19 +67,11 @@ if(strpos($page, "login") === false){
 
 </head>
 
-<body ng-controller="ClientCtrl">
-
-<div loading>
-  <div class="spinner">
-    <img alt="loading" src="images/spinner.gif">
-  </div>
-</div>
+<body>
 
 <div class="spinner">
   <img alt="loading" src="images/spinner.gif">
 </div>
-
-<div ui-view></div>
 
 <div id="wrapper">
 

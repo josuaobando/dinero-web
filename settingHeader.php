@@ -29,6 +29,7 @@ if(strpos($page, "login") === false){
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-control" content="no-cache">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -66,12 +67,10 @@ if(strpos($page, "login") === false){
 
   </head>
 
-  <body ng-controller="ClientCtrl">
+  <body>
     <div class="spinner">
       <img alt="loading" src="images/spinner.gif">
     </div>
-
-    <div ui-view></div>
 
     <div id="wrapper">
 
