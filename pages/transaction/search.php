@@ -321,7 +321,7 @@ try{
                 $agencyType = $transaction['AgencyType'];
 
                 $customer = $transaction['Customer'];
-                $customerName = ucwords(strtolower($transaction['CustomerName']));
+                $customerName = $transaction['CustomerName'];
                 $country = $transaction['Country'];
                 $state = $transaction['State'];
 

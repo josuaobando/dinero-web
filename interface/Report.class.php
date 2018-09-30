@@ -166,10 +166,10 @@ class Report
         $company = $transaction['Company'];
 
         $customer = $transaction['Customer'];
-        $senderName = ucwords(strtolower($transaction['CustomerName']));
+        $customerName = $transaction['CustomerName'];
         $amount = $transaction['Amount'];
         $fee = $transaction['Fee'];
-        $receiverName = ucwords(strtolower($transaction['PersonName']));
+        $personName = ucwords(strtolower($transaction['PersonName']));
         $controlNumber = $transaction['ControlNumber'];
         $reason = $transaction['Reason'];
         $note = $transaction['Note'];
@@ -188,8 +188,8 @@ class Report
           <td>$$amount</td>
           <td>$$fee</td>
           <td>$customer</td>
-          <td>$senderName</td>
-          <td>$receiverName</td>
+          <td>$customerName</td>
+          <td>$personName</td>
           <td>$controlNumber</td>
           <td>$modifiedDate</td>
            ".($viewCompany ? "<td>$company</td>" : "")."

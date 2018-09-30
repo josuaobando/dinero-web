@@ -66,7 +66,7 @@ try{
                 $id = $transaction['Transaction_Id'];
                 $type = $transaction['TransactionType_Id'];
                 $customer = $transaction['Username'];
-                $customerName = ucwords(strtolower($transaction['CustomerName']));
+                $customerName = $transaction['CustomerName'];
                 $amount = $transaction['Amount'];
                 $fee = $transaction['Fee'];
                 $personName = ucwords(strtolower($transaction['PersonName']));
@@ -115,9 +115,9 @@ try{
               $agencyId = $transaction['Agency_Id'];
 
               $customer = $transaction['Username'];
-              $customerName = ucwords(strtolower($transaction['CustomerName']));
-              $firstName = ucwords($transaction['FirstName']);
-              $lastName = ucwords($transaction['LastName']);
+              $customerName = $transaction['CustomerName'];
+              $firstName = $transaction['FirstName'];
+              $lastName = $transaction['LastName'];
               $phone = $transaction['Phone'];
               $country = $transaction['Country'];
               $countryName = $transaction['CountryName'];

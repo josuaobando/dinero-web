@@ -75,7 +75,7 @@ try{
                 $agencyType = $transaction['AgencyType'];
 
                 $customer = $transaction['Username'];
-                $customerName = ucwords(strtolower($transaction['CustomerName']));
+                $customerName = $transaction['CustomerName'];
                 $personName = ucwords(strtolower($transaction['PersonName']));
 
                 //format date
@@ -116,7 +116,7 @@ try{
               $agencyType = $transaction['AgencyType'];
 
               $customer = $transaction['Username'];
-              $customerName = ucwords(strtolower($transaction['CustomerName']));
+              $customerName = $transaction['CustomerName'];
               $firstName = ucwords($transaction['FirstName']);
               $lastName = ucwords($transaction['LastName']);
               $phone = $transaction['Phone'];
