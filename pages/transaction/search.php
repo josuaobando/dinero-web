@@ -215,7 +215,7 @@ try{
                     <input class="input-sm form-control" type="text" id="filterMTCN" name="filterMTCN" placeholder="Control Number" value="<?= $filterMTCN ?>" minlength="8" maxlength="11" pattern="<?= Util::REGEX_NUMERIC ?>">
                   </div>
                   <div class="col-sm-4">
-                    <input class="input-sm form-control" type=text id="filterUsername" name="filterReference" placeholder="Reference" value="<?= $filterMerchantId ?>" pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
+                    <input class="input-sm form-control" type=text id="filterUsername" name="filterReference" placeholder="Merchant Trans Id" value="<?= $filterMerchantId ?>" pattern="<?= Util::REGEX_ALPHANIMERIC ?>">
                   </div>
                 </div>
                 <!-- End Specific filters -->
