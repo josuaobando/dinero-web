@@ -152,11 +152,11 @@ try{
               </tr>
                 <tr>
                   <td><?php echo RequestException::ERROR_P2P_CUSTOMER; ?></td>
-                  <td>External filter: customer validations</td>
+                  <td>External filter: Customer validations</td>
                 </tr>
                 <tr>
                   <td><?php echo RequestException::ERROR_P2P_PERSON; ?></td>
-                  <td>External filter: name validations</td>
+                  <td>External filter: Name validations</td>
                 </tr>
                 <tr>
                   <td><?php echo RequestException::ERROR_P2P_LIMIT; ?></td>
