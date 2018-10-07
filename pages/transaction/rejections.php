@@ -150,6 +150,18 @@ try{
                 <td><?php echo RequestException::ERROR_P2P; ?></td>
                 <td>External filter validations</td>
               </tr>
+                <tr>
+                  <td><?php echo RequestException::ERROR_P2P_CUSTOMER; ?></td>
+                  <td>External filter: customer validations</td>
+                </tr>
+                <tr>
+                  <td><?php echo RequestException::ERROR_P2P_PERSON; ?></td>
+                  <td>External filter: name validations</td>
+                </tr>
+                <tr>
+                  <td><?php echo RequestException::ERROR_P2P_LIMIT; ?></td>
+                  <td>External filter: Limit validations</td>
+                </tr>
               <tr>
                 <td><?php echo RequestException::ERROR_API; ?></td>
                 <td>Unassigned provider message</td>
