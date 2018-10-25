@@ -129,6 +129,11 @@ catch(Exception $ex)
     <!-- Custom JavaScript -->
     <script src="js/custom.js<?= "?v=".CoreConfig::CACHE_VERSION ?>"></script>
 
+
+    <a href="http://app.dinerosegurohf.com/" class="float-content" title="Try New Site">
+      <i class="fa fa-share-square-o fa-3x float-button"></i>
+    </a>
+
   </body>
 
   <footer>
