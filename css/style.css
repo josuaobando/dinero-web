@@ -192,7 +192,8 @@ input[type="text"].readonly {
 .float-button{
   margin: 13px;
 }
-.float-content a, i {
+.float-content > a,
+.float-content > i {
   color: white;
   background-color:red;
 }
