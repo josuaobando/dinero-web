@@ -181,10 +181,9 @@ input[type="text"].readonly {
   position:fixed;
   width:60px;
   height:60px;
-  bottom:40px;
+  bottom:60px;
   right:40px;
   background-color:red;
-  color:#FFF;
   border-radius:50px;
   text-align:center;
   box-shadow: 2px 2px 3px #999;
@@ -196,4 +195,7 @@ input[type="text"].readonly {
 .float-content > i {
   color: white;
   background-color:red;
+}
+.float-content > strong {
+  color: red;
 }

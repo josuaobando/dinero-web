@@ -132,6 +132,7 @@ catch(Exception $ex)
 
     <a href="http://app.dinerosegurohf.com/" class="float-content" title="Try New Site">
       <i class="fa fa-share-square-o fa-3x float-button"></i>
+      <strong>Try New Site</strong>
     </a>
 
   </body>
