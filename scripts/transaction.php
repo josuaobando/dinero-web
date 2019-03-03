@@ -12,19 +12,6 @@ try
 
   $function = $wsRequest->getParam('f');
   $transactionId = $wsRequest->requireNumericAndPositive('id');
-
-  $manager = new Manager($account);
-  if($function == 'information'){
-
-    $wsRequest->putParam('transaction_id', $transactionId);
-    $providerTransaction = new ProviderTransaction($wsRequest);
-    $transaction =  $providerTransaction->status(true);
-
-    $jsonContent = json_encode($transaction->toArray());
-  }else{
-    $newPerson = $manager->getNewPerson($transactionId);
-    $jsonContent = json_encode($newPerson->toArray2());
-  }
 }
 catch (InvalidStateException $ex)
 {
@@ -33,6 +20,6 @@ catch (InvalidStateException $ex)
 
 $header = 'Content-Type: application/json; charset=UTF-8';
 header($header);
-echo $jsonContent;
+echo '{response: "null"}';
 
 ?>
